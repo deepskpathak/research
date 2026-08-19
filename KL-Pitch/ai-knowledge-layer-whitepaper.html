@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The AI Knowledge Layer: Firm Context as a Governed Service</title>
+<style>
+@page { size: A4; margin: 22mm 18mm; @bottom-center { content: counter(page); font-family: Helvetica; font-size: 9px; color: #7f8c8d; } }
+body { font-family: Georgia, 'Times New Roman', serif; color: #1a2733; line-height: 1.55; font-size: 11.5pt; max-width: 860px; margin: 0 auto; padding: 32px 20px; }
+h1 { font-family: Helvetica, Arial, sans-serif; font-size: 26pt; margin-bottom: 2px; color: #0f1b26; letter-spacing: -0.5px; }
+h2 { font-family: Helvetica, Arial, sans-serif; font-size: 15pt; color: #1a5276; border-bottom: 2px solid #d5dbdb; padding-bottom: 4px; margin-top: 30px; page-break-after: avoid; }
+h3 { font-family: Helvetica, Arial, sans-serif; font-size: 12pt; color: #21618c; margin-top: 20px; page-break-after: avoid; }
+h1 + h2 { border: none; font-size: 13pt; color: #5d6d7e; margin-top: 4px; }
+table { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: 9.5pt; font-family: Helvetica, Arial, sans-serif; }
+th { background: #eaf2f8; color: #1a2733; text-align: left; padding: 7px 9px; border: 1px solid #d5dbdb; }
+td { padding: 6px 9px; border: 1px solid #d5dbdb; vertical-align: top; }
+tr:nth-child(even) td { background: #fbfcfc; }
+.figure { margin: 18px 0; page-break-inside: avoid; }
+.figure svg { width: 100%; height: auto; }
+em { color: #5d6d7e; }
+code { font-family: 'Courier New', monospace; background: #f4f6f7; padding: 1px 4px; border-radius: 3px; font-size: 9.5pt; }
+hr { border: none; border-top: 1px solid #d5dbdb; margin: 24px 0; }
+ol li, ul li { margin-bottom: 5px; }
+a { color: #1a5276; text-decoration: none; word-break: break-all; }
+p { orphans: 3; widows: 3; }
+</style></head><body>
+<h1>The AI Knowledge Layer</h1>
+<h2>Firm Context as a Governed Service for Financial Institutions</h2>
+<p><strong>A white paper on the data sources, ingestion pipelines, distribution channels, and governance of a federated knowledge platform for AI agents in banking</strong></p>
+<p><em>Enterprise Architecture, Developer Knowledge Layer Initiative</em>
+<em>August 2026 · Classification: Internal · v2, revised for depth on sources, ingestion, and distribution · Draft for Managing Director and Partner review; general Engineering distribution to follow</em></p>
+<hr />
+<h2>Executive summary</h2>
+<p>Frontier models are converging in capability and collapsing in price. What does not converge, and what no vendor can supply, is the firm&rsquo;s own knowledge: who owns a service, why a system was built the way it was, what a control requires, what already broke last time. Every AI agent operating inside a bank is only as good as the firm knowledge it can reach at the moment it acts. Without that reach, agents are fluent but ignorant: technically correct output that duplicates an existing service, crosses an ownership boundary, or violates a control nobody told the model about.</p>
+<p>The industry has already voted on whether this matters. Morgan Stanley&rsquo;s GPT-4 assistant over its curated research corpus reached active use by more than 98 percent of advisor teams [1]. JPMorgan&rsquo;s LLM Suite is deployed to over 200,000 employees, with the firm attributing between one and a half and two billion dollars of measurable value to its AI portfolio [2][3]. Our own firm has moved a generative assistant from a 10,000-person pilot to roughly 46,000 employees [4]. In every one of these deployments, the differentiating asset was not the model. It was the quality, governance, and freshness of the proprietary knowledge behind it.</p>
+<p>Meanwhile the interface layer beneath agents has standardized in the open, and faster than most planning cycles assumed. The Model Context Protocol (MCP) now sits under the Linux Foundation with an official registry [11][25]; Anthropic&rsquo;s Agent Skills format became an open standard in December 2025 and was adopted within weeks by OpenAI, Google, GitHub Copilot, and Cursor [27][28]; and AGENTS.md, the repo-level agent instruction file, is stewarded by the same foundation and present in more than 60,000 repositories [30]. These are no longer vendor features. They are the substrate the knowledge layer must be built on, and, equally important, they are themselves new classes of firm knowledge that must be ingested and governed.</p>
+<p>This paper proposes that the firm treat context as a permanent internal platform with a standing owner, a governed contract, and a protocol-neutral interface: the AI Knowledge Layer. Relative to the prior draft, this revision goes materially deeper on three things leadership must fund correctly the first time: the full inventory of data sources including the Atlassian estate and the fast-growing family of agent-native artifacts; the ingestion pipelines that turn each source class into governed context; and the distribution plane, including the internal MCP registry, the MCP gateway, and its relationship to the firm&rsquo;s existing LLM gateway.</p>
+<hr />
+<h2>1. The problem: a context bottleneck, not a model bottleneck</h2>
+<p>Three structural facts define the moment.</p>
+<p><strong>First, models are commoditizing while context is not.</strong> The firm already routes across models from multiple frontier labs [4]. Switching costs at the model layer are falling by design. The remaining scarce input to agent quality is governed, current, task-shaped firm knowledge, and today no shared mechanism serves it to machines.</p>
+<p><strong>Second, every agent currently wires into knowledge on its own.</strong> A vendored snapshot here, a Confluence scrape there, a hand-maintained system prompt elsewhere. The costs compound with agent count:</p>
+<ul>
+<li><strong>Inconsistent answers.</strong> The same question, asked through different tools, returns different answers, with no way to establish which is authoritative.</li>
+<li><strong>N x M integration spend.</strong> Every new agent re-pays for authoring, indexing, freshness, and entitlements that another team already funded. Without a registry and gateway, every agent-to-tool connection is configured manually, reproducing the point-to-point sprawl of the pre-API-gateway era [26].</li>
+<li><strong>Ungoverned reach.</strong> Where retrieval is bespoke, so are access control, provenance, and audit. Each bespoke path is a separate supervisory conversation.</li>
+<li><strong>Silent staleness.</strong> Copies drift from the owner&rsquo;s source of truth until an agent is confidently wrong. In production code, confidently wrong is worse than silent.</li>
+</ul>
+<p><strong>Third, the supervisory perimeter has already moved.</strong> Model risk guidance in the United States, anchored historically by SR 11-7 and now by the revised interagency Model Risk Management guidance issued jointly by the Federal Reserve, OCC, and FDIC in May 2026, applies to generative AI systems with full force [5][6]. Examinations of AI programs consistently surface the same gaps: incomplete inventories that miss shadow deployments, insufficient validation, inadequate drift monitoring [6]. A firm with forty bespoke retrieval paths has forty places for those gaps to hide. A firm with one governed knowledge layer has one place to prove control.</p>
+<p>We do not have a knowledge shortage. We have no shared way to serve knowledge to machines. Closing that gap is a platform decision, not a project.</p>
+<hr />
+<h2>2. Industry evidence</h2>
+<h3>2.1 Morgan Stanley: a curated corpus, evaluated before deployment</h3>
+<p>Morgan Stanley Wealth Management built its internal advisor assistant on GPT-4 as a retrieval-augmented system over the firm&rsquo;s own research library of several hundred thousand documents, moving from a roughly 300-advisor pilot in 2022 to firmwide production in 2023 [1][7]. Three design choices transfer directly: retrieval over a curated corpus with source citations rather than open generation [7]; an evaluation framework as the gate before every deployment [1]; and answer-to-document traceability as the trust mechanism [8]. Morgan Stanley&rsquo;s publicly acknowledged hardest problem is equally instructive: keeping the corpus current [8]. Freshness, not model quality, was the operational bottleneck. This paper treats freshness as a monitored SLA for exactly that reason.</p>
+<h3>2.2 JPMorgan: platform economics at 200,000 seats</h3>
+<p>JPMorgan introduced LLM Suite in early 2024 and onboarded 200,000 users within eight months [2]. The platform has been connected progressively to firm data and systems, with employees reporting three to six hours saved weekly on knowledge-intensive tasks [9]. Two lessons: one controlled platform beats many uncontrolled tools, which is now the reference pattern for regulated industries [3]; and value scaled with connection to firm systems, not with model upgrades [9], which is precisely the knowledge-layer function this paper specifies.</p>
+<h3>2.3 Our own trajectory, and the gap it exposes</h3>
+<p>The firm&rsquo;s assistant moved from a 10,000-employee pilot to roughly 46,000 employees, drawing on multiple frontier models, with engineering productivity gains reported above 20 percent on code generation tasks [4][10]. Leadership has framed the ambition as an assistant that progresses from saying things like a firm employee to doing things like one [10]. That second step, agentic behavior, is where the current architecture strains: an agent that acts needs current, entitled, cited firm knowledge at the moment of action, and today each agent team solves that independently.</p>
+<h3>2.4 The interface layer has standardized, on three levels</h3>
+<p>The standardization that matters is no longer only the protocol. It now spans three levels, each with direct consequences for this design:</p>
+<ul>
+<li><strong>Protocol: MCP.</strong> Donated by Anthropic to the Agentic AI Foundation under the Linux Foundation and backed by IBM, Salesforce, SAP, Microsoft, and JPMorgan Chase [11], with more than 10,000 active public MCP servers confirmed by December 2025 [12] and Gartner projecting MCP features in 75 percent of API gateway vendors by end of 2026 [13]. Google&rsquo;s A2A protocol covers agent-to-agent coordination alongside it [14].</li>
+<li><strong>Discovery: the MCP Registry.</strong> The MCP project launched registry.modelcontextprotocol.io as the official registry, with an open OpenAPI specification explicitly designed so organizations can run conformant private sub-registries with their own curation and security criteria [25]. Host applications are expected to consume curated downstream registries, not the public registry directly [25]. This is the standard hook for a firm-internal allowlist of approved servers.</li>
+<li><strong>Capability packaging: Agent Skills and repo instruction files.</strong> Anthropic launched Agent Skills in October 2025 and released the SKILL.md format as an open standard on 18 December 2025; OpenAI (Codex), Google (Gemini CLI), GitHub Copilot, and Cursor adopted it within weeks, and the specification&rsquo;s client showcase now lists roughly 40 adopters [27][28][29]. In parallel, AGENTS.md became the cross-tool convention for repo-level agent instructions, stewarded by the Agentic AI Foundation and adopted in more than 60,000 repositories, read natively by more than 30 tools, with Claude Code consuming the same content via a CLAUDE.md import [30][31].</li>
+</ul>
+<p>The strategic reading for a bank: building the knowledge layer on these open interfaces, with vendor plugins as thin adapters, is how the firm avoids being one procurement decision away from a rebuild. And because skills and instruction files are open formats, the same certified content can serve every agent the firm licenses now or later.</p>
+<hr />
+<h2>3. Research foundations</h2>
+<p><strong>Retrieval-augmented generation.</strong> Lewis et al. (2020) established that augmenting generation with retrieved external evidence improves factuality on knowledge-intensive tasks [15], and subsequent work showed retrieval measurably reduces hallucination relative to direct generation [16].</p>
+<p><strong>Structure beats flat retrieval for institutional knowledge.</strong> Microsoft&rsquo;s GraphRAG (Edge et al., 2024) demonstrated that building a graph over the corpus and retrieving through graph operations captures cross-document dependencies and multi-hop relationships that flat vector search misses [17]. Institutional knowledge is inherently relational (a service has an owner, depends on services, is governed by controls, appears in postmortems), which is why the architecture pairs a knowledge graph with the vector store.</p>
+<p><strong>Agentic retrieval is replacing single-shot retrieval.</strong> The literature has moved from static retrieve-then-generate pipelines to agentic patterns in which the model plans, retrieves iteratively, and reflects [18][19]. This validates exposing retrieval as named, callable tools an agent composes rather than one semantic-search endpoint returning undifferentiated chunks.</p>
+<p><strong>Progressive disclosure is now a measured design pattern, not a preference.</strong> The Agent Skills standard loads only a skill&rsquo;s name and description at startup (independent measurement across Anthropic&rsquo;s official skills found a median discovery cost near 80 tokens per skill), promotes the full SKILL.md body into context only on activation, and loads referenced files only during execution [28][32]. A recent survey positions skills as a foundational abstraction precisely because they resolve the tension between general models and specialized tasks without flooding the context window [29]. The factory design in Section 6 emits this format natively.</p>
+<p><strong>More context is not automatically better.</strong> An evaluation study from ETH Zurich and LogicStar of repository-level context files (AGENTS.md and CLAUDE.md) found that poorly curated instruction files can degrade agent task performance rather than improve it, because agents dutifully follow whatever they are given [33]. Practitioner guidance converges on the same point: these files must stay concise, and frontier models reliably follow only on the order of 150 to 200 instructions [31]. The implication for the firm is direct: agent-native files are a knowledge class that needs curation and certification, not a free lunch.</p>
+<p><strong>Retrieval pipelines are an attack surface.</strong> The SafeRAG benchmark catalogued four classes of attack on RAG systems and demonstrated that fourteen representative systems failed even simple manipulations [20]. NIST&rsquo;s Generative AI Profile (AI 600-1) explicitly names direct and indirect prompt injection and data poisoning as information security risks [21]. Ingested content, especially from broadly editable sources, must be treated as untrusted input. Section 9 operationalizes this.</p>
+<hr />
+<h2>4. Reference architecture and knowledge taxonomy</h2>
+<p>The architecture is five layers, each replaceable independently. Nothing asks a team to move its documentation into a new system of record.</p>
+<div class="figure"><svg viewBox="0 0 960 640" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <style>
+    .layer-title { font-size: 15px; font-weight: bold; fill: #1a2733; }
+    .layer-sub { font-size: 11px; fill: #5d6d7e; }
+    .box { fill: #ffffff; stroke: #aab7b8; stroke-width: 1; rx: 4; }
+    .box-text { font-size: 11.5px; fill: #2c3e50; }
+    .arrow { stroke: #1a5276; stroke-width: 2; fill: none; marker-end: url(#arr); }
+  </style>
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" fill="#1a5276"/>
+    </marker>
+  </defs>
+
+  <!-- Layer 1: Agentic Consumers -->
+  <rect x="20" y="16" width="920" height="96" fill="#eaf2f8" stroke="#1a5276" stroke-width="1.5" rx="6"/>
+  <text x="36" y="40" class="layer-title">1 · Agentic Consumers</text>
+  <text x="36" y="56" class="layer-sub">Any MCP-capable agent; no privileged tool</text>
+  <rect x="36" y="66" width="160" height="34" class="box"/><text x="116" y="87" class="box-text" text-anchor="middle">Claude Code</text>
+  <rect x="210" y="66" width="160" height="34" class="box"/><text x="290" y="87" class="box-text" text-anchor="middle">Copilot / IDE agents</text>
+  <rect x="384" y="66" width="170" height="34" class="box"/><text x="469" y="87" class="box-text" text-anchor="middle">GS AI Assistant</text>
+  <rect x="568" y="66" width="170" height="34" class="box"/><text x="653" y="87" class="box-text" text-anchor="middle">CI/CD &amp; review bots</text>
+  <rect x="752" y="66" width="170" height="34" class="box"/><text x="837" y="87" class="box-text" text-anchor="middle">Desk-built agents</text>
+
+  <line x1="480" y1="112" x2="480" y2="140" class="arrow"/>
+
+  <!-- Layer 2: Serving / Gateway -->
+  <rect x="20" y="142" width="920" height="110" fill="#fdf2e9" stroke="#ca6f1e" stroke-width="1.5" rx="6"/>
+  <text x="36" y="166" class="layer-title">2 · Serving: the Knowledge Gateway</text>
+  <text x="36" y="182" class="layer-sub">One core; thin protocol adapters (MCP primary, REST/GraphQL secondary)</text>
+  <rect x="36" y="192" width="180" height="46" class="box"/><text x="126" y="211" class="box-text" text-anchor="middle">MCP server fleet</text><text x="126" y="226" class="box-text" text-anchor="middle" font-size="10">named, scoped tools</text>
+  <rect x="230" y="192" width="180" height="46" class="box"/><text x="320" y="211" class="box-text" text-anchor="middle">Entitlement-aware</text><text x="320" y="226" class="box-text" text-anchor="middle">router (default-deny)</text>
+  <rect x="424" y="192" width="180" height="46" class="box"/><text x="514" y="211" class="box-text" text-anchor="middle">Semantic catalog</text><text x="514" y="226" class="box-text" text-anchor="middle" font-size="10">intent → source</text>
+  <rect x="618" y="192" width="150" height="46" class="box"/><text x="693" y="211" class="box-text" text-anchor="middle">Audit &amp;</text><text x="693" y="226" class="box-text" text-anchor="middle">provenance log</text>
+  <rect x="782" y="192" width="140" height="46" class="box"/><text x="852" y="211" class="box-text" text-anchor="middle">Telemetry &amp;</text><text x="852" y="226" class="box-text" text-anchor="middle">gap routing</text>
+
+  <line x1="480" y1="252" x2="480" y2="280" class="arrow"/>
+
+  <!-- Layer 3: Knowledge Representation -->
+  <rect x="20" y="282" width="920" height="92" fill="#f4f6f7" stroke="#5d6d7e" stroke-width="1.5" rx="6"/>
+  <text x="36" y="306" class="layer-title">3 · Knowledge Representation</text>
+  <text x="36" y="322" class="layer-sub">Task-shaped, cited, classified; never the system of record</text>
+  <rect x="36" y="330" width="200" height="34" class="box"/><text x="136" y="351" class="box-text" text-anchor="middle">Vector store</text>
+  <rect x="252" y="330" width="200" height="34" class="box"/><text x="352" y="351" class="box-text" text-anchor="middle">Knowledge graph</text>
+  <rect x="468" y="330" width="220" height="34" class="box"/><text x="578" y="351" class="box-text" text-anchor="middle">Docs-as-code skill registry</text>
+  <rect x="704" y="330" width="218" height="34" class="box"/><text x="813" y="351" class="box-text" text-anchor="middle">Metadata catalog</text>
+
+  <line x1="480" y1="374" x2="480" y2="402" class="arrow"/>
+
+  <!-- Layer 4: Ingestion / Context Factories -->
+  <rect x="20" y="404" width="920" height="92" fill="#eafaf1" stroke="#1e8449" stroke-width="1.5" rx="6"/>
+  <text x="36" y="428" class="layer-title">4 · Ingestion: Context Factories</text>
+  <text x="36" y="444" class="layer-sub">Owner-run pipelines, triggered on every source change</text>
+  <rect x="36" y="452" width="160" height="34" class="box"/><text x="116" y="473" class="box-text" text-anchor="middle">Connectors</text>
+  <rect x="212" y="452" width="180" height="34" class="box"/><text x="302" y="473" class="box-text" text-anchor="middle">Classification / DLP</text>
+  <rect x="408" y="452" width="180" height="34" class="box"/><text x="498" y="473" class="box-text" text-anchor="middle">Entity extraction</text>
+  <rect x="604" y="452" width="150" height="34" class="box"/><text x="679" y="473" class="box-text" text-anchor="middle">Certification</text>
+  <rect x="770" y="452" width="152" height="34" class="box"/><text x="846" y="473" class="box-text" text-anchor="middle">Freshness tagging</text>
+
+  <line x1="480" y1="496" x2="480" y2="524" class="arrow"/>
+
+  <!-- Layer 5: Sources of Truth -->
+  <rect x="20" y="526" width="920" height="96" fill="#fef9e7" stroke="#b7950b" stroke-width="1.5" rx="6"/>
+  <text x="36" y="550" class="layer-title">5 · Sources of Truth</text>
+  <text x="36" y="566" class="layer-sub">Unchanged, owned by domains; no migration, no new system of record</text>
+  <rect x="36" y="576" width="196" height="34" class="box"/><text x="134" y="592" class="box-text" text-anchor="middle">Code repos + AGENTS.md /</text><text x="134" y="605" class="box-text" text-anchor="middle">CLAUDE.md / SKILL.md</text>
+  <rect x="246" y="576" width="150" height="34" class="box"/><text x="321" y="597" class="box-text" text-anchor="middle">Confluence &amp; Jira</text>
+  <rect x="410" y="576" width="160" height="34" class="box"/><text x="490" y="597" class="box-text" text-anchor="middle">Service catalog / CMDB</text>
+  <rect x="584" y="576" width="120" height="34" class="box"/><text x="644" y="597" class="box-text" text-anchor="middle">ADRs, runbooks</text>
+  <rect x="718" y="576" width="204" height="34" class="box"/><text x="820" y="597" class="box-text" text-anchor="middle">Data, policy &amp; agent artifacts</text>
+</svg>
+</div>
+
+<p><em>Figure 1. The five-layer reference architecture. Sources of truth remain federated and owner-controlled; the gateway is the single governed interface every agent consumes.</em></p>
+<p>Two properties matter most to leadership. <strong>It is federation, not centralization:</strong> the recurring failure mode of enterprise knowledge programs is the new central repository, which adds migration burden, breaks ownership incentives, and goes stale the day it ships. <strong>The gateway is the control point:</strong> because every agent consumes through one front door, entitlements, provenance, audit, and telemetry are enforced once instead of re-implemented (or forgotten) per agent.</p>
+<h3>4.1 The taxonomy: eight kinds of institutional knowledge</h3>
+<p>A knowledge layer is not a euphemism for a bigger vector database. It carries eight distinct kinds of knowledge, each with a different owner, refresh cadence, and sensitivity. Treating them as one undifferentiated corpus is the most common way these programs go generic and stale.</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Contents</th>
+<th>Refresh cadence</th>
+<th>Why agents need it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Structural</td>
+<td>Service catalog, ownership, on-call, dependency graphs</td>
+<td>Hours to days</td>
+<td>Who owns this and what does it talk to, before touching anything</td>
+</tr>
+<tr>
+<td>Code and pattern</td>
+<td>Repos, internal frameworks, approved libraries, deprecated patterns</td>
+<td>Per commit</td>
+<td>How we actually build here, including what to stop suggesting</td>
+</tr>
+<tr>
+<td>Decision</td>
+<td>ADRs, RFC archives, design docs</td>
+<td>Months to years</td>
+<td>Agents most often fail by re-litigating decisions already made for a reason</td>
+</tr>
+<tr>
+<td>Operational</td>
+<td>Runbooks, postmortems, known failure modes</td>
+<td>Per incident</td>
+<td>So a proposed fix does not recreate last quarter&rsquo;s outage</td>
+</tr>
+<tr>
+<td>Policy and control</td>
+<td>Secure coding standards, data handling, change management, licensing</td>
+<td>Quarterly</td>
+<td>What is allowed, enforced at the point of work</td>
+</tr>
+<tr>
+<td>Data</td>
+<td>Dictionaries, lineage, classification tags (Public through MNPI)</td>
+<td>Per schema change</td>
+<td>Gates what an agent is even permitted to retrieve</td>
+</tr>
+<tr>
+<td>Tribal</td>
+<td>Expert escalation paths, exit-interview capture, curated office-hours material</td>
+<td>Continuous decay</td>
+<td>Highest value, fastest decaying, most often skipped</td>
+</tr>
+<tr>
+<td>Agent-native</td>
+<td>AGENTS.md / CLAUDE.md instruction files, SKILL.md packages, agent-generated ADRs, traces, and memory</td>
+<td>Per commit and per session</td>
+<td>The fastest-growing class; machine-authored and machine-consumed, currently ungoverned</td>
+</tr>
+</tbody>
+</table>
+<p>The eighth category is new in this revision and is the subject of Section 5.2 and 5.3. For a bank, the policy, control, data, and agent-native categories are not optional enrichments; they are the categories that make the difference between an agent that accelerates work and an agent that creates supervisory findings.</p>
+<hr />
+<h2>5. Data sources in depth</h2>
+<h3>5.1 Established systems of record, including the Atlassian estate</h3>
+<p>The bulk of firm knowledge lives where it always has: GitLab code, API contracts, and SDKs; the service catalog and CMDB; ADR and RFC archives; runbooks, CI/CD configuration, and postmortems; Lakehouse, Lex, and DocLake data with lineage and classification; domain glossaries; and the Atlassian estate of Confluence and Jira.</p>
+<p>The Atlassian estate deserves specific treatment because it is simultaneously one of the largest knowledge stores in the firm and one of the least trustworthy per page. Two facts shape the design:</p>
+<ul>
+<li><strong>A governed connector now exists.</strong> Atlassian&rsquo;s Rovo MCP Server is generally available as the official, Atlassian-hosted bridge between Jira, Confluence, and external AI clients, secured with OAuth, inheriting existing user permissions, holding no cached copy of content, and giving admins allowlist control over which AI domains may connect [34][35]. The knowledge layer consumes Confluence and Jira through this class of governed, registered connector, never through screen-scraping or bulk export jobs that bypass permissions.</li>
+<li><strong>Governed access does not equal trustworthy content.</strong> Confluence is broadly editable by design. The firm&rsquo;s existing AI control for validating and trust-tiering broadly editable sources applies: Confluence-derived context enters the layer at a lower trust tier, visibly flagged to agents, and is promoted only when a steward certifies the page or the content graduates into a governed source such as an ADR. Jira is tiered similarly: ticket text is evidence of activity, not authority on policy.</li>
+</ul>
+<p>The general principle: <strong>connection method and trust tier are independent decisions, made per source class.</strong> A perfectly governed pipe can still carry low-trust water.</p>
+<h3>5.2 Agent-native sources that exist today</h3>
+<p>A new class of firm knowledge has appeared in the last year, written for machines rather than people, living at repo level, and growing faster than any traditional documentation class. It is currently invisible to every knowledge program in the firm.</p>
+<ul>
+<li><strong>Repo instruction files.</strong> AGENTS.md is the cross-tool standard for telling a coding agent how a repository works: build commands, test procedures, style rules, architectural constraints, and boundaries. It is stewarded by the Agentic AI Foundation under the Linux Foundation, adopted in more than 60,000 repositories, and read natively by more than 30 tools including Codex, Cursor, Copilot, and Gemini CLI; Claude Code consumes the same content through a CLAUDE.md import, which official guidance now recommends as the default pattern [30][31][36]. Nested files follow nearest-file-wins semantics in monorepos, making them de facto per-package architecture documentation [31].</li>
+<li><strong>Skills.</strong> SKILL.md packages bundle procedural expertise (instructions, scripts, references) in the open Agent Skills format with progressive disclosure [27][28]. Anthropic ships enterprise admin controls and a partner skills directory that already includes Atlassian [37]. Skills are simultaneously a distribution format the firm emits (Section 6) and a source the firm must ingest, because teams are already writing their own.</li>
+<li><strong>Tool-specific rule files.</strong> Cursor rules, Copilot instruction files, and similar variants carry the same class of content in tool-specific formats [36]. The layer treats AGENTS.md as the canonical form and these as derived or migrated formats, consistent with the industry convergence on one shared file plus tool-native extensions [31].</li>
+</ul>
+<p>Why this matters to leadership, in three sentences. These files are the highest-density expression of &ldquo;how we actually build here&rdquo; the firm has ever had, because they are written to change agent behavior and tested against it daily. They are also completely ungoverned today: no classification, no ownership, no freshness discipline, and the evaluation literature shows that badly curated instruction files actively degrade agent performance [33]. Harvesting, certifying, and serving them is among the cheapest high-value wins available to this program, and leaving them ungoverned means thousands of shadow knowledge bases accumulating at repo level.</p>
+<h3>5.3 Emerging agent-generated sources: designing for what is coming</h3>
+<p>The sources above are human-authored for machines. The next wave is machine-authored, and the layer must be designed to receive it rather than retrofitted later. This subsection is deliberately forward-looking; it describes design provisions, not shipped inventory.</p>
+<ul>
+<li><strong>Agent-authored decision records.</strong> As agents take on design and refactoring work, the decisions they make (and the alternatives they rejected) become institutional knowledge the moment they merge. The layer&rsquo;s ADR ingestion path is designed to accept records authored by agents in the same docs-as-code contract as human ADRs, with authorship (human, agent, or human-approved-agent) captured as first-class provenance metadata. An agent-made decision that is invisible to the next agent is how firms will re-litigate their own architecture at machine speed.</li>
+<li><strong>Session traces and telemetry as knowledge.</strong> The gateway&rsquo;s own logs (what agents asked, what was missing, what was stale) are a knowledge source about the knowledge itself, routed to stewards as curation signal rather than accumulating as a central backlog.</li>
+<li><strong>Agent memory and learned skills.</strong> Current research distinguishes model-internal learned skills, which cannot be inspected or governed, from externalized SKILL.md artifacts, which can; bridging that gap so agents can externalize what they learn as portable, auditable artifacts is an open direction the survey literature explicitly identifies [29]. The firm&rsquo;s position should be conservative and simple: nothing model-internal is treated as firm knowledge; anything an agent externalizes into the docs-as-code contract enters the same certification pipeline as human-authored content, at a distinct trust tier, with human steward sign-off required for promotion.</li>
+</ul>
+<p>The governance stance across all three: <strong>agent-generated content is a source class, not a shortcut.</strong> It flows through the same factories, carries stricter provenance, and never self-certifies.</p>
+<hr />
+<h2>6. Ingestion: context factories, per source class</h2>
+<p>Raw sources are written for humans reading pages: long, mixed-trust, uncited, unshaped for an agent&rsquo;s task. The context factory is the pipeline pattern that closes that gap, and it is deliberately a pipeline, not another database.</p>
+<div class="figure"><svg viewBox="0 0 960 340" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <style>
+    .stage { fill: #ffffff; stroke: #1e8449; stroke-width: 1.5; rx: 6; }
+    .stage-title { font-size: 13px; font-weight: bold; fill: #1a2733; }
+    .stage-sub { font-size: 10.5px; fill: #5d6d7e; }
+    .arrow { stroke: #1e8449; stroke-width: 2; fill: none; marker-end: url(#arr2); }
+    .fail { stroke: #c0392b; stroke-width: 1.5; fill: none; marker-end: url(#arrfail); stroke-dasharray: 5 4; }
+  </style>
+  <defs>
+    <marker id="arr2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#1e8449"/></marker>
+    <marker id="arrfail" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#c0392b"/></marker>
+  </defs>
+
+  <text x="480" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a2733">Context Factory: source change to governed, agent-ready context</text>
+
+  <!-- Trigger -->
+  <rect x="20" y="60" width="130" height="70" fill="#fef9e7" stroke="#b7950b" stroke-width="1.5" rx="6"/>
+  <text x="85" y="88" text-anchor="middle" class="stage-title">Source change</text>
+  <text x="85" y="106" text-anchor="middle" class="stage-sub">commit, page edit,</text>
+  <text x="85" y="119" text-anchor="middle" class="stage-sub">schema update</text>
+
+  <line x1="150" y1="95" x2="176" y2="95" class="arrow"/>
+
+  <!-- 1 Extract -->
+  <rect x="178" y="60" width="140" height="70" class="stage"/>
+  <text x="248" y="82" text-anchor="middle" class="stage-title">1 · Extract &amp;</text>
+  <text x="248" y="97" text-anchor="middle" class="stage-title">normalize</text>
+  <text x="248" y="115" text-anchor="middle" class="stage-sub">one docs-as-code contract</text>
+
+  <line x1="318" y1="95" x2="344" y2="95" class="arrow"/>
+
+  <!-- 2 Shape -->
+  <rect x="346" y="60" width="140" height="70" class="stage"/>
+  <text x="416" y="82" text-anchor="middle" class="stage-title">2 · Shape for tasks</text>
+  <text x="416" y="100" text-anchor="middle" class="stage-sub">progressive disclosure:</text>
+  <text x="416" y="113" text-anchor="middle" class="stage-sub">summary first, detail on demand</text>
+
+  <line x1="486" y1="95" x2="512" y2="95" class="arrow"/>
+
+  <!-- 3 Enrich -->
+  <rect x="514" y="60" width="140" height="70" class="stage"/>
+  <text x="584" y="82" text-anchor="middle" class="stage-title">3 · Enrich metadata</text>
+  <text x="584" y="100" text-anchor="middle" class="stage-sub">owner · classification ·</text>
+  <text x="584" y="113" text-anchor="middle" class="stage-sub">entitlement · trust tier · time</text>
+
+  <line x1="654" y1="95" x2="680" y2="95" class="arrow"/>
+
+  <!-- 4 Certify -->
+  <rect x="682" y="60" width="130" height="70" class="stage"/>
+  <text x="747" y="82" text-anchor="middle" class="stage-title">4 · Certify</text>
+  <text x="747" y="100" text-anchor="middle" class="stage-sub">firm skill standard +</text>
+  <text x="747" y="113" text-anchor="middle" class="stage-sub">compliance scans</text>
+
+  <line x1="812" y1="95" x2="838" y2="95" class="arrow"/>
+
+  <!-- 5 Index -->
+  <rect x="840" y="60" width="104" height="70" class="stage"/>
+  <text x="892" y="82" text-anchor="middle" class="stage-title">5 · Index</text>
+  <text x="892" y="100" text-anchor="middle" class="stage-sub">semantic catalog:</text>
+  <text x="892" y="113" text-anchor="middle" class="stage-sub">intent finds knowledge</text>
+
+  <!-- Fail closed branch -->
+  <line x1="747" y1="130" x2="747" y2="176" class="fail"/>
+  <rect x="642" y="178" width="210" height="52" fill="#fdedec" stroke="#c0392b" stroke-width="1.5" rx="6"/>
+  <text x="747" y="200" text-anchor="middle" class="stage-title" fill="#922b21">Fail closed</text>
+  <text x="747" y="218" text-anchor="middle" class="stage-sub">uncertified content never ships;</text>
+  <text x="747" y="230" text-anchor="middle" class="stage-sub" >gap routed to the owning team</text>
+
+  <!-- Ownership band -->
+  <rect x="20" y="262" width="924" height="58" fill="#f4f6f7" stroke="#aab7b8" rx="6"/>
+  <text x="482" y="286" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a2733">Operating rule: factories run in the owner's existing CI/CD</text>
+  <text x="482" y="306" text-anchor="middle" font-size="11.5" fill="#5d6d7e">The platform designs the assembly line once; hundreds of domain teams supply the goods. Contribution is a pull request, not a parallel wiki edit.</text>
+</svg>
+</div>
+
+<p><em>Figure 2. The context factory. Triggered on every source change, it emits governed, task-shaped context; certification failures fail closed.</em></p>
+<p>The five stages: <strong>extract and normalize</strong> into one docs-as-code contract; <strong>shape for tasks</strong> with progressive disclosure; <strong>enrich</strong> with the metadata governance depends on (owner, classification, entitlement scope, trust tier, timestamp); <strong>certify</strong> at build time against the firm skill standard with fail-closed compliance scans; <strong>index</strong> into the semantic catalog. The operating rule that makes it scale: factories are run by the teams that own the source. The platform designs the assembly line once; hundreds of domain teams supply the goods.</p>
+<p>This revision adds the per-source-class detail that an implementation team needs:</p>
+<table>
+<thead>
+<tr>
+<th>Source class</th>
+<th>Trigger</th>
+<th>Connector pattern</th>
+<th>Trust tier at entry</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Code, AGENTS.md, CLAUDE.md, SKILL.md, ADRs</td>
+<td>Git commit / merge</td>
+<td>CI pipeline step in the owning repo</td>
+<td>High (post-review)</td>
+<td>Instruction files additionally linted for size and conflict, per the evaluation findings that bloated files degrade agents [33]</td>
+</tr>
+<tr>
+<td>Confluence</td>
+<td>Page publish / edit webhook</td>
+<td>Governed Rovo MCP connector [34]; no bulk scrape</td>
+<td>Low, promotable</td>
+<td>Steward certification promotes a page; barrier-relevant spaces excluded at source</td>
+</tr>
+<tr>
+<td>Jira</td>
+<td>Issue events</td>
+<td>Governed Rovo MCP connector [34]</td>
+<td>Low (evidence, not authority)</td>
+<td>Feeds operational and structural knowledge, never policy</td>
+</tr>
+<tr>
+<td>Service catalog / CMDB</td>
+<td>Catalog sync</td>
+<td>API pull on schedule plus change events</td>
+<td>High</td>
+<td>The resolution authority for steward fields (Section 10)</td>
+</tr>
+<tr>
+<td>Data catalogs</td>
+<td>Schema / lineage change events</td>
+<td>Native catalog APIs</td>
+<td>High, classification-gated</td>
+<td>MNPI tags gate retrieval before indexing, not after</td>
+</tr>
+<tr>
+<td>Postmortems, runbooks</td>
+<td>Publication workflow</td>
+<td>Docs-as-code where present; export pipeline otherwise</td>
+<td>High</td>
+<td>Highest-value operational class per incident dollar</td>
+</tr>
+<tr>
+<td>Agent-generated artifacts</td>
+<td>Merge of agent-authored content</td>
+<td>Same CI path as human content</td>
+<td>Distinct agent tier</td>
+<td>Human steward sign-off required for promotion; provenance records authorship</td>
+</tr>
+</tbody>
+</table>
+<p>Three pipeline disciplines apply across every class:</p>
+<ol>
+<li><strong>Canonicalization and deduplication.</strong> The same fact frequently lives in Confluence, an ADR, and a runbook. The factory resolves to the highest-trust canonical source and links the rest, so agents never receive three conflicting versions of one policy.</li>
+<li><strong>Incremental by default.</strong> Factories process changes, not corpora. Full rebuilds are an exceptional, audited operation, because they are where classification errors slip in at scale.</li>
+<li><strong>The output is the skills contract.</strong> Factories emit certified SKILL.md packages plus graph and index entries. Because SKILL.md is an open standard with roughly 40 adopting clients [28], one certified artifact serves every agent the firm runs, which is the economic point of building factories at all.</li>
+</ol>
+<hr />
+<h2>7. Serving: the gateway and named tools</h2>
+<p>Agents call named, scoped operations: <code>get_service_owner(name)</code>, <code>search_code(query, repo)</code>, <code>get_related_incidents(service)</code>, <code>check_data_classification(dataset)</code>. This follows the agentic-retrieval literature [18][19] and buys three properties a single semantic-search endpoint cannot: <strong>auditability</strong> (the log records exactly what was asked and answered, per tool, per call), <strong>economy</strong> (no need to embed and re-rank a document to answer one factual question), and <strong>field-level entitlements</strong> (a named tool is permissioned at the granularity of the answer, not the document).</p>
+<div class="figure"><svg viewBox="0 0 960 430" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <style>
+    .node { fill: #ffffff; stroke: #ca6f1e; stroke-width: 1.5; rx: 6; }
+    .t { font-size: 12.5px; font-weight: bold; fill: #1a2733; }
+    .s { font-size: 10.5px; fill: #5d6d7e; }
+    .flow { stroke: #ca6f1e; stroke-width: 2; fill: none; marker-end: url(#arr3); }
+    .side { stroke: #5d6d7e; stroke-width: 1.5; fill: none; marker-end: url(#arr4); stroke-dasharray: 4 4; }
+    .num { font-size: 11px; font-weight: bold; fill: #ca6f1e; }
+  </style>
+  <defs>
+    <marker id="arr3" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#ca6f1e"/></marker>
+    <marker id="arr4" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#5d6d7e"/></marker>
+  </defs>
+
+  <text x="480" y="26" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a2733">One request through the Knowledge Gateway</text>
+
+  <!-- Developer + agent -->
+  <rect x="20" y="60" width="180" height="76" fill="#eaf2f8" stroke="#1a5276" stroke-width="1.5" rx="6"/>
+  <text x="110" y="86" text-anchor="middle" class="t">Developer + agent</text>
+  <text x="110" y="104" text-anchor="middle" class="s">SSO identity travels with</text>
+  <text x="110" y="117" text-anchor="middle" class="s">every call; agent is never a</text>
+  <text x="110" y="130" text-anchor="middle" class="s">privilege-escalation path</text>
+
+  <text x="222" y="88" class="num">1 · MCP tool call</text>
+  <line x1="200" y1="98" x2="266" y2="98" class="flow"/>
+
+  <!-- Gateway container -->
+  <rect x="268" y="52" width="424" height="330" fill="#fdf2e9" stroke="#ca6f1e" stroke-width="2" rx="8"/>
+  <text x="480" y="76" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a2733">Knowledge Gateway (single core)</text>
+
+  <rect x="292" y="92" width="376" height="52" class="node"/>
+  <text x="480" y="112" text-anchor="middle" class="t">2 · Authenticate &amp; entitle (default-deny)</text>
+  <text x="480" y="130" text-anchor="middle" class="s">scope to what this identity may see; MNPI barriers enforced here</text>
+
+  <line x1="480" y1="144" x2="480" y2="162" class="flow"/>
+
+  <rect x="292" y="164" width="376" height="52" class="node"/>
+  <text x="480" y="184" text-anchor="middle" class="t">3 · Route intent to named tools</text>
+  <text x="480" y="202" text-anchor="middle" class="s">get_service_owner() · search_code() · get_related_incidents() · check_data_classification()</text>
+
+  <line x1="480" y1="216" x2="480" y2="234" class="flow"/>
+
+  <rect x="292" y="236" width="376" height="52" class="node"/>
+  <text x="480" y="256" text-anchor="middle" class="t">4 · Retrieve, filter, assemble</text>
+  <text x="480" y="274" text-anchor="middle" class="s">field-level entitlement check; staleness flags surfaced, not hidden</text>
+
+  <line x1="480" y1="288" x2="480" y2="306" class="flow"/>
+
+  <rect x="292" y="308" width="376" height="52" class="node"/>
+  <text x="480" y="328" text-anchor="middle" class="t">5 · Respond with provenance</text>
+  <text x="480" y="346" text-anchor="middle" class="s">source, version, classification, and timestamp travel with every answer</text>
+
+  <!-- Sources -->
+  <rect x="740" y="120" width="200" height="150" fill="#fef9e7" stroke="#b7950b" stroke-width="1.5" rx="6"/>
+  <text x="840" y="144" text-anchor="middle" class="t">Federated sources</text>
+  <text x="840" y="164" text-anchor="middle" class="s">repos · catalogs · ADRs</text>
+  <text x="840" y="180" text-anchor="middle" class="s">runbooks · policies · data</text>
+  <text x="840" y="196" text-anchor="middle" class="s">via factory-built indexes</text>
+  <text x="840" y="220" text-anchor="middle" class="s" font-style="italic">owners keep ownership;</text>
+  <text x="840" y="234" text-anchor="middle" class="s" font-style="italic">gateway holds no copy of</text>
+  <text x="840" y="248" text-anchor="middle" class="s" font-style="italic">record</text>
+  <line x1="692" y1="262" x2="738" y2="230" class="flow"/>
+
+  <!-- Audit sidecar -->
+  <rect x="740" y="300" width="200" height="82" fill="#f4f6f7" stroke="#5d6d7e" stroke-width="1.5" rx="6"/>
+  <text x="840" y="324" text-anchor="middle" class="t">Audit + telemetry</text>
+  <text x="840" y="342" text-anchor="middle" class="s">who, what, which version,</text>
+  <text x="840" y="356" text-anchor="middle" class="s">100% of retrievals logged;</text>
+  <text x="840" y="370" text-anchor="middle" class="s">gaps routed to owners</text>
+  <line x1="692" y1="334" x2="738" y2="334" class="side"/>
+
+  <!-- Return arrow -->
+  <path d="M 292 334 C 190 334 110 260 110 140" class="flow"/>
+  <text x="150" y="240" class="num">6 · cited answer</text>
+</svg>
+</div>
+
+<p><em>Figure 3. One request through the gateway. Identity travels with every call; provenance travels with every answer; every retrieval is logged.</em></p>
+<p>Agnosticism lives at the interface. MCP is the primary protocol, with REST/GraphQL as a thin secondary surface over the same core; all business logic (retrieval, entitlement enforcement, classification checks, audit logging) lives once in the gateway core, and supporting a new tool means writing an adapter, not duplicating logic. Identity travels with every call: requests carry the developer&rsquo;s existing SSO identity, and the agent is never a privilege-escalation path.</p>
+<hr />
+<h2>8. Distribution: three channels, a registry, and two gateways</h2>
+<p>Distribution is where most knowledge programs quietly fragment, because each new agent product ships its own copy &ldquo;just for now.&rdquo; This design makes fragmentation structurally difficult.</p>
+<div class="figure"><svg viewBox="0 0 960 560" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <style>
+    .t { font-size: 13px; font-weight: bold; fill: #1a2733; }
+    .s { font-size: 10.5px; fill: #5d6d7e; }
+    .lbl { font-size: 11px; font-weight: bold; fill: #1a5276; }
+    .flow { stroke: #1a5276; stroke-width: 2; fill: none; marker-end: url(#a6); }
+    .dash { stroke: #5d6d7e; stroke-width: 1.5; fill: none; stroke-dasharray: 5 4; marker-end: url(#a7); }
+  </style>
+  <defs>
+    <marker id="a6" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#1a5276"/></marker>
+    <marker id="a7" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#5d6d7e"/></marker>
+  </defs>
+
+  <text x="480" y="26" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a2733">Distribution and control plane: three channels, one contract, one policy point</text>
+
+  <!-- Agents row -->
+  <rect x="20" y="50" width="920" height="72" fill="#eaf2f8" stroke="#1a5276" stroke-width="1.5" rx="6"/>
+  <text x="36" y="74" class="t">Agents (any MCP-capable client)</text>
+  <text x="36" y="92" class="s">Claude Code · Copilot · Cursor · GS AI Assistant · CI/CD and review bots · desk-built agents</text>
+  <text x="36" y="108" class="s">Repo-level AGENTS.md / CLAUDE.md tells each agent which gateway tools and skills to use; it never carries the knowledge itself</text>
+
+  <!-- Channel arrows -->
+  <line x1="200" y1="122" x2="200" y2="176" class="flow"/>
+  <text x="208" y="152" class="lbl">Live (default)</text>
+  <line x1="560" y1="122" x2="560" y2="176" class="flow"/>
+  <text x="568" y="152" class="lbl">Installed (fallback)</text>
+  <line x1="820" y1="122" x2="820" y2="176" class="flow"/>
+  <text x="712" y="152" class="lbl">Embedded</text>
+
+  <!-- MCP Gateway -->
+  <rect x="40" y="178" width="330" height="150" fill="#fdf2e9" stroke="#ca6f1e" stroke-width="2" rx="8"/>
+  <text x="205" y="202" text-anchor="middle" class="t">MCP Gateway (Knowledge Gateway)</text>
+  <text x="205" y="222" text-anchor="middle" class="s">Session-fetched, always fresh, no client footprint</text>
+  <text x="205" y="240" text-anchor="middle" class="s">Entitlements (default-deny) · citations · audit</text>
+  <text x="205" y="258" text-anchor="middle" class="s">Named tools over federated sources</text>
+  <text x="205" y="282" text-anchor="middle" class="s" font-style="italic">Policy enforced once here,</text>
+  <text x="205" y="296" text-anchor="middle" class="s" font-style="italic">not re-implemented per agent</text>
+
+  <!-- Skills registry -->
+  <rect x="410" y="178" width="300" height="150" fill="#eafaf1" stroke="#1e8449" stroke-width="2" rx="8"/>
+  <text x="560" y="202" text-anchor="middle" class="t">Firm skills registry (git)</text>
+  <text x="560" y="222" text-anchor="middle" class="s">Certified SKILL.md packages via firm CLI</text>
+  <text x="560" y="240" text-anchor="middle" class="s">For offline / local-file-only runtimes</text>
+  <text x="560" y="258" text-anchor="middle" class="s">Progressive disclosure: name + description</text>
+  <text x="560" y="272" text-anchor="middle" class="s">at startup, full instructions on demand</text>
+  <text x="560" y="296" text-anchor="middle" class="s" font-style="italic">Versioned, signed, revocable</text>
+
+  <!-- LLM Gateway -->
+  <rect x="740" y="178" width="200" height="150" fill="#f4f6f7" stroke="#5d6d7e" stroke-width="2" rx="8"/>
+  <text x="840" y="202" text-anchor="middle" class="t">LLM Gateway</text>
+  <text x="840" y="222" text-anchor="middle" class="s">Sits on the model path</text>
+  <text x="840" y="240" text-anchor="middle" class="s">Injects baseline firm context</text>
+  <text x="840" y="254" text-anchor="middle" class="s">into every model call</text>
+  <text x="840" y="278" text-anchor="middle" class="s" font-style="italic">Model-path control,</text>
+  <text x="840" y="292" text-anchor="middle" class="s" font-style="italic">complements the tool path</text>
+
+  <!-- Registry -->
+  <rect x="40" y="366" width="330" height="120" fill="#ffffff" stroke="#ca6f1e" stroke-width="1.5" rx="8"/>
+  <text x="205" y="390" text-anchor="middle" class="t">Internal MCP registry</text>
+  <text x="205" y="410" text-anchor="middle" class="s">Private sub-registry on the open MCP</text>
+  <text x="205" y="424" text-anchor="middle" class="s">Registry API spec: the allowlist of approved,</text>
+  <text x="205" y="438" text-anchor="middle" class="s">certified servers agents may discover</text>
+  <text x="205" y="460" text-anchor="middle" class="s" font-style="italic">Discovery and access control close one loop</text>
+  <line x1="205" y1="364" x2="205" y2="330" class="dash"/>
+  <text x="214" y="350" class="s">publishes / governs</text>
+
+  <!-- Vendor servers -->
+  <rect x="410" y="366" width="300" height="120" fill="#ffffff" stroke="#1e8449" stroke-width="1.5" rx="8"/>
+  <text x="560" y="390" text-anchor="middle" class="t">Approved external MCP servers</text>
+  <text x="560" y="410" text-anchor="middle" class="s">e.g. Atlassian Rovo MCP Server for</text>
+  <text x="560" y="424" text-anchor="middle" class="s">Confluence and Jira: OAuth, permission</text>
+  <text x="560" y="438" text-anchor="middle" class="s">inheritance, no content caching</text>
+  <text x="560" y="460" text-anchor="middle" class="s" font-style="italic">Registered and tiered, never wired ad hoc</text>
+  <line x1="410" y1="426" x2="372" y2="426" class="dash"/>
+
+  <!-- One rule -->
+  <rect x="740" y="366" width="200" height="120" fill="#fdedec" stroke="#c0392b" stroke-width="1.5" rx="8"/>
+  <text x="840" y="392" text-anchor="middle" class="t" fill="#922b21">One rule, all channels</text>
+  <text x="840" y="416" text-anchor="middle" class="s">No agent vendors</text>
+  <text x="840" y="430" text-anchor="middle" class="s">its own copy.</text>
+  <text x="840" y="454" text-anchor="middle" class="s" font-style="italic">Copies are where staleness and</text>
+  <text x="840" y="468" text-anchor="middle" class="s" font-style="italic">entitlement bypass are born</text>
+
+  <text x="480" y="530" text-anchor="middle" class="s">The registry answers "what exists and is approved"; the MCP gateway answers "what may this identity retrieve right now"; the LLM gateway answers "what does every model call carry by default."</text>
+</svg>
+</div>
+
+<p><em>Figure 5. The distribution plane. The registry answers what exists and is approved; the MCP gateway answers what this identity may retrieve now; the LLM gateway answers what every model call carries by default.</em></p>
+<h3>8.1 Three channels, one contract</h3>
+<ul>
+<li><strong>Live (default): the MCP gateway.</strong> Fetched per session, always fresh, no client footprint. Already the production pattern internally.</li>
+<li><strong>Installed (fallback): the firm skills registry.</strong> Certified SKILL.md packages distributed over git registries via the firm CLI, for offline or local-file-only runtimes. Versioned, signed, revocable. Progressive disclosure keeps the installed footprint near-zero until a skill activates [28].</li>
+<li><strong>Embedded: the LLM gateway.</strong> The firm&rsquo;s LLM gateway sits on the model path and injects baseline firm context and policy into every model call, regardless of which agent made it. It is the complement to the MCP gateway, which sits on the tool path. The two are different control points and both are needed: the LLM gateway cannot see tool traffic, and the MCP gateway cannot see raw prompts.</li>
+</ul>
+<p>One rule holds across all three: <strong>no agent vendors its own copy.</strong> Vendored copies are where staleness, entitlement bypass, and audit gaps are born.</p>
+<h3>8.2 The internal MCP registry: discovery as a governed function</h3>
+<p>Today, which MCP servers an agent may use is decided ad hoc, per team. The open MCP Registry changes what good looks like: the official registry publishes an OpenAPI specification explicitly designed for private sub-registries that apply their own curation, security scanning, and approval criteria, and host applications are expected to consume curated registries rather than the public one directly [25]. Industry guidance is converging on the same operational point: a registry that shares identity and policy with a gateway closes the loop between discovery and access control, and federation support lets decentralized teams manage their own entries under one platform view [26].</p>
+<p>The firm therefore runs an <strong>internal MCP registry</strong> conformant to the open spec: the single allowlist of approved servers (the knowledge gateway&rsquo;s own tools, certified domain servers, and vetted external servers such as the Atlassian Rovo MCP Server [34]), each entry carrying owner, trust tier, review status, and entitlement scope. Agents discover capability through the registry; the governance council approves entries; unregistered servers are unreachable from managed runtimes. Discovery stops being a wiki page and becomes a control.</p>
+<h3>8.3 The MCP gateway as the firm&rsquo;s future control plane</h3>
+<p>The market is moving the gateway function itself onto MCP. Gartner projects that 75 percent of API gateway vendors will carry MCP features by end of 2026, and an ecosystem of MCP gateways offering authentication, monitoring, and compliance controls has formed around exactly the problem this paper addresses [13]. The design consequence for the firm: the knowledge gateway is built so that it either becomes, or cleanly registers into, the firm&rsquo;s eventual MCP gateway. Concretely, that means no business logic in transport adapters, registry-driven discovery from day one, and per-tool policy expressed as data rather than code. The firm should expect to operate one MCP control plane within two years; the knowledge layer must be its first and best-behaved tenant, not a parallel bespoke path that later needs migration.</p>
+<h3>8.4 Repo instruction files as the last hop of distribution</h3>
+<p>AGENTS.md and CLAUDE.md files complete the distribution story at the repo level: they tell each agent which gateway tools and skills to use for that repository, and they are the natural carrier for pointers, never for the knowledge itself. The firm standard is one canonical AGENTS.md per repo or package, generated and linted by the factory, with CLAUDE.md importing it per official guidance [36]; knowledge stays in the layer, and the instruction file stays under the size and specificity limits the evaluation literature indicates actually change agent behavior [31][33].</p>
+<hr />
+<h2>9. Governance: built as a control, not retrofitted after an incident</h2>
+<p>This layer touches source code, deal data, and potentially MNPI inside a regulated bank. It is governed from the outset under frameworks examiners already apply, and it deliberately invents nothing new.</p>
+<p><strong>Model risk management.</strong> SR 11-7 established the supervisory expectation that models informing business decisions be inventoried, independently validated, documented, and monitored [5], and the May 2026 revised interagency guidance carries those expectations forward for AI systems explicitly [6]. The gateway&rsquo;s retrieval and ranking logic is registered as a model under the firm&rsquo;s existing MRM framework, with quarterly revalidation at steady state, directly pre-empting the most common examination findings: shadow inventories and unvalidated conceptual soundness [6].</p>
+<p><strong>The firm&rsquo;s existing AI control set applies at the gateway.</strong> Default-deny access, validation and lower-trust tiering for broadly editable sources, on-behalf-of identity with dual audit, and mandatory citations are enforced at the single choke point, with Tech Risk design review and the firm&rsquo;s AI governance councils as the production gate. One honest gap remains: no firm standard yet covers a federated knowledge layer as a pattern, and this program should commission one. This revision adds two control surfaces the prior draft did not name: the <strong>internal MCP registry</strong> as the approval record for every server agents may reach (Section 8.2), and <strong>agent-native file certification</strong> as the control preventing repo-level instruction files from becoming ungoverned shadow knowledge (Sections 5.2, 6).</p>
+<p><strong>Classification and information barriers at ingestion.</strong> Every source is tagged Public, Internal, Confidential, or MNPI before indexing. MNPI-tagged content is excluded from broad retrieval by default and respects existing barriers between desks and deal teams. Classification is enforced in the factory, checked again at the gateway, and travels with every answer.</p>
+<p><strong>Ingested content is untrusted input.</strong> Consistent with SafeRAG [20] and NIST&rsquo;s Generative AI Profile [21], documents are sanitized and validated before indexing, broadly editable sources carry a visible lower trust tier, and the retrieval path is red-teamed for indirect prompt injection through poisoned source content on a standing schedule, with OWASP&rsquo;s LLM Top 10 as the baseline threat catalog [22]. Agent-native files receive particular attention here: an instruction file is the highest-leverage injection target in the estate, because agents are built to follow it.</p>
+<p><strong>Audit by construction.</strong> Every retrieval logs who (developer plus agent identity), what was retrieved, and which source version, with downstream use captured where feasible. This is the difference between &ldquo;the agent suggested it&rdquo; and being able to explain a suggestion after the fact.</p>
+<p><strong>Alignment beyond the US perimeter.</strong> The design maps onto NIST AI RMF&rsquo;s govern-map-measure-manage cycle [23] and its financial-sector translation [24], and its emphasis on explainability, auditability, and human accountability is consistent with the principles supervisors in our other major jurisdictions, including MAS in Singapore, have articulated for AI in financial services. One platform, one evidence trail, every jurisdiction.</p>
+<hr />
+<h2>10. Operating model: designed for an org chart that will not hold still</h2>
+<p>A firm of this size does not have one clean owner for anything, and it reorganizes constantly. The fix is structural: stewardship attaches to the entity being described, not to a team name.</p>
+<ul>
+<li><strong>Every service, repo, and dataset carries a steward field,</strong> a role resolved against the existing service catalog. When a reorg moves a service, one field updates; no knowledge migrates. Stewardship extends existing service-ownership duty and appears on the same engineering-excellence scorecard as on-call. The steward&rsquo;s scope now explicitly includes the repo&rsquo;s agent-native files: the AGENTS.md is owned the way the runbook is owned.</li>
+<li><strong>The central platform team owns pipes, never content correctness.</strong> Five to eight engineers: platform lead, retrieval and ML, knowledge graph and ingestion, security and entitlements, a standing compliance and model-risk liaison, and developer enablement. It additionally operates the internal MCP registry and the skills registry.</li>
+<li><strong>A governance council adjudicates what stewards cannot:</strong> approval of new source connectors and registry entries, classification disputes, trust-tier promotions, and maturity calls on when a domain expands. Monthly, cross-division, with compliance, model risk, and security seated as members rather than reviewers of record.</li>
+</ul>
+<hr />
+<h2>11. Rollout, adoption, and measurement</h2>
+<div class="figure"><svg viewBox="0 0 960 300" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <style>
+    .ph { stroke-width: 1.5; rx: 6; }
+    .t { font-size: 13px; font-weight: bold; fill: #1a2733; }
+    .s { font-size: 10.5px; fill: #5d6d7e; }
+    .g { font-size: 10.5px; font-weight: bold; fill: #1e8449; }
+    .arrow { stroke: #1a5276; stroke-width: 2; fill: none; marker-end: url(#arr5); }
+  </style>
+  <defs>
+    <marker id="arr5" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#1a5276"/></marker>
+  </defs>
+
+  <text x="480" y="26" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a2733">Phased rollout: each phase earns the next on measured results</text>
+
+  <rect x="20" y="60" width="164" height="150" fill="#f4f6f7" stroke="#5d6d7e" class="ph"/>
+  <text x="102" y="84" text-anchor="middle" class="t">Phase 0 · Discovery</text>
+  <text x="102" y="102" text-anchor="middle" class="s">~1 quarter</text>
+  <text x="102" y="122" text-anchor="middle" class="s">Source audit, charter,</text>
+  <text x="102" y="136" text-anchor="middle" class="s">classification framework,</text>
+  <text x="102" y="150" text-anchor="middle" class="s">exec + MRM co-sponsor</text>
+  <text x="102" y="176" text-anchor="middle" class="g">Gate: pilot scope and</text>
+  <text x="102" y="190" text-anchor="middle" class="g">metrics baselined</text>
+
+  <line x1="184" y1="135" x2="210" y2="135" class="arrow"/>
+
+  <rect x="212" y="60" width="164" height="150" fill="#eaf2f8" stroke="#1a5276" class="ph"/>
+  <text x="294" y="84" text-anchor="middle" class="t">Phase 1 · Pilot</text>
+  <text x="294" y="102" text-anchor="middle" class="s">~1 quarter</text>
+  <text x="294" y="122" text-anchor="middle" class="s">1–2 domains, 2 divisions,</text>
+  <text x="294" y="136" text-anchor="middle" class="s">200–500 developers,</text>
+  <text x="294" y="150" text-anchor="middle" class="s">one gateway + MCP server</text>
+  <text x="294" y="176" text-anchor="middle" class="g">Gate: measurable lift;</text>
+  <text x="294" y="190" text-anchor="middle" class="g">council go/no-go</text>
+
+  <line x1="376" y1="135" x2="402" y2="135" class="arrow"/>
+
+  <rect x="404" y="60" width="164" height="150" fill="#eafaf1" stroke="#1e8449" class="ph"/>
+  <text x="486" y="84" text-anchor="middle" class="t">Phase 2 · Expand</text>
+  <text x="486" y="102" text-anchor="middle" class="s">~2 quarters</text>
+  <text x="486" y="122" text-anchor="middle" class="s">+3–4 domains, 2nd/3rd</text>
+  <text x="486" y="136" text-anchor="middle" class="s">agent tool, steward network,</text>
+  <text x="486" y="150" text-anchor="middle" class="s">several thousand developers</text>
+  <text x="486" y="176" text-anchor="middle" class="g">Gate: freshness SLAs</text>
+  <text x="486" y="190" text-anchor="middle" class="g">holding across domains</text>
+
+  <line x1="568" y1="135" x2="594" y2="135" class="arrow"/>
+
+  <rect x="596" y="60" width="164" height="150" fill="#fdf2e9" stroke="#ca6f1e" class="ph"/>
+  <text x="678" y="84" text-anchor="middle" class="t">Phase 3 · Scale</text>
+  <text x="678" y="102" text-anchor="middle" class="s">~2 quarters</text>
+  <text x="678" y="122" text-anchor="middle" class="s">Firmwide availability,</text>
+  <text x="678" y="136" text-anchor="middle" class="s">self-service onboarding,</text>
+  <text x="678" y="150" text-anchor="middle" class="s">showback model live</text>
+  <text x="678" y="176" text-anchor="middle" class="g">Gate: all 12,000</text>
+  <text x="678" y="190" text-anchor="middle" class="g">developers have access</text>
+
+  <line x1="760" y1="135" x2="786" y2="135" class="arrow"/>
+
+  <rect x="788" y="60" width="152" height="150" fill="#fef9e7" stroke="#b7950b" class="ph"/>
+  <text x="864" y="84" text-anchor="middle" class="t">Phase 4 · Steady state</text>
+  <text x="864" y="102" text-anchor="middle" class="s">ongoing</text>
+  <text x="864" y="122" text-anchor="middle" class="s">Usage-driven deepening,</text>
+  <text x="864" y="136" text-anchor="middle" class="s">quarterly MRM revalidation,</text>
+  <text x="864" y="150" text-anchor="middle" class="s">deprecation workflow</text>
+  <text x="864" y="176" text-anchor="middle" class="g">No further launches,</text>
+  <text x="864" y="190" text-anchor="middle" class="g">only reviews</text>
+
+  <rect x="20" y="232" width="920" height="52" fill="#fdedec" stroke="#c0392b" stroke-width="1.5" rx="6"/>
+  <text x="480" y="254" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#922b21">Anti-pattern this design rejects: the big-bang firmwide mandate</text>
+  <text x="480" y="272" text-anchor="middle" font-size="11" fill="#5d6d7e">12,000 engineers do not adopt a mandate. They adopt something that makes their specific Tuesday better. Wins first, communication second.</text>
+</svg>
+</div>
+
+<p><em>Figure 4. Five phases; each earns the next on measured results against a pre-registered baseline.</em></p>
+<p>Adoption at 12,000 engineers is earned team by team. The pilot must produce three or four visible, specific wins before any firmwide communication; division champions trained in the pilot become local feedback loops; onboarding introduces the layer as the normal way to ramp on a service. This revision adds one high-leverage early deliverable to Phase 1: <strong>the AGENTS.md harvest.</strong> Inventorying, linting, and certifying the instruction files that already exist in firm repos delivers immediate, visible value to every team that wrote one, seeds the agent-native ingestion path, and costs a fraction of any other domain&rsquo;s factory.</p>
+<p>Measurement is defined and baselined before the pilot:</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Metric</th>
+<th>Signal of success</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Adoption</td>
+<td>Weekly active developers with an agent on the gateway</td>
+<td>Rising share of 12,000, phase over phase</td>
+</tr>
+<tr>
+<td>Quality</td>
+<td>PR rework and defect-escape rate on AI-assisted changes</td>
+<td>At or below non-AI baseline</td>
+</tr>
+<tr>
+<td>Velocity</td>
+<td>Cycle time on knowledge-heavy tasks</td>
+<td>Measurable reduction</td>
+</tr>
+<tr>
+<td>Knowledge health</td>
+<td>Services with named steward, content within freshness SLA; repos with certified AGENTS.md</td>
+<td>Above 90 percent in core domains by Phase 3</td>
+</tr>
+<tr>
+<td>Trust</td>
+<td>Retrievals fully logged; agents reaching only registered servers</td>
+<td>100 percent logged; zero unregistered reach</td>
+</tr>
+<tr>
+<td>Cost</td>
+<td>Infra cost per active developer vs. hours saved</td>
+<td>Positive and improving each phase</td>
+</tr>
+</tbody>
+</table>
+<p>Morgan Stanley&rsquo;s discipline of an evaluation gate before every deployment [1] applies here as the release process, not as an aspiration.</p>
+<hr />
+<h2>12. Risks and mitigations</h2>
+<table>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Why it bites in a bank specifically</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MNPI and data leakage</td>
+<td>Information barriers exist for a reason; an unchecked agent is a new path across them</td>
+<td>Classification at ingestion, entitlement-scoped retrieval, standing red team</td>
+</tr>
+<tr>
+<td>Stale knowledge as hallucination source</td>
+<td>Confidently wrong output can reach production code and client work</td>
+<td>Freshness SLAs, mandatory citation, staleness flags surfaced to agents</td>
+</tr>
+<tr>
+<td>Poisoned or manipulated sources</td>
+<td>RAG pipelines demonstrably fail simple adversarial manipulations [20]; instruction files are the highest-leverage injection target</td>
+<td>Trust tiering, sanitization, injection red-teaming per OWASP LLM Top 10 [22], certification of agent-native files</td>
+</tr>
+<tr>
+<td>Instruction-file bloat degrading agents</td>
+<td>Evaluation evidence shows badly curated repo context files reduce task performance [33]</td>
+<td>Factory linting for size and conflict; one canonical AGENTS.md per package [31]</td>
+</tr>
+<tr>
+<td>Shadow knowledge at repo level</td>
+<td>Thousands of ungoverned agent files accumulating outside any inventory</td>
+<td>Agent-native ingestion path plus the Phase 1 harvest</td>
+</tr>
+<tr>
+<td>Unregistered MCP servers</td>
+<td>Ad hoc server wiring recreates point-to-point sprawl and bypasses review [26]</td>
+<td>Internal registry as allowlist; unregistered servers unreachable from managed runtimes</td>
+</tr>
+<tr>
+<td>Vendor lock-in</td>
+<td>The agent market is moving fast; today&rsquo;s default is not tomorrow&rsquo;s</td>
+<td>Protocol-first (MCP), open skills format, one gateway core, thin adapters [11][28]</td>
+</tr>
+<tr>
+<td>Federated hoarding and silo decay</td>
+<td>No natural incentive to maintain shared knowledge under deadline pressure</td>
+<td>Stewardship on the engineering-excellence scorecard, attached to the entity</td>
+</tr>
+<tr>
+<td>Reorg churn breaking ownership</td>
+<td>Reorganizations are routine at this scale</td>
+<td>Steward as a metadata field resolved against the service catalog</td>
+</tr>
+<tr>
+<td>Regulatory exposure</td>
+<td>Retrieval logic influences production decisions in a regulated business</td>
+<td>Registered under MRM from day one; quarterly revalidation [6]</td>
+</tr>
+<tr>
+<td>Change fatigue</td>
+<td>Engineers have watched initiatives come and go</td>
+<td>Phased, win-led rollout; no big-bang mandate</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>13. Conclusion</h2>
+<p>The firms winning with AI in financial services are not the ones with exclusive model access; nobody has that anymore. They are the ones that turned proprietary knowledge into a governed, current, machine-consumable asset [1][9]. Since the first draft of this program, the ground has moved again: the protocol has a registry [25], capability packaging has an open standard adopted across every major agent vendor [27][28], and the firm&rsquo;s own repositories are quietly filling with machine-readable knowledge nobody governs [30][33]. Each of those developments makes the federated design in this paper cheaper to build and more expensive to skip.</p>
+<p>The design asks for no new regulation, no content migration, and no bet on a single vendor. It asks for one small permanent team, one contract, one registry, named stewards, and the discipline to let each phase earn the next. The net effect: every agent at the firm, in any tool, acting on the same trusted, cited, current context, authored once by the team that owns it, discovered through one registry, on interfaces that outlive any single procurement cycle.</p>
+<hr />
+<h2>References</h2>
+<ol>
+<li>OpenAI. &ldquo;Morgan Stanley uses AI evals to shape the future of financial services.&rdquo; https://openai.com/index/morgan-stanley/</li>
+<li>AI Magazine. &ldquo;How JPMorgan is Embedding AI into Employee Performance.&rdquo; November 2025. https://aimagazine.com/news/how-jpmorgan-is-embedding-ai-into-employee-performance</li>
+<li>AI Pro Playbook. &ldquo;JPMorgan LLM Suite.&rdquo; April 2026. https://aiproplaybook.com/tools/jpmorgan-llm-suite</li>
+<li>ValueAdd VC. &ldquo;AI in Financial Services 2026: What JPMorgan, Goldman and BlackRock Are Actually Doing.&rdquo; June 2026. https://valueaddvc.com/blog/ai-in-financial-services-2026-what-jpmorgan-goldman-and-blackrock-are-actually-doing</li>
+<li>Board of Governors of the Federal Reserve System. &ldquo;SR 11-7: Guidance on Model Risk Management.&rdquo; 2011. https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm</li>
+<li>Block Convey. &ldquo;Model Risk Management for AI: Revised Interagency Guidance.&rdquo; 2026. https://blockconvey.com/compliance/sr-11-7-mrm ; see also Glacis, &ldquo;SR 11-7 Model Risk Management: Complete Guide for AI Systems,&rdquo; April 2026. https://www.glacis.io/guide-sr-11-7</li>
+<li>COMPEL Framework. &ldquo;Case Study: Morgan Stanley Wealth Management and the Internal-Assistant Rollout.&rdquo; April 2026. https://www.compelframework.org/articles/casestudy-morgan-stanley-wealth-management-llm-rollout</li>
+<li>Davenport, T. &ldquo;How Morgan Stanley Is Training GPT To Help Financial Advisors.&rdquo; 2023. https://www.tomdavenport.com/how-morgan-stanley-is-training-gpt-to-help-financial-advisors/</li>
+<li>The Digital Banker. &ldquo;JPMorgan Chase&rsquo;s LLM Suite drives AI transformation across the enterprise.&rdquo; March 2026. https://thedigitalbanker.com/jpmorgan-chases-llm-suite-drives-ai-transformation-across-the-enterprise/</li>
+<li>AI Street. &ldquo;Goldman&rsquo;s AI Rollout Follows Rivals.&rdquo; https://www.ai-street.co/p/goldman-joins-jpm-morgan-stanley-releasing-ai-tool</li>
+<li>AngelHack DevLabs. &ldquo;The Latest AI Trends Reshaping Enterprise Software Development in 2026.&rdquo; July 2026. https://devlabs.angelhack.com/blog/ai-enterprise-2026/</li>
+<li>Software Strategies Blog. &ldquo;Agentic AI Security Startups, Funding, M&amp;A, RSAC 2026.&rdquo; March 2026. https://softwarestrategiesblog.com/2026/03/28/agentic-ai-security-startups-funding-mna-rsac-2026/</li>
+<li>MintMCP. &ldquo;Best MCP Gateways for AI Startups 2026.&rdquo; May 2026. https://www.mintmcp.com/blog/gateways-ai-startups-with-mcp</li>
+<li>Waehner, K. &ldquo;Enterprise Agentic AI Landscape Q2 2026: Trust, Flexibility, and Vendor Lock-in.&rdquo; April 2026. https://www.kai-waehner.de/blog/2026/04/06/enterprise-agentic-ai-landscape-2026-trust-flexibility-and-vendor-lock-in/</li>
+<li>Lewis, P., Perez, E., Piktus, A., et al. &ldquo;Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks.&rdquo; Advances in Neural Information Processing Systems 33 (2020): 9459-9474.</li>
+<li>Shuster, K., et al. &ldquo;Retrieval Augmentation Reduces Hallucination in Conversation.&rdquo; Findings of EMNLP (2021).</li>
+<li>Edge, D., et al. &ldquo;From Local to Global: A GraphRAG Approach to Query-Focused Summarization.&rdquo; Microsoft Research, arXiv:2404.16130 (2024).</li>
+<li>Singh, A., et al. &ldquo;Agentic Retrieval-Augmented Generation: A Survey.&rdquo; arXiv (2025).</li>
+<li>Microsoft Corporation. &ldquo;AgenticRAG: Agentic Retrieval for Enterprise Knowledge Bases.&rdquo; arXiv:2605.05538 (2026).</li>
+<li>Liang, X., et al. &ldquo;SafeRAG: Benchmarking Security in Retrieval-Augmented Generation.&rdquo; arXiv (2025).</li>
+<li>National Institute of Standards and Technology. &ldquo;Generative Artificial Intelligence Profile (NIST AI 600-1).&rdquo; 2024.</li>
+<li>OWASP Foundation. &ldquo;OWASP Top 10 for Large Language Model Applications.&rdquo; https://owasp.org/www-project-top-10-for-large-language-model-applications/</li>
+<li>National Institute of Standards and Technology. &ldquo;Artificial Intelligence Risk Management Framework (AI RMF 1.0), NIST AI 100-1.&rdquo; 2023.</li>
+<li>Cyber Risk Institute. &ldquo;Financial Services AI Risk Management Framework (FS AI RMF).&rdquo; Developed with support from the U.S. Treasury.</li>
+<li>Model Context Protocol project. &ldquo;Introducing the MCP Registry.&rdquo; September 2025. https://blog.modelcontextprotocol.io/posts/2025-09-08-mcp-registry-preview/ ; and &ldquo;The MCP Registry: About.&rdquo; https://modelcontextprotocol.io/registry/about</li>
+<li>Kong Inc. &ldquo;What is an MCP Registry? The Centralized Directory for AI Agents.&rdquo; 2026. https://konghq.com/blog/learning-center/what-is-an-mcp-registry</li>
+<li>Agent Skills project (originally developed by Anthropic). &ldquo;Agent Skills Overview.&rdquo; https://agentskills.io/home</li>
+<li>SwirlAI. &ldquo;Agent Skills: Progressive Disclosure as a System Design Pattern.&rdquo; 2026. https://www.newsletter.swirlai.com/p/agent-skills-progressive-disclosure ; see also daily.dev summary, April 2026. https://daily.dev/posts/agent-skills-progressive-disclosure-as-a-system-design-pattern-nanbjcqsc</li>
+<li>&ldquo;Agent Skills for Large Language Models: Architecture, Acquisition, Security, and the Path Forward.&rdquo; arXiv:2602.12430 (2026).</li>
+<li>Codersera. &ldquo;AGENTS.md Complete Guide 2026: Spec, Tools, Examples.&rdquo; May 2026. https://codersera.com/blog/agents-md-complete-guide-2026/</li>
+<li>DeployHQ. &ldquo;CLAUDE.md, AGENTS.md and Copilot Instructions: Configure Every AI Coding Assistant.&rdquo; June 2026. https://www.deployhq.com/blog/ai-coding-config-files-guide ; see also Morph, &ldquo;AGENTS.md Spec (2026).&rdquo; https://www.morphllm.com/agents-md-guide</li>
+<li>Agentman. &ldquo;How Do You Build Your First Agent Skill? A Complete SKILL.md Anatomy Guide.&rdquo; June 2026. https://agentman.ai/blog/build-your-first-agent-skill-skillmd-anatomy</li>
+<li>To Data &amp; Beyond. &ldquo;Do AGENTS.md/CLAUDE.md Files Help Coding Agents? A New Paper Challenges This.&rdquo; Discussing &ldquo;Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for Coding Agents?&rdquo; (ETH Zurich and LogicStar.ai). https://todatabeyond.substack.com/p/do-agentsmdclaudemd-files-help-coding</li>
+<li>Atlassian. &ldquo;Atlassian Rovo MCP Server is now GA.&rdquo; February 2026. https://www.atlassian.com/blog/announcements/atlassian-rovo-mcp-ga ; and &ldquo;Extend Atlassian into any AI assistant using MCP.&rdquo; https://www.atlassian.com/platform/remote-mcp-server</li>
+<li>Atlassian Support. &ldquo;Getting started with the Atlassian Rovo MCP Server.&rdquo; https://support.atlassian.com/atlassian-rovo-mcp-server/docs/getting-started-with-the-atlassian-remote-mcp-server/</li>
+<li>Codersera. &ldquo;AGENTS.md vs CLAUDE.md vs Cursor Rules vs Copilot (2026).&rdquo; https://codersera.com/blog/agents-md-vs-claude-md-vs-cursor-rules-comparison-2026/</li>
+<li>Ry Walker Research. &ldquo;Anthropic Skills (anthropics/skills).&rdquo; June 2026. https://rywalker.com/research/anthropic-skills</li>
+</ol>
+<hr />
+<p><em>Internal working draft. Architecture and phase gates subject to governance council review. External sources cited for pattern evidence; figures for peer institutions and ecosystem adoption are as publicly reported and have not been independently verified. Section 5.3 describes forward-looking design provisions, not shipped inventory.</em></p>
+</body></html>

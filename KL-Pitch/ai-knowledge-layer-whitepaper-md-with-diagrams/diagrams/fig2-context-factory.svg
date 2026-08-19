@@ -1,0 +1,73 @@
+<svg viewBox="0 0 960 340" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <style>
+    .stage { fill: #ffffff; stroke: #1e8449; stroke-width: 1.5; rx: 6; }
+    .stage-title { font-size: 13px; font-weight: bold; fill: #1a2733; }
+    .stage-sub { font-size: 10.5px; fill: #5d6d7e; }
+    .arrow { stroke: #1e8449; stroke-width: 2; fill: none; marker-end: url(#arr2); }
+    .fail { stroke: #c0392b; stroke-width: 1.5; fill: none; marker-end: url(#arrfail); stroke-dasharray: 5 4; }
+  </style>
+  <defs>
+    <marker id="arr2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#1e8449"/></marker>
+    <marker id="arrfail" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#c0392b"/></marker>
+  </defs>
+
+  <text x="480" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a2733">Context Factory: source change to governed, agent-ready context</text>
+
+  <!-- Trigger -->
+  <rect x="20" y="60" width="130" height="70" fill="#fef9e7" stroke="#b7950b" stroke-width="1.5" rx="6"/>
+  <text x="85" y="88" text-anchor="middle" class="stage-title">Source change</text>
+  <text x="85" y="106" text-anchor="middle" class="stage-sub">commit, page edit,</text>
+  <text x="85" y="119" text-anchor="middle" class="stage-sub">schema update</text>
+
+  <line x1="150" y1="95" x2="176" y2="95" class="arrow"/>
+
+  <!-- 1 Extract -->
+  <rect x="178" y="60" width="140" height="70" class="stage"/>
+  <text x="248" y="82" text-anchor="middle" class="stage-title">1 · Extract &amp;</text>
+  <text x="248" y="97" text-anchor="middle" class="stage-title">normalize</text>
+  <text x="248" y="115" text-anchor="middle" class="stage-sub">one docs-as-code contract</text>
+
+  <line x1="318" y1="95" x2="344" y2="95" class="arrow"/>
+
+  <!-- 2 Shape -->
+  <rect x="346" y="60" width="140" height="70" class="stage"/>
+  <text x="416" y="82" text-anchor="middle" class="stage-title">2 · Shape for tasks</text>
+  <text x="416" y="100" text-anchor="middle" class="stage-sub">progressive disclosure:</text>
+  <text x="416" y="113" text-anchor="middle" class="stage-sub">summary first, detail on demand</text>
+
+  <line x1="486" y1="95" x2="512" y2="95" class="arrow"/>
+
+  <!-- 3 Enrich -->
+  <rect x="514" y="60" width="140" height="70" class="stage"/>
+  <text x="584" y="82" text-anchor="middle" class="stage-title">3 · Enrich metadata</text>
+  <text x="584" y="100" text-anchor="middle" class="stage-sub">owner · classification ·</text>
+  <text x="584" y="113" text-anchor="middle" class="stage-sub">entitlement · trust tier · time</text>
+
+  <line x1="654" y1="95" x2="680" y2="95" class="arrow"/>
+
+  <!-- 4 Certify -->
+  <rect x="682" y="60" width="130" height="70" class="stage"/>
+  <text x="747" y="82" text-anchor="middle" class="stage-title">4 · Certify</text>
+  <text x="747" y="100" text-anchor="middle" class="stage-sub">firm skill standard +</text>
+  <text x="747" y="113" text-anchor="middle" class="stage-sub">compliance scans</text>
+
+  <line x1="812" y1="95" x2="838" y2="95" class="arrow"/>
+
+  <!-- 5 Index -->
+  <rect x="840" y="60" width="104" height="70" class="stage"/>
+  <text x="892" y="82" text-anchor="middle" class="stage-title">5 · Index</text>
+  <text x="892" y="100" text-anchor="middle" class="stage-sub">semantic catalog:</text>
+  <text x="892" y="113" text-anchor="middle" class="stage-sub">intent finds knowledge</text>
+
+  <!-- Fail closed branch -->
+  <line x1="747" y1="130" x2="747" y2="176" class="fail"/>
+  <rect x="642" y="178" width="210" height="52" fill="#fdedec" stroke="#c0392b" stroke-width="1.5" rx="6"/>
+  <text x="747" y="200" text-anchor="middle" class="stage-title" fill="#922b21">Fail closed</text>
+  <text x="747" y="218" text-anchor="middle" class="stage-sub">uncertified content never ships;</text>
+  <text x="747" y="230" text-anchor="middle" class="stage-sub" >gap routed to the owning team</text>
+
+  <!-- Ownership band -->
+  <rect x="20" y="262" width="924" height="58" fill="#f4f6f7" stroke="#aab7b8" rx="6"/>
+  <text x="482" y="286" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a2733">Operating rule: factories run in the owner's existing CI/CD</text>
+  <text x="482" y="306" text-anchor="middle" font-size="11.5" fill="#5d6d7e">The platform designs the assembly line once; hundreds of domain teams supply the goods. Contribution is a pull request, not a parallel wiki edit.</text>
+</svg>

@@ -1,0 +1,75 @@
+<svg viewBox="0 0 960 430" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <style>
+    .node { fill: #ffffff; stroke: #ca6f1e; stroke-width: 1.5; rx: 6; }
+    .t { font-size: 12.5px; font-weight: bold; fill: #1a2733; }
+    .s { font-size: 10.5px; fill: #5d6d7e; }
+    .flow { stroke: #ca6f1e; stroke-width: 2; fill: none; marker-end: url(#arr3); }
+    .side { stroke: #5d6d7e; stroke-width: 1.5; fill: none; marker-end: url(#arr4); stroke-dasharray: 4 4; }
+    .num { font-size: 11px; font-weight: bold; fill: #ca6f1e; }
+  </style>
+  <defs>
+    <marker id="arr3" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#ca6f1e"/></marker>
+    <marker id="arr4" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#5d6d7e"/></marker>
+  </defs>
+
+  <text x="480" y="26" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a2733">One request through the Knowledge Gateway</text>
+
+  <!-- Developer + agent -->
+  <rect x="20" y="60" width="180" height="76" fill="#eaf2f8" stroke="#1a5276" stroke-width="1.5" rx="6"/>
+  <text x="110" y="86" text-anchor="middle" class="t">Developer + agent</text>
+  <text x="110" y="104" text-anchor="middle" class="s">SSO identity travels with</text>
+  <text x="110" y="117" text-anchor="middle" class="s">every call; agent is never a</text>
+  <text x="110" y="130" text-anchor="middle" class="s">privilege-escalation path</text>
+
+  <text x="222" y="88" class="num">1 · MCP tool call</text>
+  <line x1="200" y1="98" x2="266" y2="98" class="flow"/>
+
+  <!-- Gateway container -->
+  <rect x="268" y="52" width="424" height="330" fill="#fdf2e9" stroke="#ca6f1e" stroke-width="2" rx="8"/>
+  <text x="480" y="76" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a2733">Knowledge Gateway (single core)</text>
+
+  <rect x="292" y="92" width="376" height="52" class="node"/>
+  <text x="480" y="112" text-anchor="middle" class="t">2 · Authenticate &amp; entitle (default-deny)</text>
+  <text x="480" y="130" text-anchor="middle" class="s">scope to what this identity may see; MNPI barriers enforced here</text>
+
+  <line x1="480" y1="144" x2="480" y2="162" class="flow"/>
+
+  <rect x="292" y="164" width="376" height="52" class="node"/>
+  <text x="480" y="184" text-anchor="middle" class="t">3 · Route intent to named tools</text>
+  <text x="480" y="202" text-anchor="middle" class="s">get_service_owner() · search_code() · get_related_incidents() · check_data_classification()</text>
+
+  <line x1="480" y1="216" x2="480" y2="234" class="flow"/>
+
+  <rect x="292" y="236" width="376" height="52" class="node"/>
+  <text x="480" y="256" text-anchor="middle" class="t">4 · Retrieve, filter, assemble</text>
+  <text x="480" y="274" text-anchor="middle" class="s">field-level entitlement check; staleness flags surfaced, not hidden</text>
+
+  <line x1="480" y1="288" x2="480" y2="306" class="flow"/>
+
+  <rect x="292" y="308" width="376" height="52" class="node"/>
+  <text x="480" y="328" text-anchor="middle" class="t">5 · Respond with provenance</text>
+  <text x="480" y="346" text-anchor="middle" class="s">source, version, classification, and timestamp travel with every answer</text>
+
+  <!-- Sources -->
+  <rect x="740" y="120" width="200" height="150" fill="#fef9e7" stroke="#b7950b" stroke-width="1.5" rx="6"/>
+  <text x="840" y="144" text-anchor="middle" class="t">Federated sources</text>
+  <text x="840" y="164" text-anchor="middle" class="s">repos · catalogs · ADRs</text>
+  <text x="840" y="180" text-anchor="middle" class="s">runbooks · policies · data</text>
+  <text x="840" y="196" text-anchor="middle" class="s">via factory-built indexes</text>
+  <text x="840" y="220" text-anchor="middle" class="s" font-style="italic">owners keep ownership;</text>
+  <text x="840" y="234" text-anchor="middle" class="s" font-style="italic">gateway holds no copy of</text>
+  <text x="840" y="248" text-anchor="middle" class="s" font-style="italic">record</text>
+  <line x1="692" y1="262" x2="738" y2="230" class="flow"/>
+
+  <!-- Audit sidecar -->
+  <rect x="740" y="300" width="200" height="82" fill="#f4f6f7" stroke="#5d6d7e" stroke-width="1.5" rx="6"/>
+  <text x="840" y="324" text-anchor="middle" class="t">Audit + telemetry</text>
+  <text x="840" y="342" text-anchor="middle" class="s">who, what, which version,</text>
+  <text x="840" y="356" text-anchor="middle" class="s">100% of retrievals logged;</text>
+  <text x="840" y="370" text-anchor="middle" class="s">gaps routed to owners</text>
+  <line x1="692" y1="334" x2="738" y2="334" class="side"/>
+
+  <!-- Return arrow -->
+  <path d="M 292 334 C 190 334 110 260 110 140" class="flow"/>
+  <text x="150" y="240" class="num">6 · cited answer</text>
+</svg>

@@ -1,0 +1,71 @@
+<svg viewBox="0 0 960 300" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <style>
+    .ph { stroke-width: 1.5; rx: 6; }
+    .t { font-size: 13px; font-weight: bold; fill: #1a2733; }
+    .s { font-size: 10.5px; fill: #5d6d7e; }
+    .g { font-size: 10.5px; font-weight: bold; fill: #1e8449; }
+    .arrow { stroke: #1a5276; stroke-width: 2; fill: none; marker-end: url(#arr5); }
+  </style>
+  <defs>
+    <marker id="arr5" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#1a5276"/></marker>
+  </defs>
+
+  <text x="480" y="26" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a2733">Phased rollout: each phase earns the next on measured results</text>
+
+  <rect x="20" y="60" width="164" height="150" fill="#f4f6f7" stroke="#5d6d7e" class="ph"/>
+  <text x="102" y="84" text-anchor="middle" class="t">Phase 0 · Discovery</text>
+  <text x="102" y="102" text-anchor="middle" class="s">~1 quarter</text>
+  <text x="102" y="122" text-anchor="middle" class="s">Source audit, charter,</text>
+  <text x="102" y="136" text-anchor="middle" class="s">classification framework,</text>
+  <text x="102" y="150" text-anchor="middle" class="s">exec + MRM co-sponsor</text>
+  <text x="102" y="176" text-anchor="middle" class="g">Gate: pilot scope and</text>
+  <text x="102" y="190" text-anchor="middle" class="g">metrics baselined</text>
+
+  <line x1="184" y1="135" x2="210" y2="135" class="arrow"/>
+
+  <rect x="212" y="60" width="164" height="150" fill="#eaf2f8" stroke="#1a5276" class="ph"/>
+  <text x="294" y="84" text-anchor="middle" class="t">Phase 1 · Pilot</text>
+  <text x="294" y="102" text-anchor="middle" class="s">~1 quarter</text>
+  <text x="294" y="122" text-anchor="middle" class="s">1–2 domains, 2 divisions,</text>
+  <text x="294" y="136" text-anchor="middle" class="s">200–500 developers,</text>
+  <text x="294" y="150" text-anchor="middle" class="s">one gateway + MCP server</text>
+  <text x="294" y="176" text-anchor="middle" class="g">Gate: measurable lift;</text>
+  <text x="294" y="190" text-anchor="middle" class="g">council go/no-go</text>
+
+  <line x1="376" y1="135" x2="402" y2="135" class="arrow"/>
+
+  <rect x="404" y="60" width="164" height="150" fill="#eafaf1" stroke="#1e8449" class="ph"/>
+  <text x="486" y="84" text-anchor="middle" class="t">Phase 2 · Expand</text>
+  <text x="486" y="102" text-anchor="middle" class="s">~2 quarters</text>
+  <text x="486" y="122" text-anchor="middle" class="s">+3–4 domains, 2nd/3rd</text>
+  <text x="486" y="136" text-anchor="middle" class="s">agent tool, steward network,</text>
+  <text x="486" y="150" text-anchor="middle" class="s">several thousand developers</text>
+  <text x="486" y="176" text-anchor="middle" class="g">Gate: freshness SLAs</text>
+  <text x="486" y="190" text-anchor="middle" class="g">holding across domains</text>
+
+  <line x1="568" y1="135" x2="594" y2="135" class="arrow"/>
+
+  <rect x="596" y="60" width="164" height="150" fill="#fdf2e9" stroke="#ca6f1e" class="ph"/>
+  <text x="678" y="84" text-anchor="middle" class="t">Phase 3 · Scale</text>
+  <text x="678" y="102" text-anchor="middle" class="s">~2 quarters</text>
+  <text x="678" y="122" text-anchor="middle" class="s">Firmwide availability,</text>
+  <text x="678" y="136" text-anchor="middle" class="s">self-service onboarding,</text>
+  <text x="678" y="150" text-anchor="middle" class="s">showback model live</text>
+  <text x="678" y="176" text-anchor="middle" class="g">Gate: all 12,000</text>
+  <text x="678" y="190" text-anchor="middle" class="g">developers have access</text>
+
+  <line x1="760" y1="135" x2="786" y2="135" class="arrow"/>
+
+  <rect x="788" y="60" width="152" height="150" fill="#fef9e7" stroke="#b7950b" class="ph"/>
+  <text x="864" y="84" text-anchor="middle" class="t">Phase 4 · Steady state</text>
+  <text x="864" y="102" text-anchor="middle" class="s">ongoing</text>
+  <text x="864" y="122" text-anchor="middle" class="s">Usage-driven deepening,</text>
+  <text x="864" y="136" text-anchor="middle" class="s">quarterly MRM revalidation,</text>
+  <text x="864" y="150" text-anchor="middle" class="s">deprecation workflow</text>
+  <text x="864" y="176" text-anchor="middle" class="g">No further launches,</text>
+  <text x="864" y="190" text-anchor="middle" class="g">only reviews</text>
+
+  <rect x="20" y="232" width="920" height="52" fill="#fdedec" stroke="#c0392b" stroke-width="1.5" rx="6"/>
+  <text x="480" y="254" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#922b21">Anti-pattern this design rejects: the big-bang firmwide mandate</text>
+  <text x="480" y="272" text-anchor="middle" font-size="11" fill="#5d6d7e">12,000 engineers do not adopt a mandate. They adopt something that makes their specific Tuesday better. Wins first, communication second.</text>
+</svg>

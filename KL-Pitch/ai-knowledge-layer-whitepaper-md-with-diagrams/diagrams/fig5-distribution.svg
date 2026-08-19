@@ -1,0 +1,85 @@
+<svg viewBox="0 0 960 560" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif">
+  <style>
+    .t { font-size: 13px; font-weight: bold; fill: #1a2733; }
+    .s { font-size: 10.5px; fill: #5d6d7e; }
+    .lbl { font-size: 11px; font-weight: bold; fill: #1a5276; }
+    .flow { stroke: #1a5276; stroke-width: 2; fill: none; marker-end: url(#a6); }
+    .dash { stroke: #5d6d7e; stroke-width: 1.5; fill: none; stroke-dasharray: 5 4; marker-end: url(#a7); }
+  </style>
+  <defs>
+    <marker id="a6" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#1a5276"/></marker>
+    <marker id="a7" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#5d6d7e"/></marker>
+  </defs>
+
+  <text x="480" y="26" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a2733">Distribution and control plane: three channels, one contract, one policy point</text>
+
+  <!-- Agents row -->
+  <rect x="20" y="50" width="920" height="72" fill="#eaf2f8" stroke="#1a5276" stroke-width="1.5" rx="6"/>
+  <text x="36" y="74" class="t">Agents (any MCP-capable client)</text>
+  <text x="36" y="92" class="s">Claude Code · Copilot · Cursor · GS AI Assistant · CI/CD and review bots · desk-built agents</text>
+  <text x="36" y="108" class="s">Repo-level AGENTS.md / CLAUDE.md tells each agent which gateway tools and skills to use; it never carries the knowledge itself</text>
+
+  <!-- Channel arrows -->
+  <line x1="200" y1="122" x2="200" y2="176" class="flow"/>
+  <text x="208" y="152" class="lbl">Live (default)</text>
+  <line x1="560" y1="122" x2="560" y2="176" class="flow"/>
+  <text x="568" y="152" class="lbl">Installed (fallback)</text>
+  <line x1="820" y1="122" x2="820" y2="176" class="flow"/>
+  <text x="712" y="152" class="lbl">Embedded</text>
+
+  <!-- MCP Gateway -->
+  <rect x="40" y="178" width="330" height="150" fill="#fdf2e9" stroke="#ca6f1e" stroke-width="2" rx="8"/>
+  <text x="205" y="202" text-anchor="middle" class="t">MCP Gateway (Knowledge Gateway)</text>
+  <text x="205" y="222" text-anchor="middle" class="s">Session-fetched, always fresh, no client footprint</text>
+  <text x="205" y="240" text-anchor="middle" class="s">Entitlements (default-deny) · citations · audit</text>
+  <text x="205" y="258" text-anchor="middle" class="s">Named tools over federated sources</text>
+  <text x="205" y="282" text-anchor="middle" class="s" font-style="italic">Policy enforced once here,</text>
+  <text x="205" y="296" text-anchor="middle" class="s" font-style="italic">not re-implemented per agent</text>
+
+  <!-- Skills registry -->
+  <rect x="410" y="178" width="300" height="150" fill="#eafaf1" stroke="#1e8449" stroke-width="2" rx="8"/>
+  <text x="560" y="202" text-anchor="middle" class="t">Firm skills registry (git)</text>
+  <text x="560" y="222" text-anchor="middle" class="s">Certified SKILL.md packages via firm CLI</text>
+  <text x="560" y="240" text-anchor="middle" class="s">For offline / local-file-only runtimes</text>
+  <text x="560" y="258" text-anchor="middle" class="s">Progressive disclosure: name + description</text>
+  <text x="560" y="272" text-anchor="middle" class="s">at startup, full instructions on demand</text>
+  <text x="560" y="296" text-anchor="middle" class="s" font-style="italic">Versioned, signed, revocable</text>
+
+  <!-- LLM Gateway -->
+  <rect x="740" y="178" width="200" height="150" fill="#f4f6f7" stroke="#5d6d7e" stroke-width="2" rx="8"/>
+  <text x="840" y="202" text-anchor="middle" class="t">LLM Gateway</text>
+  <text x="840" y="222" text-anchor="middle" class="s">Sits on the model path</text>
+  <text x="840" y="240" text-anchor="middle" class="s">Injects baseline firm context</text>
+  <text x="840" y="254" text-anchor="middle" class="s">into every model call</text>
+  <text x="840" y="278" text-anchor="middle" class="s" font-style="italic">Model-path control,</text>
+  <text x="840" y="292" text-anchor="middle" class="s" font-style="italic">complements the tool path</text>
+
+  <!-- Registry -->
+  <rect x="40" y="366" width="330" height="120" fill="#ffffff" stroke="#ca6f1e" stroke-width="1.5" rx="8"/>
+  <text x="205" y="390" text-anchor="middle" class="t">Internal MCP registry</text>
+  <text x="205" y="410" text-anchor="middle" class="s">Private sub-registry on the open MCP</text>
+  <text x="205" y="424" text-anchor="middle" class="s">Registry API spec: the allowlist of approved,</text>
+  <text x="205" y="438" text-anchor="middle" class="s">certified servers agents may discover</text>
+  <text x="205" y="460" text-anchor="middle" class="s" font-style="italic">Discovery and access control close one loop</text>
+  <line x1="205" y1="364" x2="205" y2="330" class="dash"/>
+  <text x="214" y="350" class="s">publishes / governs</text>
+
+  <!-- Vendor servers -->
+  <rect x="410" y="366" width="300" height="120" fill="#ffffff" stroke="#1e8449" stroke-width="1.5" rx="8"/>
+  <text x="560" y="390" text-anchor="middle" class="t">Approved external MCP servers</text>
+  <text x="560" y="410" text-anchor="middle" class="s">e.g. Atlassian Rovo MCP Server for</text>
+  <text x="560" y="424" text-anchor="middle" class="s">Confluence and Jira: OAuth, permission</text>
+  <text x="560" y="438" text-anchor="middle" class="s">inheritance, no content caching</text>
+  <text x="560" y="460" text-anchor="middle" class="s" font-style="italic">Registered and tiered, never wired ad hoc</text>
+  <line x1="410" y1="426" x2="372" y2="426" class="dash"/>
+
+  <!-- One rule -->
+  <rect x="740" y="366" width="200" height="120" fill="#fdedec" stroke="#c0392b" stroke-width="1.5" rx="8"/>
+  <text x="840" y="392" text-anchor="middle" class="t" fill="#922b21">One rule, all channels</text>
+  <text x="840" y="416" text-anchor="middle" class="s">No agent vendors</text>
+  <text x="840" y="430" text-anchor="middle" class="s">its own copy.</text>
+  <text x="840" y="454" text-anchor="middle" class="s" font-style="italic">Copies are where staleness and</text>
+  <text x="840" y="468" text-anchor="middle" class="s" font-style="italic">entitlement bypass are born</text>
+
+  <text x="480" y="530" text-anchor="middle" class="s">The registry answers "what exists and is approved"; the MCP gateway answers "what may this identity retrieve right now"; the LLM gateway answers "what does every model call carry by default."</text>
+</svg>
