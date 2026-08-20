@@ -64,6 +64,39 @@ The standardization that matters is no longer only the protocol. It now spans th
 
 The strategic reading for a bank: building the knowledge layer on these open interfaces, with vendor plugins as thin adapters, is how the firm avoids being one procurement decision away from a rebuild. And because skills and instruction files are open formats, the same certified content can serve every agent the firm licenses now or later.
 
+### 2.5 The commercial tool landscape
+
+The buy side of this market is real, well funded, and worth understanding precisely, because several of its layers should be bought rather than built. It divides into four tiers.
+
+**Workforce context platforms.** Glean is the category leader: founded in 2019 by a former Google search engineer, it reached a reported $4.6 billion valuation in 2024 and serves more than 700 enterprise customers with a permission-aware knowledge graph, hybrid search, and RAG over more than 100 prebuilt connectors, with financial services among its higher-concentration industries [38][39][40]. Its featured customers include Booking.com, Zillow, TIME, and Ericsson, and one published deployment case reports 82 percent sustained usage among deployed users, framed explicitly as an organizational-change exercise rather than a purely technical rollout [41][42]. Notably, Glean's own platform now ships an MCP gateway and an agentic engine [42], confirming that the architecture in this paper is where the commercial category itself is heading. Coveo and Sinequa compete in the same space with public-company and European footprints respectively, both with financial services practices [38].
+
+**Hyperscaler-native grounding.** Microsoft grounds Copilot on the Microsoft Graph semantic index, honoring existing Microsoft 365 permissions, extensible to third-party repositories through Graph connectors, and now exposes that grounded retrieval to custom applications through a generally available Copilot Retrieval API [43][44]. AWS offers Bedrock Knowledge Bases as a managed RAG pipeline, and its newer Managed Knowledge Base adds an agentic retriever that plans multi-step queries and exposes itself over MCP so any MCP-compatible framework can call it without custom integration [45][46]. Google grounds against Vertex AI Search and BigQuery [46]. Industry buyer guidance frames the choice cleanly: hyperscaler suites bolt grounded search onto the estate you already own, while build-on engines such as Elastic, Coveo, Sinequa, and OpenSearch supply retrieval primitives for assembling exactly the experience you want [44].
+
+**MCP infrastructure.** A vendor ecosystem of MCP gateways and registries (Kong, TrueFoundry, MintMCP, and others) has formed around discovery, authentication, and policy for agent tool access [13][26], the same control-plane functions Section 8 specifies.
+
+**Governed source connectors.** Vendors of the sources themselves increasingly ship the governed pipe: the Atlassian Rovo MCP Server for Confluence and Jira is the reference example [34].
+
+### 2.6 Build, buy, or assemble: the decision
+
+The honest framing for leadership is that this is not a build-versus-buy decision at the platform level; it is a layer-by-layer assembly decision. The peer evidence points one way at the top of the stack: Morgan Stanley, JPMorgan, and this firm all built their workforce-facing knowledge capability in-house on top of bought model APIs [1][2][4], because the differentiated and regulated parts (entitlements, barriers, MRM evidence, the firm's own taxonomy) are exactly the parts a horizontal product cannot carry for a bank.
+
+| Layer | Recommendation | Reasoning |
+|---|---|---|
+| Frontier models | Buy (multi-vendor) | Already firm practice [4]; commoditizing by design |
+| Vector stores, managed RAG primitives | Buy | Hyperscaler services (Bedrock Knowledge Bases, Azure AI Search) are mature, MCP-exposed, and inside existing cloud commercials [45][46] |
+| Source connectors | Buy where governed | Atlassian Rovo MCP class connectors inherit permissions and hold no copy [34]; never rebuild what the source vendor governs better |
+| MCP gateway / registry infrastructure | Buy or adopt open source, configure heavily | A commodity race with 75 percent of API gateway vendors adding MCP by end-2026 [13]; the firm's value is in the policy, not the proxy |
+| The contract, metadata schema, and certification standard | Build | This is the governance itself; no vendor carries the firm's classification, barrier, and MRM obligations |
+| Context factories | Build the reference once; domains copy | Owner-run pipelines in existing CI/CD are organizational design, not software procurement |
+| Entitlement, MNPI, and audit integration | Build | Must bind to firm identity, barriers, and evidence trails; the layer examiners will ask about |
+| Workforce context platform (Glean class) | Evaluate, do not default | See below |
+
+On the last row, the considered case for and against buying a Glean-class platform outright:
+
+- **For:** speed to value, 100-plus connectors on day one, a proven adoption playbook, and permission-aware search that took the vendor years to harden [39][41].
+- **Against, specifically for a bank of our profile:** a horizontal platform builds its own index of firm content, which is a new copy of data subject to MRM validation, barrier analysis, and vendor risk at MNPI sensitivity; its retrieval is corpus-shaped rather than named-tool-shaped, weakening field-level entitlement and audit granularity (Section 7); buyer guidance itself flags premium quote-based pricing, credit-metered agent usage, overlap with search the hyperscalers already bundle, and the roadmap risk of a category-defining startup [44]; and the firm's 12,000-engineer knowledge problem is dominated by source classes (code, ADRs, agent-native files, CMDB) where the developer-tooling fit of horizontal workforce platforms is weakest.
+- **The assembly position this paper recommends:** buy the commodity layers in the table, keep a Glean-class evaluation alive for non-engineering workforce search where its connector breadth is strongest, and build the governed spine (contract, factories, entitlements, registry policy, certification) that makes every bought component examinable. This is also the reversible position: because the spine speaks MCP and emits open skills, a future decision to buy more or build more swaps components rather than re-platforming.
+
 ---
 
 ## 3. Research foundations
@@ -336,6 +369,15 @@ The design asks for no new regulation, no content migration, and no bet on a sin
 35. Atlassian Support. "Getting started with the Atlassian Rovo MCP Server." https://support.atlassian.com/atlassian-rovo-mcp-server/docs/getting-started-with-the-atlassian-remote-mcp-server/
 36. Codersera. "AGENTS.md vs CLAUDE.md vs Cursor Rules vs Copilot (2026)." https://codersera.com/blog/agents-md-vs-claude-md-vs-cursor-rules-comparison-2026/
 37. Ry Walker Research. "Anthropic Skills (anthropics/skills)." June 2026. https://rywalker.com/research/anthropic-skills
+38. Contrary Research. "Report: Glean Business Breakdown & Founding Story." https://research.contrary.com/company/glean
+39. Perspective AI. "Glean's AI Strategy: How the $4B Enterprise Search Leader Discovers What 700 Enterprise Customers Actually Want." May 2026. https://getperspective.ai/blog/glean-ai-enterprise-search-conversational-customer-research-2026
+40. MVP Ventures. "Initiation Report: Glean Technologies." October 2024. https://www.mvp.vc/company-initations/initiation-report-glean-technologies---disrupting-enterprise-knowledge-management-with-ai
+41. TipRanks. "Enterprise AI Adoption Metrics Highlighted in Glean Case Study." May 2026. https://www.tipranks.com/news/private-companies/enterprise-ai-adoption-metrics-highlighted-in-glean-case-study
+42. Glean. Product and customer pages. https://www.glean.com/ and https://www.glean.com/resources/customer-stories
+43. Microsoft. "Knowledge in Microsoft Copilot Studio." Power Platform Blog, 2025. https://www.microsoft.com/en-us/power-platform/blog/2025/03/27/knowledge-in-microsoft-copilot-studio/
+44. CIOPages. "Buyer's Guide: Enterprise Search & RAG Platforms." June 2026. https://www.ciopages.com/buyer-guides/enterprise-search-rag
+45. Amazon Web Services. "Introducing Amazon Bedrock Managed Knowledge Base." June 2026. https://aws.amazon.com/blogs/aws/introducing-amazon-bedrock-managed-knowledge-base-for-faster-more-accurate-enterprise-ai-applications/
+46. TechnologyMatch. "AWS Bedrock vs Azure OpenAI vs Google Vertex AI: Enterprise AI Comparison." June 2026. https://technologymatch.com/blog/aws-bedrock-vs-azure-openai-vs-google-vertex-ai-enterprise-ai-comparison
 
 ---
 

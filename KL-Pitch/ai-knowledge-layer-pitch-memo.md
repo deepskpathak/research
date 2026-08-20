@@ -63,6 +63,10 @@ The org model is designed for a firm that reorganizes constantly. Stewardship at
 
 Adoption at 12,000 developers is earned team by team, not mandated. Phase 0 charters the initiative and baselines metrics. Phase 1 pilots one or two domains with 200 to 500 developers in two divisions and brings measurable lift to the council for go/no-go. Expansion follows results, with freshness SLAs, steward coverage above 90 percent in core domains, fully logged retrievals, and cost per active developer tracked each phase. Near-term working-group deliverables: a ratified MCP contract and metadata schema, a reference context factory any team can copy, a named front door with SLOs, and the commissioned Knowledge-Layer standard.
 
+## Build, buy, or assemble
+
+This is a layer-by-layer assembly decision, not a platform bet. Buy the commodity layers: frontier models (already firm practice), managed retrieval primitives from the hyperscalers, governed source connectors such as Atlassian's MCP server, and MCP gateway infrastructure, a space Gartner expects 75 percent of API gateway vendors to enter by end-2026. Build the governed spine no vendor can carry for a bank: the contract and metadata schema, owner-run factories, entitlement and MNPI integration, and certification. Workforce platforms like Glean (700-plus enterprise customers, financial services among its strongest verticals) are worth evaluating for non-engineering search, but Morgan Stanley, JPMorgan, and this firm all built the workforce-facing capability in-house on bought model APIs, because the regulated parts are exactly what a horizontal product cannot own. Because the spine speaks MCP and emits open skills, the decision stays reversible: components swap without re-platforming.
+
 ## Decisions requested
 
 1. **Endorse federation-first.** Unify what we own; do not fund a new knowledge silo.
