@@ -1,0 +1,4555 @@
+{
+ "contentType": "application/gliffy+json",
+ "version": "1.3",
+ "stage": {
+  "background": "#FFFFFF",
+  "width": 1290,
+  "height": 1530,
+  "nodeIndex": 117,
+  "autoFit": true,
+  "exportBorder": false,
+  "gridOn": true,
+  "snapToGrid": true,
+  "drawingGuidesOn": true,
+  "pageBreaksOn": false,
+  "printGridOn": false,
+  "printPaper": "LETTER",
+  "printShrinkToFit": false,
+  "printPortrait": true,
+  "maxWidth": 5000,
+  "maxHeight": 5000,
+  "themeData": null,
+  "imageCache": {},
+  "viewportType": "default",
+  "fitBB": {
+   "min": {
+    "x": 20,
+    "y": 20
+   },
+   "max": {
+    "x": 1290,
+    "y": 1530
+   }
+  },
+  "objects": [
+   {
+    "x": 20,
+    "y": 20,
+    "rotation": 0,
+    "id": 1,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.text",
+    "width": 1250,
+    "height": 36,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 1,
+    "graphic": {
+     "type": "Text",
+     "Text": {
+      "tid": null,
+      "valign": "middle",
+      "overflow": "none",
+      "vposition": "none",
+      "hposition": "none",
+      "html": "<p style=\"text-align:left;\"><span style=\"font-family:Arial;font-size:16px;\"><span style=\"font-weight:bold;\">Context as a Service (CaaS): governed knowledge preparation + task-specific context delivery</span></span></p>",
+      "paddingLeft": 2,
+      "paddingRight": 2,
+      "paddingBottom": 2,
+      "paddingTop": 2
+     }
+    },
+    "children": null,
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 20,
+    "y": 70,
+    "rotation": 0,
+    "id": 2,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.rectangle",
+    "width": 1250,
+    "height": 680,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 2,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#BDBDBD",
+      "fillColor": "#FAFAFA",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 3,
+      "uid": null,
+      "width": 1246,
+      "height": 30,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "top",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:left;\"><span style=\"font-family:Arial;font-size:13px;\"><span style=\"font-weight:bold;\">1 \u00b7 KNOWLEDGE PREPARATION  (build time, change-driven)</span></span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 20,
+    "y": 770,
+    "rotation": 0,
+    "id": 4,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.rectangle",
+    "width": 1250,
+    "height": 740,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 3,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#BDBDBD",
+      "fillColor": "#FAFAFA",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 5,
+      "uid": null,
+      "width": 1246,
+      "height": 30,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "top",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:left;\"><span style=\"font-family:Arial;font-size:13px;\"><span style=\"font-weight:bold;\">2 \u00b7 TASK-SPECIFIC CONTEXT DELIVERY  (runtime, per request)</span></span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 60,
+    "y": 140,
+    "rotation": 0,
+    "id": 6,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 230,
+    "height": 60,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 4,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#78909C",
+      "fillColor": "#ECEFF1",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 7,
+      "uid": null,
+      "width": 226,
+      "height": 60,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">Engineering docs</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">EngHub / SharePoint</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 60,
+    "y": 220,
+    "rotation": 0,
+    "id": 8,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 230,
+    "height": 60,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 5,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#78909C",
+      "fillColor": "#ECEFF1",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 9,
+      "uid": null,
+      "width": 226,
+      "height": 60,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">Standards &amp; controls</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Policies / guidelines</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 60,
+    "y": 300,
+    "rotation": 0,
+    "id": 10,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 230,
+    "height": 60,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 6,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#78909C",
+      "fillColor": "#ECEFF1",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 11,
+      "uid": null,
+      "width": 226,
+      "height": 60,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">Repositories</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Code / configs / ADRs</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 60,
+    "y": 380,
+    "rotation": 0,
+    "id": 12,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 230,
+    "height": 60,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 7,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#78909C",
+      "fillColor": "#ECEFF1",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 13,
+      "uid": null,
+      "width": 226,
+      "height": 60,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">Jira / Confluence</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Specs / decisions</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 60,
+    "y": 460,
+    "rotation": 0,
+    "id": 14,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 230,
+    "height": 60,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 8,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#78909C",
+      "fillColor": "#ECEFF1",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 15,
+      "uid": null,
+      "width": 226,
+      "height": 60,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">Code graph / SDLC</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Dependency structure</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 60,
+    "y": 540,
+    "rotation": 0,
+    "id": 16,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 230,
+    "height": 60,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 9,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#78909C",
+      "fillColor": "#ECEFF1",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 17,
+      "uid": null,
+      "width": 226,
+      "height": 60,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">Runtime evidence</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Builds, tests, scans</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 340,
+    "y": 140,
+    "rotation": 0,
+    "id": 18,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 280,
+    "height": 60,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 10,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#1E88E5",
+      "fillColor": "#E3F2FD",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 19,
+      "uid": null,
+      "width": 276,
+      "height": 60,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">Source-owned pipelines</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Triggered by commit, edit, schema or policy update</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 340,
+    "y": 220,
+    "rotation": 0,
+    "id": 20,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 280,
+    "height": 60,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 11,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#1E88E5",
+      "fillColor": "#E3F2FD",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 21,
+      "uid": null,
+      "width": 276,
+      "height": 60,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">1. Connect &amp; Extract</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Pull / push / events</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 340,
+    "y": 300,
+    "rotation": 0,
+    "id": 22,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 280,
+    "height": 60,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 12,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#1E88E5",
+      "fillColor": "#E3F2FD",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 23,
+      "uid": null,
+      "width": 276,
+      "height": 60,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">2. Normalize</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Canonical document + metadata contract</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 340,
+    "y": 380,
+    "rotation": 0,
+    "id": 24,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 280,
+    "height": 60,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 13,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#1E88E5",
+      "fillColor": "#E3F2FD",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 25,
+      "uid": null,
+      "width": 276,
+      "height": 60,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">3. Shape for Tasks</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Summaries, sections, pointers, relationships</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 340,
+    "y": 460,
+    "rotation": 0,
+    "id": 26,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 280,
+    "height": 60,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 14,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#1E88E5",
+      "fillColor": "#E3F2FD",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 27,
+      "uid": null,
+      "width": 276,
+      "height": 60,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">4. Enrich &amp; Govern</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Owner, classification, entitlement, trust, version, timestamp</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 340,
+    "y": 540,
+    "rotation": 0,
+    "id": 28,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 280,
+    "height": 60,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 15,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#1E88E5",
+      "fillColor": "#E3F2FD",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 29,
+      "uid": null,
+      "width": 276,
+      "height": 60,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">5. Certify</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Quality, provenance, compliance, safety; fail closed</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 340,
+    "y": 620,
+    "rotation": 0,
+    "id": 30,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 280,
+    "height": 60,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 16,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#1E88E5",
+      "fillColor": "#E3F2FD",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 31,
+      "uid": null,
+      "width": 276,
+      "height": 60,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">6. Index &amp; Publish</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Semantic, lexical, graph and metadata indexes</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 680,
+    "y": 350,
+    "rotation": 0,
+    "id": 32,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 540,
+    "height": 330,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 17,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#43A047",
+      "fillColor": "#E8F5E9",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 33,
+      "uid": null,
+      "width": 536,
+      "height": 30,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "top",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:left;\"><span style=\"font-family:Arial;font-size:13px;\"><span style=\"font-weight:bold;\">GOVERNED CONTEXT PLANE</span></span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 700,
+    "y": 400,
+    "rotation": 0,
+    "id": 34,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 240,
+    "height": 70,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 18,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#43A047",
+      "fillColor": "#FFFFFF",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 35,
+      "uid": null,
+      "width": 236,
+      "height": 70,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">Document / object store</span></span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 960,
+    "y": 400,
+    "rotation": 0,
+    "id": 36,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 240,
+    "height": 70,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 19,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#43A047",
+      "fillColor": "#FFFFFF",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 37,
+      "uid": null,
+      "width": 236,
+      "height": 70,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">Semantic + lexical index</span></span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 700,
+    "y": 490,
+    "rotation": 0,
+    "id": 38,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 240,
+    "height": 70,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 20,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#43A047",
+      "fillColor": "#FFFFFF",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 39,
+      "uid": null,
+      "width": 236,
+      "height": 70,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">Knowledge / code graph</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Dependencies + links</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 960,
+    "y": 490,
+    "rotation": 0,
+    "id": 40,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 240,
+    "height": 70,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 21,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#43A047",
+      "fillColor": "#FFFFFF",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 41,
+      "uid": null,
+      "width": 236,
+      "height": 70,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">Metadata &amp; semantic catalog</span></span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 700,
+    "y": 580,
+    "rotation": 0,
+    "id": 42,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 240,
+    "height": 70,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 22,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#43A047",
+      "fillColor": "#FFFFFF",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 43,
+      "uid": null,
+      "width": 236,
+      "height": 70,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">Context cache</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Task / query keyed</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 960,
+    "y": 580,
+    "rotation": 0,
+    "id": 44,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 240,
+    "height": 70,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 23,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#43A047",
+      "fillColor": "#FFFFFF",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 45,
+      "uid": null,
+      "width": 236,
+      "height": 70,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">Provenance &amp; certification</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Records</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 60,
+    "y": 100,
+    "rotation": 0,
+    "id": 46,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.text",
+    "width": 230,
+    "height": 30,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 24,
+    "graphic": {
+     "type": "Text",
+     "Text": {
+      "tid": null,
+      "valign": "middle",
+      "overflow": "none",
+      "vposition": "none",
+      "hposition": "none",
+      "html": "<p style=\"text-align:left;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">AUTHORITATIVE SOURCES</span></span></p>",
+      "paddingLeft": 2,
+      "paddingRight": 2,
+      "paddingBottom": 2,
+      "paddingTop": 2
+     }
+    },
+    "children": null,
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 340,
+    "y": 100,
+    "rotation": 0,
+    "id": 47,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.text",
+    "width": 280,
+    "height": 30,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 25,
+    "graphic": {
+     "type": "Text",
+     "Text": {
+      "tid": null,
+      "valign": "middle",
+      "overflow": "none",
+      "vposition": "none",
+      "hposition": "none",
+      "html": "<p style=\"text-align:left;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">CONTEXT FACTORIES</span></span></p>",
+      "paddingLeft": 2,
+      "paddingRight": 2,
+      "paddingBottom": 2,
+      "paddingTop": 2
+     }
+    },
+    "children": null,
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 60,
+    "y": 830,
+    "rotation": 0,
+    "id": 48,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 230,
+    "height": 80,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 26,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#FB8C00",
+      "fillColor": "#FFF3E0",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 49,
+      "uid": null,
+      "width": 226,
+      "height": 80,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">Agents / Harnesses</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Claude Code, Devin, Codex, GSCode, CI, future agents</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 340,
+    "y": 830,
+    "rotation": 0,
+    "id": 50,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 200,
+    "height": 80,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 27,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#8E24AA",
+      "fillColor": "#F3E5F5",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 51,
+      "uid": null,
+      "width": 196,
+      "height": 80,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">1. Receive Task</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Query, repo, workflow, task type, session state</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 570,
+    "y": 830,
+    "rotation": 0,
+    "id": 52,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 200,
+    "height": 80,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 28,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#8E24AA",
+      "fillColor": "#F3E5F5",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 53,
+      "uid": null,
+      "width": 196,
+      "height": 80,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">2. Identity &amp; Scope</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Caller, entitlements, repo, data classification</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 800,
+    "y": 830,
+    "rotation": 0,
+    "id": 54,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 190,
+    "height": 80,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 29,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#8E24AA",
+      "fillColor": "#F3E5F5",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 55,
+      "uid": null,
+      "width": 186,
+      "height": 80,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">3. Understand Task</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Classify intent; identify standards + source types</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 1030,
+    "y": 810,
+    "rotation": 0,
+    "id": 56,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 190,
+    "height": 60,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 30,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#5E35B1",
+      "fillColor": "#EDE7F6",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 57,
+      "uid": null,
+      "width": 186,
+      "height": 60,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">Lexical search</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Exact terms</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 1030,
+    "y": 890,
+    "rotation": 0,
+    "id": 58,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 190,
+    "height": 60,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 31,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#5E35B1",
+      "fillColor": "#EDE7F6",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 59,
+      "uid": null,
+      "width": 186,
+      "height": 60,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">Semantic search</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Concepts / meaning</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 1030,
+    "y": 970,
+    "rotation": 0,
+    "id": 60,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 190,
+    "height": 60,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 32,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#5E35B1",
+      "fillColor": "#EDE7F6",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 61,
+      "uid": null,
+      "width": 186,
+      "height": 60,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">Graph traversal</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Code / deps / links</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 1030,
+    "y": 1080,
+    "rotation": 0,
+    "id": 62,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 190,
+    "height": 150,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 33,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#8E24AA",
+      "fillColor": "#F3E5F5",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 63,
+      "uid": null,
+      "width": 186,
+      "height": 150,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">4. Merge &amp; Normalize</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Deduplicate and reconcile scores across sources</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 800,
+    "y": 1080,
+    "rotation": 0,
+    "id": 64,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 190,
+    "height": 150,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 34,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#8E24AA",
+      "fillColor": "#F3E5F5",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 65,
+      "uid": null,
+      "width": 186,
+      "height": 150,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">5. Filter &amp; Policy</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Entitlement, trust, freshness, certification</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 570,
+    "y": 1080,
+    "rotation": 0,
+    "id": 66,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 200,
+    "height": 150,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 35,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#8E24AA",
+      "fillColor": "#F3E5F5",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 67,
+      "uid": null,
+      "width": 196,
+      "height": 150,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">6. Rerank for Task</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Authority + relevance + workflow stage + recency</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 340,
+    "y": 1080,
+    "rotation": 0,
+    "id": 68,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 200,
+    "height": 150,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 36,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#8E24AA",
+      "fillColor": "#F3E5F5",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 69,
+      "uid": null,
+      "width": 196,
+      "height": 150,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">7. Build Context Bundle</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Summary first</span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Applicable rules</span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Recommended skills / tools</span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Authoritative pointers</span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Citations + provenance</span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Detail retrieval handles</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 60,
+    "y": 1080,
+    "rotation": 0,
+    "id": 70,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 230,
+    "height": 150,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 37,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#8E24AA",
+      "fillColor": "#F3E5F5",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 71,
+      "uid": null,
+      "width": 226,
+      "height": 150,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">8. Budget &amp; Condense</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Remove redundancy; fit model / context limits</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 60,
+    "y": 1290,
+    "rotation": 0,
+    "id": 72,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 230,
+    "height": 80,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 38,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#8E24AA",
+      "fillColor": "#F3E5F5",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 73,
+      "uid": null,
+      "width": 226,
+      "height": 80,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">Return context</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">via MCP, API, CLI or plugin</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 340,
+    "y": 1290,
+    "rotation": 0,
+    "id": 74,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 200,
+    "height": 80,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 39,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#FB8C00",
+      "fillColor": "#FFF3E0",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 75,
+      "uid": null,
+      "width": 196,
+      "height": 80,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">Agent reasons</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">and performs SDLC work</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 570,
+    "y": 1290,
+    "rotation": 0,
+    "id": 76,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 200,
+    "height": 80,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 40,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#8E24AA",
+      "fillColor": "#F3E5F5",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 77,
+      "uid": null,
+      "width": 196,
+      "height": 80,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">Telemetry &amp; feedback</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Relevance, citations, outcome, cost</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 800,
+    "y": 1290,
+    "rotation": 0,
+    "id": 78,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 420,
+    "height": 80,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 41,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#F9A825",
+      "fillColor": "#FFFDE7",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1,
+      "dashStyle": "4.0,4.0"
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 79,
+      "uid": null,
+      "width": 416,
+      "height": 80,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">Feedback loop: back to Context Factories</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">Improves ranking, content and factory pipelines</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 60,
+    "y": 1410,
+    "rotation": 0,
+    "id": 80,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.round_rectangle",
+    "width": 230,
+    "height": 70,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 42,
+    "graphic": {
+     "type": "Shape",
+     "Shape": {
+      "tid": "com.gliffy.stencil.round_rectangle.basic_v1",
+      "strokeWidth": 1.5,
+      "strokeColor": "#43A047",
+      "fillColor": "#FFFFFF",
+      "gradient": false,
+      "dropShadow": false,
+      "state": 0,
+      "shadowX": 0,
+      "shadowY": 0,
+      "opacity": 1
+     }
+    },
+    "children": [
+     {
+      "x": 2,
+      "y": 0,
+      "rotation": 0,
+      "id": 81,
+      "uid": null,
+      "width": 226,
+      "height": 70,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "none",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:12px;\"><span style=\"font-weight:bold;\">Cache task-shaped result</span></span></p><p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;\">with invalidation on source change</span></p>",
+        "paddingLeft": 8,
+        "paddingRight": 8,
+        "paddingBottom": 6,
+        "paddingTop": 6
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 83,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 43,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        290,
+        170.0
+       ],
+       [
+        340,
+        170.0
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [
+     {
+      "x": 0,
+      "y": 0,
+      "rotation": 0,
+      "id": 82,
+      "uid": null,
+      "width": 110,
+      "height": 18,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "both",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;background-color:#FFFFFF;\">change</span></p>",
+        "paddingLeft": 2,
+        "paddingRight": 2,
+        "paddingBottom": 2,
+        "paddingTop": 2,
+        "linePerpValue": 0,
+        "cardinalityType": null,
+        "lineTValue": 0.5
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "constraints": {
+     "constraints": [],
+     "startConstraint": {
+      "type": "StartPositionConstraint",
+      "StartPositionConstraint": {
+       "nodeId": 6,
+       "px": 1,
+       "py": 0.5
+      }
+     },
+     "endConstraint": {
+      "type": "EndPositionConstraint",
+      "EndPositionConstraint": {
+       "nodeId": 18,
+       "px": 0,
+       "py": 0.5
+      }
+     }
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 84,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 44,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        290,
+        250.0
+       ],
+       [
+        340,
+        250.0
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": [],
+     "startConstraint": {
+      "type": "StartPositionConstraint",
+      "StartPositionConstraint": {
+       "nodeId": 8,
+       "px": 1,
+       "py": 0.5
+      }
+     },
+     "endConstraint": {
+      "type": "EndPositionConstraint",
+      "EndPositionConstraint": {
+       "nodeId": 20,
+       "px": 0,
+       "py": 0.5
+      }
+     }
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 85,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 45,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        290,
+        330.0
+       ],
+       [
+        340,
+        330.0
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": [],
+     "startConstraint": {
+      "type": "StartPositionConstraint",
+      "StartPositionConstraint": {
+       "nodeId": 10,
+       "px": 1,
+       "py": 0.5
+      }
+     },
+     "endConstraint": {
+      "type": "EndPositionConstraint",
+      "EndPositionConstraint": {
+       "nodeId": 22,
+       "px": 0,
+       "py": 0.5
+      }
+     }
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 86,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 46,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        290,
+        410.0
+       ],
+       [
+        340,
+        398.0
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": [],
+     "startConstraint": {
+      "type": "StartPositionConstraint",
+      "StartPositionConstraint": {
+       "nodeId": 12,
+       "px": 1,
+       "py": 0.5
+      }
+     },
+     "endConstraint": {
+      "type": "EndPositionConstraint",
+      "EndPositionConstraint": {
+       "nodeId": 24,
+       "px": 0,
+       "py": 0.3
+      }
+     }
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 87,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 47,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        290,
+        490.0
+       ],
+       [
+        318,
+        490
+       ],
+       [
+        318,
+        428
+       ],
+       [
+        340,
+        428.0
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": []
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 88,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 48,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        290,
+        570.0
+       ],
+       [
+        318,
+        570
+       ],
+       [
+        318,
+        502
+       ],
+       [
+        340,
+        502.0
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": []
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 89,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 49,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        480.0,
+        200
+       ],
+       [
+        480.0,
+        220
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": [],
+     "startConstraint": {
+      "type": "StartPositionConstraint",
+      "StartPositionConstraint": {
+       "nodeId": 18,
+       "px": 0.5,
+       "py": 1
+      }
+     },
+     "endConstraint": {
+      "type": "EndPositionConstraint",
+      "EndPositionConstraint": {
+       "nodeId": 20,
+       "px": 0.5,
+       "py": 0
+      }
+     }
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 90,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 50,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        480.0,
+        280
+       ],
+       [
+        480.0,
+        300
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": [],
+     "startConstraint": {
+      "type": "StartPositionConstraint",
+      "StartPositionConstraint": {
+       "nodeId": 20,
+       "px": 0.5,
+       "py": 1
+      }
+     },
+     "endConstraint": {
+      "type": "EndPositionConstraint",
+      "EndPositionConstraint": {
+       "nodeId": 22,
+       "px": 0.5,
+       "py": 0
+      }
+     }
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 91,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 51,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        480.0,
+        360
+       ],
+       [
+        480.0,
+        380
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": [],
+     "startConstraint": {
+      "type": "StartPositionConstraint",
+      "StartPositionConstraint": {
+       "nodeId": 22,
+       "px": 0.5,
+       "py": 1
+      }
+     },
+     "endConstraint": {
+      "type": "EndPositionConstraint",
+      "EndPositionConstraint": {
+       "nodeId": 24,
+       "px": 0.5,
+       "py": 0
+      }
+     }
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 92,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 52,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        480.0,
+        440
+       ],
+       [
+        480.0,
+        460
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": [],
+     "startConstraint": {
+      "type": "StartPositionConstraint",
+      "StartPositionConstraint": {
+       "nodeId": 24,
+       "px": 0.5,
+       "py": 1
+      }
+     },
+     "endConstraint": {
+      "type": "EndPositionConstraint",
+      "EndPositionConstraint": {
+       "nodeId": 26,
+       "px": 0.5,
+       "py": 0
+      }
+     }
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 93,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 53,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        480.0,
+        520
+       ],
+       [
+        480.0,
+        540
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": [],
+     "startConstraint": {
+      "type": "StartPositionConstraint",
+      "StartPositionConstraint": {
+       "nodeId": 26,
+       "px": 0.5,
+       "py": 1
+      }
+     },
+     "endConstraint": {
+      "type": "EndPositionConstraint",
+      "EndPositionConstraint": {
+       "nodeId": 28,
+       "px": 0.5,
+       "py": 0
+      }
+     }
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 94,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 54,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        480.0,
+        600
+       ],
+       [
+        480.0,
+        620
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": [],
+     "startConstraint": {
+      "type": "StartPositionConstraint",
+      "StartPositionConstraint": {
+       "nodeId": 28,
+       "px": 0.5,
+       "py": 1
+      }
+     },
+     "endConstraint": {
+      "type": "EndPositionConstraint",
+      "EndPositionConstraint": {
+       "nodeId": 30,
+       "px": 0.5,
+       "py": 0
+      }
+     }
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 95,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 55,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        620,
+        650.0
+       ],
+       [
+        680,
+        650.0
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": [],
+     "startConstraint": {
+      "type": "StartPositionConstraint",
+      "StartPositionConstraint": {
+       "nodeId": 30,
+       "px": 1,
+       "py": 0.5
+      }
+     },
+     "endConstraint": {
+      "type": "EndPositionConstraint",
+      "EndPositionConstraint": {
+       "nodeId": 32,
+       "px": 0,
+       "py": 0.9090909090909091
+      }
+     }
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 97,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 56,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        1125.0,
+        680
+       ],
+       [
+        1125.0,
+        810
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [
+     {
+      "x": 0,
+      "y": 0,
+      "rotation": 0,
+      "id": 96,
+      "uid": null,
+      "width": 110,
+      "height": 18,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "both",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;background-color:#FFFFFF;\">governed retrieval</span></p>",
+        "paddingLeft": 2,
+        "paddingRight": 2,
+        "paddingBottom": 2,
+        "paddingTop": 2,
+        "linePerpValue": 0,
+        "cardinalityType": null,
+        "lineTValue": 0.5
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "constraints": {
+     "constraints": [],
+     "startConstraint": {
+      "type": "StartPositionConstraint",
+      "StartPositionConstraint": {
+       "nodeId": 32,
+       "px": 0.8240740740740741,
+       "py": 1
+      }
+     },
+     "endConstraint": {
+      "type": "EndPositionConstraint",
+      "EndPositionConstraint": {
+       "nodeId": 56,
+       "px": 0.5,
+       "py": 0
+      }
+     }
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 99,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 57,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        290,
+        870.0
+       ],
+       [
+        340,
+        870.0
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [
+     {
+      "x": 0,
+      "y": 0,
+      "rotation": 0,
+      "id": 98,
+      "uid": null,
+      "width": 110,
+      "height": 18,
+      "lockAspectRatio": false,
+      "lockShape": false,
+      "order": "auto",
+      "graphic": {
+       "type": "Text",
+       "Text": {
+        "tid": null,
+        "valign": "middle",
+        "overflow": "both",
+        "vposition": "none",
+        "hposition": "none",
+        "html": "<p style=\"text-align:center;\"><span style=\"font-family:Arial;font-size:11px;background-color:#FFFFFF;\">task</span></p>",
+        "paddingLeft": 2,
+        "paddingRight": 2,
+        "paddingBottom": 2,
+        "paddingTop": 2,
+        "linePerpValue": 0,
+        "cardinalityType": null,
+        "lineTValue": 0.5
+       }
+      },
+      "children": null,
+      "layerId": "d2898e090908"
+     }
+    ],
+    "constraints": {
+     "constraints": [],
+     "startConstraint": {
+      "type": "StartPositionConstraint",
+      "StartPositionConstraint": {
+       "nodeId": 48,
+       "px": 1,
+       "py": 0.5
+      }
+     },
+     "endConstraint": {
+      "type": "EndPositionConstraint",
+      "EndPositionConstraint": {
+       "nodeId": 50,
+       "px": 0,
+       "py": 0.5
+      }
+     }
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 100,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 58,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        540,
+        870.0
+       ],
+       [
+        570,
+        870.0
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": [],
+     "startConstraint": {
+      "type": "StartPositionConstraint",
+      "StartPositionConstraint": {
+       "nodeId": 50,
+       "px": 1,
+       "py": 0.5
+      }
+     },
+     "endConstraint": {
+      "type": "EndPositionConstraint",
+      "EndPositionConstraint": {
+       "nodeId": 52,
+       "px": 0,
+       "py": 0.5
+      }
+     }
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 101,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 59,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        770,
+        870.0
+       ],
+       [
+        800,
+        870.0
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": [],
+     "startConstraint": {
+      "type": "StartPositionConstraint",
+      "StartPositionConstraint": {
+       "nodeId": 52,
+       "px": 1,
+       "py": 0.5
+      }
+     },
+     "endConstraint": {
+      "type": "EndPositionConstraint",
+      "EndPositionConstraint": {
+       "nodeId": 54,
+       "px": 0,
+       "py": 0.5
+      }
+     }
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 102,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 60,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        990,
+        870.0
+       ],
+       [
+        1010,
+        870
+       ],
+       [
+        1010,
+        840
+       ],
+       [
+        1030,
+        840.0
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": []
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 103,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 61,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        990,
+        870.0
+       ],
+       [
+        1010,
+        870
+       ],
+       [
+        1010,
+        920
+       ],
+       [
+        1030,
+        920.0
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": []
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 104,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 62,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        990,
+        870.0
+       ],
+       [
+        1010,
+        870
+       ],
+       [
+        1010,
+        1000
+       ],
+       [
+        1030,
+        1000.0
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": []
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 105,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 63,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        1220,
+        840.0
+       ],
+       [
+        1245,
+        840
+       ],
+       [
+        1245,
+        1155
+       ],
+       [
+        1220,
+        1155.0
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": []
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 106,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 64,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        1220,
+        920.0
+       ],
+       [
+        1245,
+        920
+       ],
+       [
+        1245,
+        1155
+       ],
+       [
+        1220,
+        1155.0
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": []
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 107,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 65,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        1220,
+        1000.0
+       ],
+       [
+        1245,
+        1000
+       ],
+       [
+        1245,
+        1155
+       ],
+       [
+        1220,
+        1155.0
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": []
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 108,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 66,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        1030,
+        1155.0
+       ],
+       [
+        990,
+        1155.0
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": [],
+     "startConstraint": {
+      "type": "StartPositionConstraint",
+      "StartPositionConstraint": {
+       "nodeId": 62,
+       "px": 0,
+       "py": 0.5
+      }
+     },
+     "endConstraint": {
+      "type": "EndPositionConstraint",
+      "EndPositionConstraint": {
+       "nodeId": 64,
+       "px": 1,
+       "py": 0.5
+      }
+     }
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 109,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 67,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        800,
+        1155.0
+       ],
+       [
+        770,
+        1155.0
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": [],
+     "startConstraint": {
+      "type": "StartPositionConstraint",
+      "StartPositionConstraint": {
+       "nodeId": 64,
+       "px": 0,
+       "py": 0.5
+      }
+     },
+     "endConstraint": {
+      "type": "EndPositionConstraint",
+      "EndPositionConstraint": {
+       "nodeId": 66,
+       "px": 1,
+       "py": 0.5
+      }
+     }
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 110,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 68,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        570,
+        1155.0
+       ],
+       [
+        540,
+        1155.0
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": [],
+     "startConstraint": {
+      "type": "StartPositionConstraint",
+      "StartPositionConstraint": {
+       "nodeId": 66,
+       "px": 0,
+       "py": 0.5
+      }
+     },
+     "endConstraint": {
+      "type": "EndPositionConstraint",
+      "EndPositionConstraint": {
+       "nodeId": 68,
+       "px": 1,
+       "py": 0.5
+      }
+     }
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 111,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 69,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        340,
+        1155.0
+       ],
+       [
+        290,
+        1155.0
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": [],
+     "startConstraint": {
+      "type": "StartPositionConstraint",
+      "StartPositionConstraint": {
+       "nodeId": 68,
+       "px": 0,
+       "py": 0.5
+      }
+     },
+     "endConstraint": {
+      "type": "EndPositionConstraint",
+      "EndPositionConstraint": {
+       "nodeId": 70,
+       "px": 1,
+       "py": 0.5
+      }
+     }
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 112,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 70,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        175.0,
+        1230
+       ],
+       [
+        175.0,
+        1290
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": [],
+     "startConstraint": {
+      "type": "StartPositionConstraint",
+      "StartPositionConstraint": {
+       "nodeId": 70,
+       "px": 0.5,
+       "py": 1
+      }
+     },
+     "endConstraint": {
+      "type": "EndPositionConstraint",
+      "EndPositionConstraint": {
+       "nodeId": 72,
+       "px": 0.5,
+       "py": 0
+      }
+     }
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 113,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 71,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        60,
+        1155.0
+       ],
+       [
+        40,
+        1155
+       ],
+       [
+        40,
+        1445
+       ],
+       [
+        60,
+        1445.0
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": []
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 114,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 72,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        290,
+        1330.0
+       ],
+       [
+        340,
+        1330.0
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": [],
+     "startConstraint": {
+      "type": "StartPositionConstraint",
+      "StartPositionConstraint": {
+       "nodeId": 72,
+       "px": 1,
+       "py": 0.5
+      }
+     },
+     "endConstraint": {
+      "type": "EndPositionConstraint",
+      "EndPositionConstraint": {
+       "nodeId": 74,
+       "px": 0,
+       "py": 0.5
+      }
+     }
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 115,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 73,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": null,
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        540,
+        1330.0
+       ],
+       [
+        570,
+        1330.0
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": [],
+     "startConstraint": {
+      "type": "StartPositionConstraint",
+      "StartPositionConstraint": {
+       "nodeId": 74,
+       "px": 1,
+       "py": 0.5
+      }
+     },
+     "endConstraint": {
+      "type": "EndPositionConstraint",
+      "EndPositionConstraint": {
+       "nodeId": 76,
+       "px": 0,
+       "py": 0.5
+      }
+     }
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   },
+   {
+    "x": 0,
+    "y": 0,
+    "rotation": 0,
+    "id": 116,
+    "uid": "com.gliffy.shape.basic.basic_v1.default.line",
+    "width": 100,
+    "height": 100,
+    "lockAspectRatio": false,
+    "lockShape": false,
+    "order": 74,
+    "graphic": {
+     "type": "Line",
+     "Line": {
+      "strokeWidth": 1.5,
+      "strokeColor": "#546E7A",
+      "fillColor": "none",
+      "dashStyle": "4.0,4.0",
+      "startArrow": 0,
+      "endArrow": 1,
+      "startArrowRotation": "auto",
+      "endArrowRotation": "auto",
+      "interpolationType": "linear",
+      "cornerRadius": null,
+      "controlPath": [
+       [
+        770,
+        1330.0
+       ],
+       [
+        800,
+        1330.0
+       ]
+      ],
+      "lockSegments": {},
+      "ortho": false
+     }
+    },
+    "children": [],
+    "constraints": {
+     "constraints": [],
+     "startConstraint": {
+      "type": "StartPositionConstraint",
+      "StartPositionConstraint": {
+       "nodeId": 76,
+       "px": 1,
+       "py": 0.5
+      }
+     },
+     "endConstraint": {
+      "type": "EndPositionConstraint",
+      "EndPositionConstraint": {
+       "nodeId": 78,
+       "px": 0,
+       "py": 0.5
+      }
+     }
+    },
+    "layerId": "d2898e090908",
+    "linkMap": [],
+    "hidden": false
+   }
+  ],
+  "layers": [
+   {
+    "guid": "d2898e090908",
+    "order": 0,
+    "name": "Layer 0",
+    "active": true,
+    "locked": false,
+    "visible": true,
+    "nodeIndex": 117
+   }
+  ],
+  "shapeStyles": {},
+  "lineStyles": {
+   "global": {
+    "stroke": "#546E7A",
+    "strokeWidth": 1.5
+   }
+  },
+  "textStyles": {}
+ },
+ "metadata": {
+  "title": "CaaS Architecture",
+  "revision": 0,
+  "exportBorder": false,
+  "loadPosition": "default",
+  "libraries": [
+   "com.gliffy.libraries.basic.basic_v1.default"
+  ],
+  "lastSerialized": 1790814935653,
+  "analyticsProduct": "Confluence"
+ },
+ "embeddedResources": {
+  "index": 0,
+  "resources": []
+ }
+}
