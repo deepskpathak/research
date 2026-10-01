@@ -1,0 +1,61 @@
+---
+title: "Context as a Service (CaaS)"
+---
+flowchart LR
+  subgraph BUILD["① BUILD TIME · Knowledge preparation"]
+    direction TB
+    SRC["<b>Authoritative sources</b><br/>EngHub / SharePoint · Standards & policies<br/>Repos, configs, ADRs · Jira / Confluence<br/>Code graph / SDLC · Builds, tests, scans"]
+    F0["<b>Change trigger</b><br/>commit · edit · schema · policy"]
+    F1["<b>1. Connect & Extract</b><br/>pull · push · events"]
+    F2["<b>2. Normalize</b><br/>canonical doc + metadata contract"]
+    F3["<b>3. Shape for Tasks</b><br/>summaries · sections · pointers · links"]
+    F4["<b>4. Enrich & Govern</b><br/>owner · classification · entitlement · trust"]
+    F5["<b>5. Certify</b><br/>quality · provenance · safety · fail closed"]
+    F6["<b>6. Index & Publish</b><br/>semantic · lexical · graph · metadata"]
+    PLANE[("<b>Governed Context Plane</b><br/>Doc store · Search indexes · Code graph<br/>Catalog · Context cache · Provenance")]
+    SRC --> F0 --> F1 --> F2 --> F3 --> F4 --> F5 --> F6 --> PLANE
+  end
+
+  subgraph RUN["② RUN TIME · Context delivery"]
+    direction TB
+    A["<b>Agent / Harness</b><br/>Claude Code · Devin · Codex · GSCode · CI"]
+    Q1["<b>1. Receive Task</b><br/>query · repo · workflow · session"]
+    Q2["<b>2. Identity & Scope</b><br/>caller · entitlements · classification"]
+    Q3["<b>3. Understand Task</b><br/>intent · standards · source types"]
+    S1["Lexical"]
+    S2["Semantic"]
+    S3["Graph"]
+    Q4["<b>4. Merge & Normalize</b>"]
+    Q5["<b>5. Filter & Policy</b><br/>entitlement · trust · freshness"]
+    Q6["<b>6. Rerank for Task</b><br/>authority · relevance · stage · recency"]
+    Q7["<b>7. Build Context Bundle</b><br/>summary · rules · tools · pointers · citations"]
+    Q8["<b>8. Budget & Condense</b><br/>fit model context limits"]
+    RET["<b>Return context</b><br/>MCP · API · CLI · plugin"]
+    CACHE[("Cache result<br/>with invalidation")]
+    TEL["<b>Telemetry & feedback</b><br/>relevance · citations · outcome · cost<br/><i>feeds back to build-time factories</i>"]
+    A --> Q1 --> Q2 --> Q3
+    Q3 --> S1 & S2 & S3
+    S1 & S2 & S3 --> Q4
+    Q4 --> Q5 --> Q6 --> Q7 --> Q8
+    Q8 --> RET & CACHE
+    RET --> TEL
+  end
+
+  BUILD == "governed retrieval" ==> RUN
+
+  classDef src fill:#ECEFF1,stroke:#78909C,color:#263238
+  classDef fac fill:#E3F2FD,stroke:#1E88E5,color:#0D47A1
+  classDef plane fill:#E8F5E9,stroke:#43A047,color:#1B5E20
+  classDef rt fill:#F3E5F5,stroke:#8E24AA,color:#4A148C
+  classDef srch fill:#EDE7F6,stroke:#5E35B1,color:#311B92
+  classDef agent fill:#FFF3E0,stroke:#FB8C00,color:#E65100
+  classDef fb fill:#FFFDE7,stroke:#F9A825,color:#5D4037,stroke-dasharray:4 3
+  class SRC src
+  class F0,F1,F2,F3,F4,F5,F6 fac
+  class PLANE,CACHE plane
+  class Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,RET rt
+  class S1,S2,S3 srch
+  class A agent
+  class TEL fb
+  style BUILD fill:#F5F9FF,stroke:#90CAF9
+  style RUN fill:#FBF5FC,stroke:#CE93D8
