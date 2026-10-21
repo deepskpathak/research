@@ -162,9 +162,28 @@ class KnowledgeGraph:
             return []
         return [self.chunks[c] for c in self.entities[eid].mentions if c in self.chunks]
 
-    def stats(self) -> dict[str, int]:
+    def degrees(self) -> dict[str, int]:
+        """Relation endpoints per entity id (a self-loop counts twice)."""
+        deg = {eid: 0 for eid in self.entities}
+        for r in self.relations:
+            deg[r.source_id] = deg.get(r.source_id, 0) + 1
+            deg[r.target_id] = deg.get(r.target_id, 0) + 1
+        return deg
+
+    def _ranked(self, n: int) -> list[tuple[Entity, int]]:
+        deg = self.degrees()
+        ranked = sorted(self.entities.values(), key=lambda e: (-deg[e.id], e.name, e.id))
+        return [(e, deg[e.id]) for e in ranked[:max(n, 0)]]
+
+    def top_entities_by_degree(self, n: int = 10) -> list[tuple[str, int]]:
+        """(entity name, degree) pairs, degree desc then name asc, at most `n`."""
+        return [(e.name, d) for e, d in self._ranked(n)]
+
+    def stats(self, top_n: int = 10) -> dict[str, Any]:
         return {"documents": len(self.documents), "chunks": len(self.chunks),
-                "entities": len(self.entities), "relations": len(self.relations)}
+                "entities": len(self.entities), "relations": len(self.relations),
+                "top_entities": [{"id": e.id, "name": e.name, "degree": d}
+                                 for e, d in self._ranked(top_n)]}
 
     def dangling_evidence(self) -> list[str]:
         """Evidence chunk ids referenced by relations but absent from the graph."""

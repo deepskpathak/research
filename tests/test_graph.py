@@ -1,8 +1,8 @@
 import logging
 
 from kgrag.extract import HeuristicExtractor, LLMExtractor
-from kgrag.graph import KnowledgeGraph
-from kgrag.models import Chunk, Document
+from kgrag.graph import KnowledgeGraph, entity_id
+from kgrag.models import Chunk, Document, Entity, Relation
 
 
 def _chunks():
@@ -68,7 +68,8 @@ def test_find_and_neighbors():
     kg = g.find_entity("Knowledge Graph")
     n1 = {e.name for e in g.neighbors(kg.id)}
     n2 = {e.name for e in g.neighbors(kg.id, depth=2)}
-    assert n1 < n2 or n1 == n2 and n1
+    assert n1 == {"Entity Nodes", "Retrieval-Augmented Generation"}
+    assert n2 - n1 == {"Community Detection", "Leiden Algorithm", "Vector Search"}
     assert "Knowledge Graph" not in n2
     assert g.chunks_for_entity(kg.id)
     assert g.stats()["entities"] == len(g.entities)
@@ -79,8 +80,24 @@ def test_neighbors_depth2_reaches_further():
     leiden = g.find_entity("Leiden Algorithm")
     d1 = {e.name for e in g.neighbors(leiden.id, 1)}
     d2 = {e.name for e in g.neighbors(leiden.id, 2)}
-    assert d1 == {"Community Detection", "Vector Search", "Retrieval-Augmented Generation"} or d1
-    assert d2 >= d1
+    assert d1 == {"Community Detection", "Vector Search", "Retrieval-Augmented Generation"}
+    assert d2 - d1 == {"Entity Nodes", "Knowledge Graph"}
+
+
+def test_top_entities_by_degree_exact_order():
+    g = KnowledgeGraph()
+    for name in ("Hub", "Alpha", "Beta", "Gamma", "Lonely"):
+        g.add_entity(Entity(entity_id(name), name, "concept"))
+    for a, b in (("Hub", "Alpha"), ("Hub", "Beta"), ("Hub", "Gamma"), ("Gamma", "Beta")):
+        g.add_relation(Relation(entity_id(a), entity_id(b), "related_to"))
+    # Hub=3, Beta=2, Gamma=2 (name tie-break), Alpha=1, Lonely=0
+    expected = [("Hub", 3), ("Beta", 2), ("Gamma", 2), ("Alpha", 1), ("Lonely", 0)]
+    assert g.top_entities_by_degree() == expected
+    assert g.top_entities_by_degree(2) == expected[:2]
+    top = g.stats()["top_entities"]
+    assert [(t["name"], t["degree"]) for t in top] == expected
+    assert top[0]["id"] == "ent-hub"
+    assert len(g.stats(top_n=3)["top_entities"]) == 3
 
 
 class StubLLM:

@@ -40,14 +40,6 @@ def _load_store(store: Path) -> tuple[KnowledgeGraph, BM25Index]:
         raise CLIError(f"Store at '{store}' is unreadable ({e}). Re-run `kgrag ingest`.") from None
 
 
-def _degrees(graph: KnowledgeGraph) -> dict[str, int]:
-    deg = {eid: 0 for eid in graph.entities}
-    for r in graph.relations:
-        deg[r.source_id] = deg.get(r.source_id, 0) + 1
-        deg[r.target_id] = deg.get(r.target_id, 0) + 1
-    return deg
-
-
 def cmd_ingest(args: argparse.Namespace) -> int:
     cfg = Config(corpus_dir=args.path, store_dir=args.store)
     try:
@@ -110,13 +102,13 @@ def cmd_ask(args: argparse.Namespace) -> int:
 
 def cmd_stats(args: argparse.Namespace) -> int:
     graph, _ = _load_store(Path(args.store))
-    for k, v in graph.stats().items():
+    s = graph.stats(TOP_ENTITIES)
+    top = s.pop("top_entities")
+    for k, v in s.items():
         print(f"{k}: {v}")
-    deg = _degrees(graph)
     print("\nTop entities by degree:")
-    top = sorted(graph.entities.values(), key=lambda e: (-deg[e.id], e.name))[:TOP_ENTITIES]
     for e in top:
-        print(f"  {deg[e.id]:>3}  {e.name} ({e.type})")
+        print(f"  {e['degree']:>3}  {e['name']}")
     return 0
 
 
