@@ -94,4 +94,4 @@ def test_max_steps_enforced(stack):
     res = agent(stack, llm, max_steps=3).run("Where was Charles Babbage born?")
     assert len(steps(res)) == 3 and llm.calls == 3 and res.truncated
     res = agent(stack, max_steps=2).run("What did Ada Lovelace write about, and where was Charles Babbage born?")
-    assert len(steps(res)) <= 2
+    assert len(steps(res)) == 2  # budget is used, never exceeded

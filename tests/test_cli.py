@@ -4,6 +4,7 @@ from pathlib import Path
 import pytest
 
 from kgrag.cli import main
+from kgrag.graph import KnowledgeGraph
 
 
 @pytest.fixture(autouse=True)
@@ -61,7 +62,13 @@ def test_stats_and_entity(mini_corpus, tmp_path, capsys):
     main(["ingest", str(mini_corpus), "--store", store])
     capsys.readouterr()
     assert main(["stats", "--store", store]) == 0
-    assert "Top entities" in capsys.readouterr().out
+    out = capsys.readouterr().out
+    assert "Top entities by degree:" in out
+    graph = KnowledgeGraph.load(store)
+    expected = graph.top_entities_by_degree(10)
+    assert expected and expected[0][1] > 0
+    section = out.split("Top entities by degree:\n", 1)[1].strip().splitlines()
+    assert [(ln.split(None, 1)[1], int(ln.split()[0])) for ln in section] == [(n, d) for n, d in expected]
     assert main(["entity", "zzz-no-such-entity", "--store", store]) != 0
 
 
