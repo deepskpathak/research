@@ -10,6 +10,7 @@ pytest
 ## Dependencies
 - Runtime: Python 3.10+ standard library only. No runtime dependencies are declared.
 - Dev: `pytest` (optional extra `dev`).
+- Graph storage: no graph database is required (no Neo4j, no Cypher). The graph is an in-memory `KnowledgeGraph` persisted as JSON in `<store>/graph.json`.
 - Network: none by default. `AnthropicLLM` calls api.anthropic.com **only** when `ANTHROPIC_API_KEY` is set (model `claude-sonnet-5-5`, override with `KGRAG_MODEL`). Otherwise the deterministic `OfflineLLM` is used. Flag for approval before enabling in a regulated environment.
 
 ## Layout
