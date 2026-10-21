@@ -13,9 +13,36 @@ SCHEMA_VERSION = 1
 GRAPH_FILE = "graph.json"
 
 
-def norm_key(name: str) -> str:
-    """Case/whitespace/hyphen-insensitive key used to merge entity names."""
+_PLURAL_KEEP = {"news", "series", "species", "lens", "bias", "kubernetes", "always", "perhaps"}
+
+
+def _singular(token: str) -> str:
+    """Conservative plural -> singular for one lowercase token.
+
+    Leaves short tokens (<=3 chars), words ending in 'ss', 'us' or 'is'
+    (class, corpus, analysis) and a few known non-plurals untouched.
+    """
+    if len(token) <= 3 or token in _PLURAL_KEEP or not token.endswith("s"):
+        return token
+    if token.endswith(("ss", "us", "is")):
+        return token
+    if token.endswith("ies") and len(token) > 4:
+        return token[:-3] + "y"
+    if token.endswith("xes"):
+        return token[:-2]
+    return token[:-1]
+
+
+def plain_key(name: str) -> str:
+    """Case/whitespace/hyphen-insensitive key without plural folding."""
     return re.sub(r"[\s_\-]+", " ", name.strip().lower())
+
+
+def norm_key(name: str) -> str:
+    """Key used to merge entity names: case/whitespace/hyphen-insensitive, last token singularized."""
+    key = plain_key(name)
+    head, sep, last = key.rpartition(" ")
+    return head + sep + _singular(last)
 
 
 def entity_id(name: str) -> str:
