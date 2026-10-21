@@ -12,6 +12,7 @@ Each may return objects (Entity / Chunk) or plain id strings; both are accepted.
 from __future__ import annotations
 
 import json
+import logging
 import math
 import re
 from collections import Counter
@@ -20,6 +21,8 @@ from pathlib import Path
 from typing import Any
 
 from kgrag.models import Chunk
+
+log = logging.getLogger(__name__)
 
 RRF_K = 60
 _TOKEN_RE = re.compile(r"[a-z0-9]+(?:[-_'][a-z0-9]+)*")
@@ -117,10 +120,33 @@ def _id(x: Any) -> str:
     return x if isinstance(x, str) else x.id
 
 
+class MissingDocPathsError(ValueError):
+    """The index has no doc_id -> path map, so citations cannot name a real file."""
+
+
+def resolve_source_path(doc_paths: dict[str, str], doc_id: str) -> str:
+    """Map a doc id to its source path, never leaking the raw doc id.
+
+    Policy: an index built without any paths is a configuration bug, so raise
+    ``MissingDocPathsError``. If the map exists but lacks this doc, log a WARNING and
+    return the marked placeholder ``<unknown:DOC_ID>`` so it cannot pass as a real path.
+    """
+    if not doc_paths:
+        raise MissingDocPathsError(
+            "index has no doc_paths; build it with BM25Index.build(chunks, doc_paths={doc_id: path})")
+    path = doc_paths.get(doc_id)
+    if path is None:
+        log.warning("no source path for doc %s; using placeholder", doc_id)
+        return f"<unknown:{doc_id}>"
+    return path
+
+
 class HybridRetriever:
     def __init__(self, index: BM25Index, graph: Any, hops: int = 2,
                  max_graph_chunks: int = 50) -> None:
         self.index, self.graph = index, graph
+        # Per-call accounting, replaced on every retrieve().
+        self.last_stats: dict[str, int] = {"dropped_graph_chunks": 0}
         self.hops = max(0, min(hops, 2))
         self.max_graph_chunks = max_graph_chunks
 
@@ -161,7 +187,13 @@ class HybridRetriever:
         if not tokenize(query):
             return []
         lexical = [cid for cid, _ in self.index.search(query, lexical_k)]
-        graph = [cid for cid in self._graph_ranking(query) if cid in self.index.chunks]
+        ranked = self._graph_ranking(query)
+        graph = [cid for cid in ranked if cid in self.index.chunks]
+        dropped = [cid for cid in ranked if cid not in self.index.chunks]
+        self.last_stats = {"dropped_graph_chunks": len(dropped)}
+        if dropped:
+            log.warning("dropped %d graph chunk(s) missing from the index: %s",
+                        len(dropped), ", ".join(dropped[:5]))
         fused: dict[str, float] = {}
         via: dict[str, set[str]] = {}
         for name, ranking in (("lexical", lexical), ("graph", graph)):
@@ -174,6 +206,6 @@ class HybridRetriever:
             chunk = self.index.chunks[cid]
             out.append(RetrievedChunk(
                 chunk=chunk, score=score,
-                source_path=self.index.doc_paths.get(chunk.doc_id, chunk.doc_id),
+                source_path=resolve_source_path(self.index.doc_paths, chunk.doc_id),
                 via=tuple(v for v in ("lexical", "graph") if v in via[cid])))
         return out
