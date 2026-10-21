@@ -174,7 +174,7 @@ sequenceDiagram
         end
         Note over A: max_steps exhausted: _compose, truncated = True
     end
-    Note over A: _offline plan = search(question); if 2+ entity mentions then search per name, lookup_entity per name, expand(depth 1) per name. Last step reserved for finish.
+    Note over A: _offline plan = search(question), then with 2+ entity mentions: search per name, lookup_entity per name, expand(depth 1) per name. Last step reserved for finish.
     A->>A: _compose: score evidence sentences, relevance gate, pick up to 3
     A-->>U: AgentResult(answer, citations, trace, truncated)
 ```
