@@ -1,5 +1,7 @@
+import pytest
+
 from kgrag.models import Chunk, Entity
-from kgrag.retrieve import BM25Index, HybridRetriever, tokenize
+from kgrag.retrieve import BM25Index, HybridRetriever, MissingDocPathsError, tokenize
 
 CHUNKS = [
     Chunk("c1", "d1", "Neo4j is a graph database used for storing property graphs.", 0, 10),
@@ -68,3 +70,34 @@ def test_empty_and_stopword_queries():
     assert r.retrieve("") == []
     assert r.retrieve("the of and") == []
     assert r.retrieve("zzzunknown") == []
+
+
+def test_missing_doc_path_is_marked_and_warned(caplog):
+    idx = BM25Index.build(CHUNKS, doc_paths={"d1": "research/a.md"})  # d2 lacks a path
+    r = HybridRetriever(idx, FakeGraph())
+    with caplog.at_level("WARNING", logger="kgrag.retrieve"):
+        res = {x.chunk.id: x for x in r.retrieve("cypher relationships")}
+    assert res["c3"].source_path == "<unknown:d2>"
+    assert res["c3"].source_path != "d2"
+    assert any("d2" in rec.getMessage() and rec.levelname == "WARNING" for rec in caplog.records)
+
+
+def test_index_without_paths_raises():
+    idx = BM25Index.build(CHUNKS)
+    with pytest.raises(MissingDocPathsError, match="doc_paths"):
+        HybridRetriever(idx, FakeGraph()).retrieve("neo4j")
+
+
+def test_dropped_graph_chunks_counted_and_logged(caplog):
+    class GhostGraph(FakeGraph):
+        def chunks_for_entity(self, entity_id):
+            return ["c1", "ghost"]
+
+    _, r = make(GhostGraph())
+    with caplog.at_level("WARNING", logger="kgrag.retrieve"):
+        res = r.retrieve("neo4j")
+    assert r.last_stats["dropped_graph_chunks"] == 1
+    assert any("ghost" in rec.getMessage() for rec in caplog.records)
+    assert all(x.chunk.id != "ghost" for x in res)
+    r.retrieve("bananas")
+    assert r.last_stats["dropped_graph_chunks"] == 0

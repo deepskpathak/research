@@ -19,7 +19,7 @@ from typing import Any
 
 from .llm import LLMClient, LLMError, OfflineLLM
 from .models import Chunk
-from .retrieve import STOPWORDS, tokenize
+from .retrieve import STOPWORDS, resolve_source_path, tokenize
 
 NOT_FOUND = "The corpus does not contain the information needed to answer this question."
 TOOLS = ("search", "lookup_entity", "expand", "finish")
@@ -100,7 +100,7 @@ class Agent:
         doc = getattr(self.graph, "documents", {}).get(chunk.doc_id)
         if doc is not None:
             return doc.path
-        return self.retriever.index.doc_paths.get(chunk.doc_id, chunk.doc_id)
+        return resolve_source_path(self.retriever.index.doc_paths, chunk.doc_id)
 
     def _remember(self, st: "_State", chunk: Chunk, path: str | None = None) -> None:
         st.evidence.setdefault(chunk.id, (chunk, path or self._path(chunk)))
