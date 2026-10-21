@@ -7,7 +7,7 @@ import re
 from itertools import combinations
 from typing import Protocol, Sequence
 
-from .graph import entity_id, norm_key
+from .graph import entity_id, norm_key, plain_key
 from .llm import LLMClient, LLMError
 from .models import Chunk, Entity, Relation
 
@@ -66,7 +66,9 @@ class HeuristicExtractor:
         def register(surface: str, kind: str) -> str:
             canonical = acr.get(surface, surface)
             key = norm_key(canonical)
-            names.setdefault(key, canonical)
+            # Display name: first surface seen, upgraded once to the singular form if one appears later.
+            if key not in names or (plain_key(names[key]) != key and plain_key(canonical) == key):
+                names[key] = canonical
             if surface != canonical:
                 aliases.setdefault(key, set()).add(surface)
             if types.get(key) in (None, "acronym"):
