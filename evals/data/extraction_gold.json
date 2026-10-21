@@ -1,0 +1,32 @@
+{
+  "entities": [
+    "Knowledge Graph",
+    "Microsoft Research",
+    "GraphRAG",
+    "Patrick Lewis",
+    "RAG",
+    "Facebook AI Research",
+    "BM25"
+  ],
+  "relations": [
+    [
+      "Microsoft Research",
+      "GraphRAG"
+    ],
+    [
+      "Patrick Lewis",
+      "Facebook AI Research"
+    ],
+    [
+      "Patrick Lewis",
+      "RAG"
+    ]
+  ],
+  "plural_groups": [
+    [
+      "Knowledge Graph",
+      "Knowledge Graphs"
+    ]
+  ],
+  "notes": "Relations are undirected co-occurrence pairs; relation precision is reported but not gated because the heuristic extractor links every entity pair in a chunk. Known gaps at the time of writing: GraphRAG (CamelCase) is missed, and the sentence-initial 'Many Knowledge Graphs' and the title 'Graph Notes' and acronym 'AI' are noise. Thresholds sit just under current performance."
+}

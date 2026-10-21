@@ -1,0 +1,39 @@
+{
+  "corpus_exclude": ["README.md"],
+  "retrieval": [
+    {"id": "r1", "question": "Who introduced Retrieval Augmented Generation?", "gold_sources": ["rag.md"]},
+    {"id": "r2", "question": "When was GraphRAG published and by whom?", "gold_sources": ["graphrag.md"]},
+    {"id": "r3", "question": "Who created the Leiden algorithm?", "gold_sources": ["leiden-algorithm.md"]},
+    {"id": "r4", "question": "What is ReAct?", "gold_sources": ["agentic-rag.md"]},
+    {"id": "r5", "question": "Which property graph database is popular for knowledge graphs?", "gold_sources": ["knowledge-graphs.md"]},
+    {"id": "r6", "question": "What does the Leiden algorithm improve on?", "gold_sources": ["leiden-algorithm.md"]},
+    {"id": "r7", "question": "What does baseline RAG struggle with?", "gold_sources": ["rag.md"]}
+  ],
+  "multi_hop": [
+    {"id": "m1", "question": "Which university created the community detection algorithm used by GraphRAG?",
+     "gold_sources": ["graphrag.md", "leiden-algorithm.md"], "answer_contains": "Leiden University"},
+    {"id": "m2", "question": "Which organization published GraphRAG, and where did the original authors of RAG work?",
+     "gold_sources": ["graphrag.md", "rag.md"], "answer_contains": "Microsoft Research"},
+    {"id": "m3", "question": "Who created the Leiden algorithm that GraphRAG uses to detect communities?",
+     "gold_sources": ["graphrag.md", "leiden-algorithm.md"], "answer_contains": "Traag"}
+  ],
+  "grounded": [
+    {"id": "g1", "question": "Who introduced Retrieval Augmented Generation?"},
+    {"id": "g2", "question": "How does GraphRAG detect communities?"},
+    {"id": "g3", "question": "What does the Leiden algorithm improve on?"},
+    {"id": "g4", "question": "What is ReAct?"},
+    {"id": "g5", "question": "Which university created the community detection algorithm used by GraphRAG?"}
+  ],
+  "on_topic": [
+    {"id": "o1", "question": "What is GraphRAG?"},
+    {"id": "o2", "question": "What is agentic RAG?"},
+    {"id": "o3", "question": "What is a knowledge graph?"},
+    {"id": "o4", "question": "Who created the Leiden algorithm?"}
+  ],
+  "off_topic": [
+    {"id": "n1", "question": "What is the capital of France?"},
+    {"id": "n2", "question": "What is the recipe for chocolate cake?"},
+    {"id": "n3", "question": "Who won the football world cup?"},
+    {"id": "n4", "question": "How tall is Mount Everest?"}
+  ]
+}

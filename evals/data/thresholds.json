@@ -1,0 +1,16 @@
+{
+  "retrieval_k": 3,
+  "retrieval_recall_at_k": 0.85,
+  "retrieval_mrr": 0.7,
+  "multi_hop_coverage": 0.5,
+  "multi_hop_answer_hit": 0.6,
+  "citation_accuracy": 1.0,
+  "answers_with_citation": 1.0,
+  "refusal_rate": 1.0,
+  "false_refusal_rate_max": 0.0,
+  "extraction_entity_precision": 0.6,
+  "extraction_entity_recall": 0.8,
+  "extraction_relation_recall": 0.6,
+  "extraction_plural_merge": 1.0,
+  "idempotency": 1.0
+}
