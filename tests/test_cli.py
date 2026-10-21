@@ -17,7 +17,7 @@ def test_ingest_then_ask(mini_corpus, tmp_path, capsys):
     out = capsys.readouterr().out
     for key in ("documents:", "chunks:", "entities:", "relations:", "skipped files:"):
         assert key in out
-    assert main(["ask", "What is in the corpus?", "--store", store]) == 0
+    assert main(["ask", "Who designed the Analytical Engine?", "--store", store]) == 0
     assert "[1]" in capsys.readouterr().out
 
 
@@ -25,10 +25,10 @@ def test_ask_json_and_trace(mini_corpus, tmp_path, capsys):
     store = str(tmp_path / "s")
     main(["ingest", str(mini_corpus), "--store", store])
     capsys.readouterr()
-    assert main(["ask", "What is in the corpus?", "--store", store, "--json"]) == 0
+    assert main(["ask", "Who designed the Analytical Engine?", "--store", store, "--json"]) == 0
     data = json.loads(capsys.readouterr().out)
     assert {"answer", "citations", "trace"} <= data.keys()
-    assert main(["ask", "What is in the corpus?", "--store", store, "--trace"]) == 0
+    assert main(["ask", "Who designed the Analytical Engine?", "--store", store, "--trace"]) == 0
     assert "Trace:" in capsys.readouterr().out
 
 
