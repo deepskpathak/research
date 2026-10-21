@@ -11,6 +11,7 @@ from .models import Chunk, Document
 log = logging.getLogger(__name__)
 
 SUPPORTED_SUFFIXES = {".md", ".markdown", ".txt"}
+INDEX_FILENAMES = {"readme.md"}  # root-level corpus index, not content
 _HEADING_RE = re.compile(r"^\s{0,3}#{1,6}\s+(.*?)\s*#*\s*$")
 
 
@@ -38,6 +39,10 @@ def load_corpus(path: str | Path) -> list[Document]:
     for file in sorted(p for p in root.rglob("*") if p.is_file()):
         rel = file.relative_to(root)
         if any(part.startswith(".") for part in rel.parts):
+            continue
+        if len(rel.parts) == 1 and file.name.lower() in INDEX_FILENAMES:
+            # A corpus index/README restates facts (even answers) from the real documents,
+            # so indexing it pollutes retrieval and citations.
             continue
         if file.suffix.lower() not in SUPPORTED_SUFFIXES:
             log.warning("Skipping unsupported file type: %s", rel.as_posix())

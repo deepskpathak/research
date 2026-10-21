@@ -73,3 +73,93 @@ def test_research_corpus_offline(tmp_path, capsys):
     assert main(["ask", "Which university created the Leiden algorithm?", "--store", store]) == 0
     out = capsys.readouterr().out
     assert "Leiden" in out and "[1]" in out
+
+
+# --- T5: skipped files, nested folders, not-found, multi-hop, error exits ---
+
+RESEARCH = Path(__file__).parent.parent / "research"
+
+
+def _ask_json(question, store, capsys):
+    assert main(["ask", question, "--store", store, "--json"]) == 0
+    return json.loads(capsys.readouterr().out)
+
+
+def test_ingest_reports_exact_skipped_count(tmp_path, capsys):
+    corpus = tmp_path / "c"
+    (corpus / "sub").mkdir(parents=True)
+    (corpus / "a.md").write_text("# Alpha\n\nAda Lovelace wrote notes.\n")
+    (corpus / "sub" / "b.txt").write_text("Plain text about Charles Babbage.\n")
+    for name in ("pic.png", "doc.pdf", "blob.bin", "sub/deep.PNG"):
+        (corpus / name).write_bytes(b"\x00\x01")
+    (corpus / ".hidden.png").write_bytes(b"\x00")  # hidden files are not counted
+    assert main(["ingest", str(corpus), "--store", str(tmp_path / "s")]) == 0
+    out = capsys.readouterr().out
+    assert "skipped files: 4\n" in out
+    assert "documents: 2\n" in out
+
+
+def test_nested_folders_ingested_with_relative_path_citations(tmp_path, capsys):
+    corpus = tmp_path / "c"
+    (corpus / "a" / "b").mkdir(parents=True)
+    (corpus / "a" / "b" / "c.md").write_text(
+        "# Quasar Notes\n\nThe Zephyrian Telescope was designed by Marta Quillon in 1974.\n")
+    (corpus / "top.md").write_text("# Top\n\nUnrelated gardening tips about tomatoes.\n")
+    store = str(tmp_path / "s")
+    assert main(["ingest", str(corpus), "--store", store]) == 0
+    assert "documents: 2\n" in capsys.readouterr().out
+    data = _ask_json("Who designed the Zephyrian Telescope?", store, capsys)
+    paths = {c["doc_path"] for c in data["citations"]}
+    assert "a/b/c.md" in paths
+    assert not any(str(tmp_path) in p for p in paths)
+
+
+def test_off_topic_question_is_not_found(tmp_path, capsys):
+    store = str(tmp_path / "s")
+    assert main(["ingest", str(RESEARCH), "--store", store]) == 0
+    capsys.readouterr()
+    assert main(["ask", "What is the boiling point of tungsten?", "--store", store]) == 0
+    out = capsys.readouterr().out
+    assert "Citations:" not in out
+    assert out.strip()
+    data = _ask_json("What is the boiling point of tungsten?", store, capsys)
+    assert data["citations"] == []
+    assert data["answer"].strip()
+
+
+def test_multi_hop_citations_verbatim_from_both_files(tmp_path, capsys):
+    store = str(tmp_path / "s")
+    assert main(["ingest", str(RESEARCH), "--store", store]) == 0
+    capsys.readouterr()
+    data = _ask_json("Which university created the Leiden algorithm used by GraphRAG?", store, capsys)
+    cites = data["citations"]
+    paths = {c["doc_path"] for c in cites}
+    assert {"graphrag.md", "leiden-algorithm.md"} <= paths, paths
+    for c in cites:
+        source = (RESEARCH / c["doc_path"]).read_text(encoding="utf-8")
+        assert c["quote"] and c["quote"] in source, c
+
+
+def test_ask_missing_store_errors_cleanly(tmp_path, capsys):
+    assert main(["ask", "hi", "--store", str(tmp_path / "none")]) == 1
+    cap = capsys.readouterr()
+    assert cap.out == ""
+    assert "kgrag: error:" in cap.err and "Traceback" not in cap.err
+
+
+def test_ingest_nonexistent_path_errors_cleanly(tmp_path, capsys):
+    store = tmp_path / "s"
+    assert main(["ingest", str(tmp_path / "nope"), "--store", str(store)]) == 1
+    cap = capsys.readouterr()
+    assert "kgrag: error:" in cap.err and "Traceback" not in cap.err
+    assert not store.exists()
+
+
+def test_root_readme_index_is_not_ingested(tmp_path, capsys):
+    corpus = tmp_path / "c"
+    (corpus / "sub").mkdir(parents=True)
+    (corpus / "README.md").write_text("# Index\n\nSpoiler answers live here.\n")
+    (corpus / "a.md").write_text("# A\n\nAda Lovelace wrote notes.\n")
+    (corpus / "sub" / "README.md").write_text("# Nested\n\nNested readme is real content.\n")
+    assert main(["ingest", str(corpus), "--store", str(tmp_path / "s")]) == 0
+    assert "documents: 2\n" in capsys.readouterr().out
