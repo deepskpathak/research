@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kgrag"
+version = "0.1.0"
+description = "Knowledge graph and agentic RAG over a local research corpus"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+# Runtime is stdlib only (regulated environment). Do not add dependencies without approval.
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+kgrag = "kgrag.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["kgrag*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
