@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Code Graph Vendors: Landscape, Shortlist and Use Cases</title>
+<style>
+:root{--bg:#fbfaf8;--fg:#1d1d1f;--muted:#5f6368;--line:#e4e1dc;--card:#ffffff;--accent:#2f5d8a;--accent-soft:#e8f0f8;--assess:#7a4b00;--assess-bg:#fff4e0;--code:#f2f0ec}
+@media (prefers-color-scheme:dark){:root{--bg:#141416;--fg:#e8e6e3;--muted:#a1a1a6;--line:#2c2c30;--card:#1c1c1f;--accent:#8ab4f8;--accent-soft:#1e2a38;--assess:#f5c97a;--assess-bg:#2e2412;--code:#26262a}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{display:grid;grid-template-columns:240px minmax(0,1fr);gap:40px;max-width:1240px;margin:0 auto;padding:32px 24px 80px}
+nav.toc{position:sticky;top:24px;align-self:start;font-size:14px}
+nav.toc h4{margin:0 0 8px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+nav.toc ol{list-style:none;margin:0;padding:0;border-left:2px solid var(--line)}
+nav.toc li a{display:block;padding:5px 12px;color:var(--muted);text-decoration:none}
+nav.toc li a:hover{color:var(--accent)}
+main{min-width:0}
+h1{font-size:30px;line-height:1.25;margin:0 0 12px}
+h2{font-size:22px;margin:44px 0 12px;padding-top:12px;border-top:1px solid var(--line)}
+h3{font-size:18px;margin:28px 0 8px}
+p,li{max-width:78ch}
+a{color:var(--accent)}
+code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:.9em}
+hr{display:none}
+.tbl{overflow-x:auto;margin:14px 0 20px;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--accent-soft);font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+sup.cite{font-size:.68em;line-height:0;white-space:nowrap;margin-left:1px}
+sup.cite a{text-decoration:none}
+strong.assess{color:var(--assess);background:var(--assess-bg);padding:1px 6px;border-radius:4px}
+ol.sources{font-size:13.5px;padding-left:28px}
+ol.sources li{margin:4px 0;max-width:none}
+ol.sources li:target{background:var(--assess-bg);border-radius:4px}
+ol.sources .url{display:block;color:var(--muted);font-size:12px;word-break:break-all}
+li.todo{list-style:none;margin-left:-20px}
+li.todo .box{display:inline-block;width:13px;height:13px;border:1.5px solid var(--muted);border-radius:3px;margin-right:8px;vertical-align:-1px}
+.meta{color:var(--muted);font-size:13px;margin-top:40px}
+@media (max-width:900px){.wrap{grid-template-columns:1fr}nav.toc{position:static}}
+@media print{nav.toc{display:none}.wrap{display:block}a{color:inherit}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="toc"><h4>Contents</h4><ol><li><a href="#1-summary">1. Summary</a></li><li><a href="#2-key-terms">2. Key terms</a></li><li><a href="#3-landscape">3. Landscape</a></li><li><a href="#4-shortlist-deep-dives">4. Shortlist deep dives</a></li><li><a href="#5-side-by-side-comparison">5. Side-by-side comparison</a></li><li><a href="#6-use-cases">6. Use cases</a></li><li><a href="#7-evidence-quality">7. Evidence quality</a></li><li><a href="#8-decision-guide-assessment">8. Decision guide (Assessment)</a></li><li><a href="#sources">Sources</a></li></ol></nav>
+<main>
+<h1 id="code-graph-vendors-landscape-shortlist-and-use-cases">Code Graph Vendors: Landscape, Shortlist and Use Cases</h1>
+<p><strong>Research date:</strong> 2026-11-18 | <strong>Scope:</strong> industry and open-source code graph tools that serve AI agents, change campaigns, code review and knowledge graphs</p>
+<p><strong>How to read this</strong></p>
+<ul>
+<li>Every fact carries a numbered source. Lines marked <strong class="assess">Assessment</strong> are my analysis, not sourced facts.</li>
+<li><strong>Vendor-reported</strong> means the number comes from the party selling or building the tool. Independent benchmarks are rare.</li>
+<li>GitHub stars and forks were read from the GitHub REST API on 2026-11-18 at 02:06 UTC, and each figure links to its repository.</li>
+<li>"Generative agents" is read here as AI coding agents that generate code (Claude Code, Codex, Cursor and similar).</li>
+</ul>
+<hr />
+<h2 id="1-summary">1. Summary</h2>
+<p><strong class="assess">Bottom line (Assessment):</strong> no single vendor covers all four use cases well. The pattern that fits the evidence is a layered stack: a precise, persistent code graph as the corpus, an SDLC graph for merge request and pipeline context, and a deterministic transformation engine for campaigns, all served to agents over MCP.</p>
+<p><strong>What changed in 2026</strong></p>
+<ul>
+<li><strong>Code graphs became agent infrastructure.</strong> Sourcegraph 7.0 (Feb 2026) repositioned the product as a shared intelligence layer for developers and AI agents <sup class="cite">[<a href="#src-1" title="Sourcegraph blog: A new era for Sourcegraph, Sourcegraph 7.0 (25 Feb 2026)">1</a>]</sup>. GitLab Orbit went GA on 29 Oct 2026 <sup class="cite">[<a href="#src-2" title="GitLab blog: GitLab Orbit is generally available (29 Oct 2026)">2</a>]</sup>. Moderne now calls itself "the Agent Tools company" <sup class="cite">[<a href="#src-3" title="Business Wire: Moderne Changelog (19 May 2026)">3</a>]</sup>.</li>
+<li><strong>MCP is the delivery channel.</strong> Orbit exposes <code>query_graph</code> and <code>get_graph_schema</code> <sup class="cite">[<a href="#src-4" title="GitLab: GitLab Orbit product page">4</a>]</sup>, Sourcegraph serves search, navigation and Deep Search over MCP <sup class="cite">[<a href="#src-5" title="Sourcegraph: AI coding context tools compared">5</a>]</sup>, and Moderne ships its LST engine and Moddy agent over MCP <sup class="cite">[<a href="#src-6" title="AWS Marketplace: Moderne listing">6</a>]</sup>.</li>
+<li><strong>Open-source local graphs exploded.</strong> CodeGraph, created in Jan 2026, has 77,889 stars <sup class="cite">[<a href="#src-7" title="GitHub: colbymchenry/codegraph">7</a>]</sup>, and codebase-memory-mcp, created in Feb 2026, has 48,789 <sup class="cite">[<a href="#src-8" title="GitHub: DeusData/codebase-memory-mcp">8</a>]</sup>.</li>
+<li><strong>SCIP became a shared standard.</strong> SCIP moved to open governance in March 2026 with a steering committee that includes engineers from Meta and Uber <sup class="cite">[<a href="#src-9" title="Sourcegraph blog: The future of SCIP (25 Mar 2026)">9</a>]</sup>.</li>
+</ul>
+<p><strong>What the evidence says</strong></p>
+<ul>
+<li><strong>Graphs help on multi-hop questions.</strong> In KGCompass, 89.7% of the bugs it localized had no location hint in the issue and were found only through multi-hop graph traversal <sup class="cite">[<a href="#src-10" title="arXiv 2503.21710v2: KGCompass, Knowledge Graph Enhanced Repository-Level Software Repair">10</a>]</sup>.</li>
+<li><strong>Agents often ignore the graph.</strong> In CodeCompass, 58% of trials with graph access skipped the graph tool despite explicit instructions <sup class="cite">[<a href="#src-11" title="arXiv 2602.20048: CodeCompass, the Navigation Paradox (HTML v1)">11</a>]</sup>.</li>
+<li><strong>Graph grounding costs more per call.</strong> In Compare the Market's test, the Orbit-grounded reviewer cost $2.37 per merge request versus $0.58 for diff-only review <sup class="cite">[<a href="#src-12" title="Compare the Market: Comparing Context Retrieval Approaches for AI Code Review">12</a>]</sup>.</li>
+</ul>
+<p><strong>Shortlist at a glance (Assessment)</strong></p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Need</th>
+<th>Lead pick</th>
+<th>Alternative</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Code graph corpus for a context service</td>
+<td>Sourcegraph (any code host) or GitLab Orbit (GitLab-native)</td>
+<td>codebase-memory-mcp (local, MIT)</td>
+</tr>
+<tr>
+<td>SDLC knowledge graph (MRs, pipelines, deployments)</td>
+<td>GitLab Orbit</td>
+<td>Potpie (open source)</td>
+</tr>
+<tr>
+<td>Toil reduction campaigns</td>
+<td>Moderne + OpenRewrite</td>
+<td>Sourcegraph Batch Changes</td>
+</tr>
+<tr>
+<td>Automated MR review context</td>
+<td>GitLab Orbit on GitLab</td>
+<td>Greptile or CodeRabbit (built-in graphs); code-review-graph (open source)</td>
+</tr>
+<tr>
+<td>Security semantics</td>
+<td>GitHub CodeQL</td>
+<td>Joern (open source CPG)</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2 id="2-key-terms">2. Key terms</h2>
+<ul>
+<li><strong>Code graph:</strong> nodes for files and symbols, edges for calls, imports and definitions. Orbit, for example, indexes files, directories, definitions, imports and calls <sup class="cite">[<a href="#src-13" title="GitLab Docs: GitLab Orbit indexed data (schema)">13</a>]</sup>.</li>
+<li><strong>SCIP:</strong> a language-agnostic protocol for indexing source code that powers go-to-definition and find-references <sup class="cite">[<a href="#src-14" title="GitHub: scip-code/scip">14</a>]</sup>.</li>
+<li><strong>Code property graph (CPG):</strong> a graph for mining large codebases for programming patterns, queried with a Scala-based DSL <sup class="cite">[<a href="#src-15" title="Joern Docs: Code Property Graph">15</a>]</sup>. It merges a syntax tree, a control-flow graph and a program-dependence graph <sup class="cite">[<a href="#src-16" title="Qwiet AI: The semantic code property graph">16</a>]</sup>.</li>
+<li><strong>Lossless Semantic Tree (LST):</strong> OpenRewrite's code tree that keeps whitespace, so it can print back the original source without reformatting <sup class="cite">[<a href="#src-17" title="OpenRewrite Docs: Lossless Semantic Trees">17</a>]</sup>. It is type-attributed <sup class="cite">[<a href="#src-18" title="Moderne Docs: Lossless semantic trees (platform reference)">18</a>]</sup>.</li>
+<li><strong>Context graph (SDLC graph):</strong> a code graph joined with lifecycle data. Orbit maps code, work items, pipelines, deployments and production signals into one graph <sup class="cite">[<a href="#src-19" title="GitLab press release: new capabilities at Transcend (10 Jun 2026)">19</a>]</sup>. Graphiti's context graphs also record when each fact became true and when it was superseded <sup class="cite">[<a href="#src-20" title="GitHub: getzep/graphiti">20</a>]</sup>.</li>
+<li><strong>MCP:</strong> the Model Context Protocol, which every shortlisted tool uses to serve agents <sup class="cite">[<a href="#src-4" title="GitLab: GitLab Orbit product page">4</a>, <a href="#src-6" title="AWS Marketplace: Moderne listing">6</a>, <a href="#src-7" title="GitHub: colbymchenry/codegraph">7</a>, <a href="#src-21" title="Sourcegraph Docs: Sourcegraph MCP Server (7.5)">21</a>]</sup>.</li>
+</ul>
+<hr />
+<h2 id="3-landscape">3. Landscape</h2>
+<h3 id="31-industry-vendors">3.1 Industry vendors</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Vendor</th>
+<th>Category</th>
+<th>Graph and technology</th>
+<th>Agent interface</th>
+<th>Deployment and license</th>
+<th>Traction signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sourcegraph</strong></td>
+<td>Code intelligence platform</td>
+<td>Search index across all repos plus optional SCIP precise graph <sup class="cite">[<a href="#src-5" title="Sourcegraph: AI coding context tools compared">5</a>]</sup></td>
+<td>MCP server (Enterprise) <sup class="cite">[<a href="#src-21" title="Sourcegraph Docs: Sourcegraph MCP Server (7.5)">21</a>]</sup></td>
+<td>Dedicated Cloud or Self Hosted, $59/user/month list <sup class="cite">[<a href="#src-22" title="Sourcegraph Docs: Enterprise plan">22</a>]</sup></td>
+<td>SCIP repo 890 stars <sup class="cite">[<a href="#src-14" title="GitHub: scip-code/scip">14</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>GitLab Orbit</strong></td>
+<td>SDLC context graph</td>
+<td>Rust service; ClickHouse hosted, DuckDB local <sup class="cite">[<a href="#src-23" title="GitLab Orbit (Knowledge Graph) README, GitHub mirror">23</a>]</sup></td>
+<td>MCP, REST, CLI, Duo Agent Platform <sup class="cite">[<a href="#src-23" title="GitLab Orbit (Knowledge Graph) README, GitHub mirror">23</a>]</sup></td>
+<td>GitLab EE license <sup class="cite">[<a href="#src-23" title="GitLab Orbit (Knowledge Graph) README, GitHub mirror">23</a>]</sup>; Premium and Ultimate <sup class="cite">[<a href="#src-2" title="GitLab blog: GitLab Orbit is generally available (29 Oct 2026)">2</a>]</sup></td>
+<td>1,500+ developers built on it at Transcend <sup class="cite">[<a href="#src-24" title="GitLab blog: Transcend hackathon, what developers built with Orbit (20 Jul 2026)">24</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>Moderne</strong></td>
+<td>Transformation engine</td>
+<td>OpenRewrite LST plus recipes <sup class="cite">[<a href="#src-25" title="ICSME 2023 tool demo: Deterministic Automatic Refactoring at Scale (OpenRewrite)">25</a>]</sup></td>
+<td>MCP, CLI, IDE plugins, Moddy <sup class="cite">[<a href="#src-6" title="AWS Marketplace: Moderne listing">6</a>]</sup></td>
+<td>SaaS tenant on Azure <sup class="cite">[<a href="#src-26" title="GlobeNewswire via Manila Times: Moderne joins Microsoft Pegasus program (15 Apr 2025)">26</a>]</sup>; OpenRewrite Apache-2.0 <sup class="cite">[<a href="#src-27" title="GitHub: openrewrite/rewrite">27</a>]</sup></td>
+<td>Five top North American banks are customers (vendor-reported) <sup class="cite">[<a href="#src-28" title="Intel Capital: Moderne Series B announcement">28</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>GitHub CodeQL</strong></td>
+<td>Semantic analysis database</td>
+<td>Queries a codebase as if it were data <sup class="cite">[<a href="#src-29" title="GitHub blog: Fixing security vulnerabilities with AI">29</a>]</sup></td>
+<td>Code scanning, Copilot code review, Autofix <sup class="cite">[<a href="#src-30" title="GitHub Docs: About GitHub Copilot code review">30</a>]</sup></td>
+<td>Private code needs GitHub Advanced Security <sup class="cite">[<a href="#src-31" title="GitHub Security Lab: GitHub CodeQL Terms and Conditions">31</a>]</sup></td>
+<td>github/codeql 10,377 stars <sup class="cite">[<a href="#src-32" title="GitHub: github/codeql">32</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>Greptile</strong></td>
+<td>Review bot with graph</td>
+<td>Graph of functions, classes, imports and dependencies <sup class="cite">[<a href="#src-33" title="Greptile Docs: Key features">33</a>]</sup></td>
+<td>PR and MR reviewer on GitHub and GitLab, incl. self-managed <sup class="cite">[<a href="#src-34" title="Greptile Docs: Introduction (platforms)">34</a>]</sup></td>
+<td>Commercial, 14-day trial <sup class="cite">[<a href="#src-35" title="Greptile: Code context">35</a>]</sup>; self-hosting options <sup class="cite">[<a href="#src-36" title="Greptile Docs: product overview (enterprise readiness)">36</a>]</sup></td>
+<td>22,000+ teams (vendor-reported) <sup class="cite">[<a href="#src-37" title="Greptile homepage">37</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>CodeRabbit</strong></td>
+<td>Review bot with graph</td>
+<td>Symbol definitions and references plus files that change together <sup class="cite">[<a href="#src-38" title="CodeRabbit Docs: Code Graph Analysis">38</a>]</sup></td>
+<td>PR reviewer and chat <sup class="cite">[<a href="#src-38" title="CodeRabbit Docs: Code Graph Analysis">38</a>]</sup></td>
+<td>Not covered here</td>
+<td>Not measured here</td>
+</tr>
+<tr>
+<td><strong>Augment Code</strong></td>
+<td>Semantic context engine</td>
+<td>Semantic retrieval, which Sourcegraph calls approximate <sup class="cite">[<a href="#src-5" title="Sourcegraph: AI coding context tools compared">5</a>]</sup></td>
+<td>Context Engine MCP, SDK, Context Connectors <sup class="cite">[<a href="#src-39" title="Augment Docs: Context Services overview">39</a>]</sup></td>
+<td>Not covered here</td>
+<td>70%+ agent improvement in its own benchmarks (vendor-reported) <sup class="cite">[<a href="#src-40" title="Augment Code changelog: Context Engine MCP for any AI coding agent (6 Feb 2026)">40</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>Gitar (Sonar)</strong></td>
+<td>Review and CI verification agent</td>
+<td>Consumes context (org instructions, Jira, Slack); not a graph vendor <sup class="cite">[<a href="#src-41" title="Sonar: Gitar product page">41</a>]</sup></td>
+<td>Reviews, diagnoses CI failures, applies fixes <sup class="cite">[<a href="#src-41" title="Sonar: Gitar product page">41</a>]</sup></td>
+<td>Joined Sonar in May 2026 <sup class="cite">[<a href="#src-42" title="Sonar: Get started with Gitar">42</a>]</sup></td>
+<td>Not measured here</td>
+</tr>
+<tr>
+<td><strong>Harness (Qwiet AI)</strong></td>
+<td>CPG-based security</td>
+<td>Code property graph for reachability analysis <sup class="cite">[<a href="#src-43" title="Harness blog: Harness acquires Qwiet AI (29 Sep 2025)">43</a>]</sup></td>
+<td>Embedded in Harness application security <sup class="cite">[<a href="#src-43" title="Harness blog: Harness acquires Qwiet AI (29 Sep 2025)">43</a>]</sup></td>
+<td>Acquired by Harness, Sep 2025 <sup class="cite">[<a href="#src-43" title="Harness blog: Harness acquires Qwiet AI (29 Sep 2025)">43</a>]</sup></td>
+<td>Not measured here</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="32-open-source-tools">3.2 Open-source tools</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>What it is</th>
+<th>Technology</th>
+<th>License</th>
+<th>Stars</th>
+<th>Forks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Graphify</strong></td>
+<td>Multimodal knowledge graph skill for Claude Code <sup class="cite">[<a href="#src-44" title="GitHub: Graphify-Labs/graphify">44</a>]</sup></td>
+<td>tree-sitter plus Claude extraction; NetworkX and Leiden <sup class="cite">[<a href="#src-44" title="GitHub: Graphify-Labs/graphify">44</a>]</sup></td>
+<td>Apache-2.0 <sup class="cite">[<a href="#src-44" title="GitHub: Graphify-Labs/graphify">44</a>]</sup></td>
+<td>149,689 <sup class="cite">[<a href="#src-44" title="GitHub: Graphify-Labs/graphify">44</a>]</sup></td>
+<td>14,381 <sup class="cite">[<a href="#src-44" title="GitHub: Graphify-Labs/graphify">44</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>CodeGraph</strong></td>
+<td>Local code graph over MCP <sup class="cite">[<a href="#src-7" title="GitHub: colbymchenry/codegraph">7</a>]</sup></td>
+<td>Rust parsing kernel; SQLite with FTS5 <sup class="cite">[<a href="#src-7" title="GitHub: colbymchenry/codegraph">7</a>]</sup></td>
+<td>MIT <sup class="cite">[<a href="#src-7" title="GitHub: colbymchenry/codegraph">7</a>]</sup></td>
+<td>77,889 <sup class="cite">[<a href="#src-7" title="GitHub: colbymchenry/codegraph">7</a>]</sup></td>
+<td>5,199 <sup class="cite">[<a href="#src-7" title="GitHub: colbymchenry/codegraph">7</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>codebase-memory-mcp</strong></td>
+<td>Local code, docs and infra graph over MCP <sup class="cite">[<a href="#src-8" title="GitHub: DeusData/codebase-memory-mcp">8</a>]</sup></td>
+<td>Native C; tree-sitter grammars; hybrid LSP <sup class="cite">[<a href="#src-8" title="GitHub: DeusData/codebase-memory-mcp">8</a>]</sup></td>
+<td>MIT <sup class="cite">[<a href="#src-8" title="GitHub: DeusData/codebase-memory-mcp">8</a>]</sup></td>
+<td>48,789 <sup class="cite">[<a href="#src-8" title="GitHub: DeusData/codebase-memory-mcp">8</a>]</sup></td>
+<td>4,050 <sup class="cite">[<a href="#src-8" title="GitHub: DeusData/codebase-memory-mcp">8</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>GitNexus</strong></td>
+<td>Code graph with impact tools and web UI <sup class="cite">[<a href="#src-45" title="GitHub: abhigyanpatwari/GitNexus">45</a>]</sup></td>
+<td>tree-sitter; LadybugDB (formerly KuzuDB) <sup class="cite">[<a href="#src-45" title="GitHub: abhigyanpatwari/GitNexus">45</a>]</sup></td>
+<td>PolyForm Noncommercial <sup class="cite">[<a href="#src-45" title="GitHub: abhigyanpatwari/GitNexus">45</a>]</sup></td>
+<td>48,620 <sup class="cite">[<a href="#src-45" title="GitHub: abhigyanpatwari/GitNexus">45</a>]</sup></td>
+<td>5,263 <sup class="cite">[<a href="#src-45" title="GitHub: abhigyanpatwari/GitNexus">45</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>Graphiti</strong></td>
+<td>Temporal context graph framework <sup class="cite">[<a href="#src-20" title="GitHub: getzep/graphiti">20</a>]</sup></td>
+<td>Facts with validity windows and provenance <sup class="cite">[<a href="#src-20" title="GitHub: getzep/graphiti">20</a>]</sup></td>
+<td>Apache-2.0 <sup class="cite">[<a href="#src-20" title="GitHub: getzep/graphiti">20</a>]</sup></td>
+<td>32,898 <sup class="cite">[<a href="#src-20" title="GitHub: getzep/graphiti">20</a>]</sup></td>
+<td>3,386 <sup class="cite">[<a href="#src-20" title="GitHub: getzep/graphiti">20</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>code-review-graph</strong></td>
+<td>Local graph for review context <sup class="cite">[<a href="#src-46" title="GitHub: tirth8205/code-review-graph">46</a>]</sup></td>
+<td>tree-sitter; one SQLite file <sup class="cite">[<a href="#src-46" title="GitHub: tirth8205/code-review-graph">46</a>]</sup></td>
+<td>MIT <sup class="cite">[<a href="#src-46" title="GitHub: tirth8205/code-review-graph">46</a>]</sup></td>
+<td>32,827 <sup class="cite">[<a href="#src-46" title="GitHub: tirth8205/code-review-graph">46</a>]</sup></td>
+<td>2,987 <sup class="cite">[<a href="#src-46" title="GitHub: tirth8205/code-review-graph">46</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>Serena</strong></td>
+<td>Symbol-level retrieval and editing over MCP <sup class="cite">[<a href="#src-47" title="GitHub: oraios/serena">47</a>]</sup></td>
+<td>IDE-style semantic tools <sup class="cite">[<a href="#src-47" title="GitHub: oraios/serena">47</a>]</sup></td>
+<td>See repo <sup class="cite">[<a href="#src-47" title="GitHub: oraios/serena">47</a>]</sup></td>
+<td>31,485 <sup class="cite">[<a href="#src-47" title="GitHub: oraios/serena">47</a>]</sup></td>
+<td>2,145 <sup class="cite">[<a href="#src-47" title="GitHub: oraios/serena">47</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>Potpie</strong></td>
+<td>SDLC context graph for agents <sup class="cite">[<a href="#src-48" title="GitHub: potpie-ai/potpie">48</a>]</sup></td>
+<td>Indexes code, decisions, history and team knowledge <sup class="cite">[<a href="#src-48" title="GitHub: potpie-ai/potpie">48</a>]</sup></td>
+<td>Apache-2.0 <sup class="cite">[<a href="#src-48" title="GitHub: potpie-ai/potpie">48</a>]</sup></td>
+<td>5,800 <sup class="cite">[<a href="#src-48" title="GitHub: potpie-ai/potpie">48</a>]</sup></td>
+<td>697 <sup class="cite">[<a href="#src-48" title="GitHub: potpie-ai/potpie">48</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>code-graph-rag</strong></td>
+<td>Graph RAG for monorepos <sup class="cite">[<a href="#src-49" title="GitHub: vitali87/code-graph-rag">49</a>]</sup></td>
+<td>tree-sitter; embedded graph DB; natural language to Cypher <sup class="cite">[<a href="#src-49" title="GitHub: vitali87/code-graph-rag">49</a>]</sup></td>
+<td>MIT <sup class="cite">[<a href="#src-49" title="GitHub: vitali87/code-graph-rag">49</a>]</sup></td>
+<td>5,381 <sup class="cite">[<a href="#src-49" title="GitHub: vitali87/code-graph-rag">49</a>]</sup></td>
+<td>719 <sup class="cite">[<a href="#src-49" title="GitHub: vitali87/code-graph-rag">49</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>CodeGraphContext</strong></td>
+<td>Graph-DB-backed MCP server and CLI <sup class="cite">[<a href="#src-50" title="GitHub: CodeGraphContext/CodeGraphContext">50</a>]</sup></td>
+<td>Neo4j, KuzuDB or FalkorDB backends <sup class="cite">[<a href="#src-50" title="GitHub: CodeGraphContext/CodeGraphContext">50</a>]</sup></td>
+<td>MIT <sup class="cite">[<a href="#src-50" title="GitHub: CodeGraphContext/CodeGraphContext">50</a>]</sup></td>
+<td>4,433 <sup class="cite">[<a href="#src-50" title="GitHub: CodeGraphContext/CodeGraphContext">50</a>]</sup></td>
+<td>852 <sup class="cite">[<a href="#src-50" title="GitHub: CodeGraphContext/CodeGraphContext">50</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>Sourcebot</strong></td>
+<td>Self-hosted code search with MCP <sup class="cite">[<a href="#src-51" title="GitHub: sourcebot-dev/sourcebot">51</a>]</sup></td>
+<td>Search plus symbol definitions and references <sup class="cite">[<a href="#src-51" title="GitHub: sourcebot-dev/sourcebot">51</a>]</sup></td>
+<td>MIT <sup class="cite">[<a href="#src-51" title="GitHub: sourcebot-dev/sourcebot">51</a>]</sup></td>
+<td>4,034 <sup class="cite">[<a href="#src-51" title="GitHub: sourcebot-dev/sourcebot">51</a>]</sup></td>
+<td>385 <sup class="cite">[<a href="#src-51" title="GitHub: sourcebot-dev/sourcebot">51</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>OpenRewrite</strong></td>
+<td>Refactoring engine behind Moderne <sup class="cite">[<a href="#src-52" title="Moderne blog: Overview of OpenRewrite and Moderne">52</a>]</sup></td>
+<td>Lossless Semantic Tree and recipes <sup class="cite">[<a href="#src-25" title="ICSME 2023 tool demo: Deterministic Automatic Refactoring at Scale (OpenRewrite)">25</a>]</sup></td>
+<td>Apache-2.0 <sup class="cite">[<a href="#src-27" title="GitHub: openrewrite/rewrite">27</a>]</sup></td>
+<td>3,992 <sup class="cite">[<a href="#src-27" title="GitHub: openrewrite/rewrite">27</a>]</sup></td>
+<td>608 <sup class="cite">[<a href="#src-27" title="GitHub: openrewrite/rewrite">27</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>Joern</strong></td>
+<td>Code property graph analysis platform <sup class="cite">[<a href="#src-53" title="GitHub: joernio/joern">53</a>]</sup></td>
+<td>CPG in a custom graph DB; Scala DSL <sup class="cite">[<a href="#src-53" title="GitHub: joernio/joern">53</a>]</sup></td>
+<td>Apache-2.0 <sup class="cite">[<a href="#src-53" title="GitHub: joernio/joern">53</a>]</sup></td>
+<td>3,650 <sup class="cite">[<a href="#src-53" title="GitHub: joernio/joern">53</a>]</sup></td>
+<td>476 <sup class="cite">[<a href="#src-53" title="GitHub: joernio/joern">53</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>Auryn (FalkorDB)</strong></td>
+<td>Code graph in FalkorDB over MCP <sup class="cite">[<a href="#src-54" title="GitHub: FalkorDB/Auryn (formerly FalkorDB/code-graph)">54</a>]</sup></td>
+<td>FalkorDB graph database <sup class="cite">[<a href="#src-54" title="GitHub: FalkorDB/Auryn (formerly FalkorDB/code-graph)">54</a>]</sup></td>
+<td>MIT <sup class="cite">[<a href="#src-54" title="GitHub: FalkorDB/Auryn (formerly FalkorDB/code-graph)">54</a>]</sup></td>
+<td>385 <sup class="cite">[<a href="#src-54" title="GitHub: FalkorDB/Auryn (formerly FalkorDB/code-graph)">54</a>]</sup></td>
+<td>56 <sup class="cite">[<a href="#src-54" title="GitHub: FalkorDB/Auryn (formerly FalkorDB/code-graph)">54</a>]</sup></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="33-building-blocks">3.3 Building blocks</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Role</th>
+<th>Stars</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>tree-sitter</strong></td>
+<td>Parser used by CodeGraph, GitNexus and code-review-graph, among others <sup class="cite">[<a href="#src-7" title="GitHub: colbymchenry/codegraph">7</a>, <a href="#src-45" title="GitHub: abhigyanpatwari/GitNexus">45</a>, <a href="#src-46" title="GitHub: tirth8205/code-review-graph">46</a>]</sup></td>
+<td>27,498 <sup class="cite">[<a href="#src-55" title="GitHub: tree-sitter/tree-sitter">55</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>Kythe</strong> (Google)</td>
+<td>Pluggable, mostly language-agnostic ecosystem for code tools <sup class="cite">[<a href="#src-56" title="Kythe project site">56</a>]</sup>; Google's migration tooling uses it to follow references <sup class="cite">[<a href="#src-57" title="arXiv 2504.09691: Google&#x27;s use of LLMs for internal code migrations (FSE 2025 preprint)">57</a>]</sup></td>
+<td>2,171 <sup class="cite">[<a href="#src-58" title="GitHub: kythe/kythe">58</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>Glean</strong> (Meta)</td>
+<td>Fact store for code in RocksDB, queried with the Datalog-like Angle language <sup class="cite">[<a href="#src-59" title="Meta Engineering: Indexing code at scale with Glean (19 Dec 2024)">59</a>]</sup></td>
+<td>1,445 <sup class="cite">[<a href="#src-60" title="GitHub: facebookincubator/Glean">60</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>SCIP</strong></td>
+<td>Open code indexing protocol with Go and Rust bindings <sup class="cite">[<a href="#src-14" title="GitHub: scip-code/scip">14</a>]</sup></td>
+<td>890 <sup class="cite">[<a href="#src-14" title="GitHub: scip-code/scip">14</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>stack-graphs</strong> (GitHub)</td>
+<td>GitHub library, repository now archived <sup class="cite">[<a href="#src-61" title="GitHub: github/stack-graphs (archived)">61</a>]</sup></td>
+<td>877 <sup class="cite">[<a href="#src-61" title="GitHub: github/stack-graphs (archived)">61</a>]</sup></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="34-common-usage-patterns">3.4 Common usage patterns</h3>
+<ol>
+<li><strong>Local stdio MCP server beside the agent.</strong> CodeGraph, codebase-memory-mcp and Orbit Local all run on the developer's machine <sup class="cite">[<a href="#src-7" title="GitHub: colbymchenry/codegraph">7</a>, <a href="#src-8" title="GitHub: DeusData/codebase-memory-mcp">8</a>, <a href="#src-23" title="GitLab Orbit (Knowledge Graph) README, GitHub mirror">23</a>]</sup>.</li>
+<li><strong>Shared remote MCP endpoint over an org-wide index.</strong> Sourcegraph serves <code>/.api/mcp</code> from its instance <sup class="cite">[<a href="#src-21" title="Sourcegraph Docs: Sourcegraph MCP Server (7.5)">21</a>]</sup>; Orbit Remote spans a top-level GitLab.com group <sup class="cite">[<a href="#src-23" title="GitLab Orbit (Knowledge Graph) README, GitHub mirror">23</a>]</sup>.</li>
+<li><strong>Index in CI.</strong> Sourcegraph recommends running SCIP indexing in CI for complex builds <sup class="cite">[<a href="#src-62" title="Sourcegraph Docs: Precise Code Navigation">62</a>]</sup>. Compare the Market ran Orbit as a sidecar that re-indexed on each MR pipeline <sup class="cite">[<a href="#src-12" title="Compare the Market: Comparing Context Retrieval Approaches for AI Code Review">12</a>]</sup>.</li>
+<li><strong>Review bot with a private graph.</strong> Greptile builds a graph at sign-up and queries it on every review <sup class="cite">[<a href="#src-63" title="Greptile Docs: Graph-based codebase context">63</a>]</sup>.</li>
+<li><strong>Campaign engine.</strong> Sourcegraph Batch Changes opens and tracks PRs across many repos <sup class="cite">[<a href="#src-64" title="Sourcegraph Docs: Batch Changes">64</a>]</sup>; Moderne runs recipes across thousands of repos <sup class="cite">[<a href="#src-65" title="Moderne Docs: Lossless semantic trees (recipe authoring concepts)">65</a>]</sup>.</li>
+<li><strong>Push context with hooks and skills.</strong> GitNexus registers Claude Code hooks and writes <code>AGENTS.md</code> and <code>CLAUDE.md</code> files <sup class="cite">[<a href="#src-45" title="GitHub: abhigyanpatwari/GitNexus">45</a>]</sup>; codebase-memory-mcp installs skills, agent profiles and hooks <sup class="cite">[<a href="#src-8" title="GitHub: DeusData/codebase-memory-mcp">8</a>]</sup>.</li>
+</ol>
+<hr />
+<h2 id="4-shortlist-deep-dives">4. Shortlist deep dives</h2>
+<p>Four industry vendors and four open-source tools, picked for fit with the four use cases and for traction.</p>
+<h3 id="41-sourcegraph-industry">4.1 Sourcegraph (industry)</h3>
+<p><strong>What it is:</strong> a code understanding platform that 7.0 repositioned as a shared intelligence layer for developers and agents <sup class="cite">[<a href="#src-1" title="Sourcegraph blog: A new era for Sourcegraph, Sourcegraph 7.0 (25 Feb 2026)">1</a>]</sup>.</p>
+<p><strong>Features</strong></p>
+<ul>
+<li>Indexes every repository, branch, tag and revision across GitHub, GitLab, Bitbucket, Gerrit, Perforce and Azure DevOps <sup class="cite">[<a href="#src-5" title="Sourcegraph: AI coding context tools compared">5</a>]</sup>.</li>
+<li>Structural, semantic and regex search, plus commit, diff and blame history <sup class="cite">[<a href="#src-5" title="Sourcegraph: AI coding context tools compared">5</a>]</sup>.</li>
+<li>Cross-repo go-to-definition and find-references out of the box <sup class="cite">[<a href="#src-5" title="Sourcegraph: AI coding context tools compared">5</a>]</sup>.</li>
+<li><strong>Deep Search:</strong> agentic natural-language exploration on the same index <sup class="cite">[<a href="#src-5" title="Sourcegraph: AI coding context tools compared">5</a>]</sup>. 7.0 improved its accuracy, added image support and embedded code navigation <sup class="cite">[<a href="#src-1" title="Sourcegraph blog: A new era for Sourcegraph, Sourcegraph 7.0 (25 Feb 2026)">1</a>]</sup>.</li>
+<li><strong>Batch Changes:</strong> creates PRs on every affected repo and tracks them until merged <sup class="cite">[<a href="#src-64" title="Sourcegraph Docs: Batch Changes">64</a>]</sup>. Agentic Batch Changes adds AI-generated, reviewable changes across thousands of repos <sup class="cite">[<a href="#src-5" title="Sourcegraph: AI coding context tools compared">5</a>]</sup>.</li>
+</ul>
+<p><strong>Technology</strong></p>
+<ul>
+<li>Precise navigation uses per-language SCIP indexes uploaded to the instance <sup class="cite">[<a href="#src-62" title="Sourcegraph Docs: Precise Code Navigation">62</a>]</sup>, with search-based navigation as the fallback <sup class="cite">[<a href="#src-66" title="Sourcegraph Docs: Precise code navigation explanation (search-based fallback)">66</a>]</sup>.</li>
+<li>SCIP is optional, and Sourcegraph says search, navigation, Deep Search and MCP work without it <sup class="cite">[<a href="#src-5" title="Sourcegraph: AI coding context tools compared">5</a>]</sup>.</li>
+</ul>
+<p><strong>Usage patterns</strong></p>
+<ul>
+<li>Agents connect to <code>/.api/mcp</code>, with <code>/.api/mcp/all</code> and <code>/.api/mcp/deepsearch</code> as alternate tool suites <sup class="cite">[<a href="#src-21" title="Sourcegraph Docs: Sourcegraph MCP Server (7.5)">21</a>]</sup>.</li>
+<li>Authentication is OAuth 2.0 (including Dynamic Client Registration) or access tokens <sup class="cite">[<a href="#src-21" title="Sourcegraph Docs: Sourcegraph MCP Server (7.5)">21</a>]</sup>.</li>
+<li>Campaigns are YAML batch specs naming target repos, commands and changeset templates <sup class="cite">[<a href="#src-64" title="Sourcegraph Docs: Batch Changes">64</a>]</sup>.</li>
+</ul>
+<p><strong>Deployment and price</strong></p>
+<ul>
+<li>Enterprise Dedicated Cloud is the default and Enterprise Self Hosted is on request, both listed at $59 per user per month <sup class="cite">[<a href="#src-22" title="Sourcegraph Docs: Enterprise plan">22</a>]</sup>.</li>
+<li>Self-hosting runs on Kubernetes with Helm (recommended) or Docker Compose <sup class="cite">[<a href="#src-67" title="Sourcegraph Docs: Self-hosted deployment overview">67</a>]</sup>.</li>
+</ul>
+<p><strong>Watch-outs</strong></p>
+<ul>
+<li>MCP server is an Enterprise plan feature <sup class="cite">[<a href="#src-21" title="Sourcegraph Docs: Sourcegraph MCP Server (7.5)">21</a>]</sup>.</li>
+<li>Precise data needs a working indexer per language, and Sourcegraph recommends CI indexing for authenticated builds <sup class="cite">[<a href="#src-62" title="Sourcegraph Docs: Precise Code Navigation">62</a>]</sup>.</li>
+<li><strong class="assess">Assessment:</strong> the fetched pages describe code and version history, not pipelines, deployments or vulnerabilities, so SDLC context would come from elsewhere.</li>
+</ul>
+<h3 id="42-gitlab-orbit-industry">4.2 GitLab Orbit (industry)</h3>
+<p><strong>What it is:</strong> formerly the GitLab Knowledge Graph, a Rust service that builds a property graph from SDLC metadata and code, queried with a JSON Cypher-like DSL compiled to ClickHouse SQL <sup class="cite">[<a href="#src-68" title="GitLab Handbook: GitLab Orbit design document">68</a>]</sup>. GA on 29 Oct 2026 <sup class="cite">[<a href="#src-2" title="GitLab blog: GitLab Orbit is generally available (29 Oct 2026)">2</a>]</sup>.</p>
+<p><strong>Features</strong></p>
+<ul>
+<li>Indexes default-branch code (files, directories, definitions, imports, calls) plus merge requests, pipelines, vulnerabilities and branches <sup class="cite">[<a href="#src-13" title="GitLab Docs: GitLab Orbit indexed data (schema)">13</a>]</sup>.</li>
+<li>Code languages: Ruby, Java, Kotlin, Python, TypeScript, JavaScript, Rust, Go, C#, C, C++, PHP, Bash and Elixir <sup class="cite">[<a href="#src-23" title="GitLab Orbit (Knowledge Graph) README, GitHub mirror">23</a>]</sup>.</li>
+<li>Hosted DSL supports aggregations, traversals, neighbors and pathfinding <sup class="cite">[<a href="#src-23" title="GitLab Orbit (Knowledge Graph) README, GitHub mirror">23</a>]</sup>.</li>
+<li>File content is resolved at query time, so agents can read code without a second API call <sup class="cite">[<a href="#src-69" title="GitLab Docs: Orbit indexed data, properties resolved at query time">69</a>]</sup>.</li>
+</ul>
+<p><strong>Technology</strong></p>
+<ul>
+<li><strong>Orbit Remote:</strong> <code>gkg-server</code> on ClickHouse, fed by change data capture through GitLab's Data Insights Platform <sup class="cite">[<a href="#src-23" title="GitLab Orbit (Knowledge Graph) README, GitHub mirror">23</a>]</sup>.</li>
+<li><strong>Orbit Local:</strong> a single-binary <code>orbit</code> CLI on DuckDB with a stdio MCP server <sup class="cite">[<a href="#src-23" title="GitLab Orbit (Knowledge Graph) README, GitHub mirror">23</a>]</sup>.</li>
+</ul>
+<p><strong>Usage patterns</strong></p>
+<ul>
+<li>Agents connect through MCP or <code>glab orbit setup</code>; named clients include Claude Code, Codex, Cursor, OpenCode, Gemini CLI and Antigravity <sup class="cite">[<a href="#src-2" title="GitLab blog: GitLab Orbit is generally available (29 Oct 2026)">2</a>]</sup>.</li>
+<li>Native in Duo Agent Platform, REST for custom agents, and Data Explorer for engineers <sup class="cite">[<a href="#src-2" title="GitLab blog: GitLab Orbit is generally available (29 Oct 2026)">2</a>]</sup>.</li>
+<li>REST endpoints: <code>/api/v4/orbit/query</code>, <code>/schema</code>, <code>/status</code> and <code>/tools</code> <sup class="cite">[<a href="#src-70" title="GitLab Docs: Orbit REST API endpoints">70</a>]</sup>.</li>
+</ul>
+<p><strong>Pricing and availability</strong></p>
+<ul>
+<li>Premium and Ultimate. GitLab.com first; Self-Managed and Dedicated follow in the coming weeks <sup class="cite">[<a href="#src-2" title="GitLab blog: GitLab Orbit is generally available (29 Oct 2026)">2</a>]</sup>.</li>
+<li>Query packs of $30 in GitLab Credits per user per month add 1,000 queries to an org-wide pool; overage is about $0.03 per query <sup class="cite">[<a href="#src-2" title="GitLab blog: GitLab Orbit is generally available (29 Oct 2026)">2</a>]</sup>.</li>
+<li><code>get_graph_schema</code> calls are free, while queries consume credits <sup class="cite">[<a href="#src-71" title="GitLab blog: GitLab Orbit and Google Antigravity (25 Jun 2026)">71</a>]</sup>.</li>
+</ul>
+<p><strong>Scale and claims (vendor-reported)</strong></p>
+<ul>
+<li>More than 1.5 million projects and 8 TB of graph data indexed in under 2 hours <sup class="cite">[<a href="#src-2" title="GitLab blog: GitLab Orbit is generally available (29 Oct 2026)">2</a>]</sup>.</li>
+<li>Up to 11x faster responses and 4.5x fewer tokens <sup class="cite">[<a href="#src-19" title="GitLab press release: new capabilities at Transcend (10 Jun 2026)">19</a>]</sup>; up to 45x fewer retries <sup class="cite">[<a href="#src-2" title="GitLab blog: GitLab Orbit is generally available (29 Oct 2026)">2</a>]</sup>.</li>
+</ul>
+<p><strong>Watch-outs</strong></p>
+<ul>
+<li>Only the default branch is indexed <sup class="cite">[<a href="#src-13" title="GitLab Docs: GitLab Orbit indexed data (schema)">13</a>]</sup>.</li>
+<li>License is the GitLab Enterprise Edition license, not open source <sup class="cite">[<a href="#src-23" title="GitLab Orbit (Knowledge Graph) README, GitHub mirror">23</a>]</sup>.</li>
+<li>Some MCP clients truncate the long <code>query_graph</code> description, so models miss the DSL grammar <sup class="cite">[<a href="#src-72" title="GitLab issue 553: query_graph tool description truncated by MCP clients">72</a>]</sup>.</li>
+<li>In the pre-GA Compare the Market test, latency was 80.6 s versus about 44 s for diff-only review <sup class="cite">[<a href="#src-12" title="Compare the Market: Comparing Context Retrieval Approaches for AI Code Review">12</a>]</sup>.</li>
+</ul>
+<h3 id="43-moderne-and-openrewrite-industry-with-open-source-core">4.3 Moderne and OpenRewrite (industry with open-source core)</h3>
+<p><strong>What it is:</strong> OpenRewrite is an open-source semantic analysis and refactoring project <sup class="cite">[<a href="#src-52" title="Moderne blog: Overview of OpenRewrite and Moderne">52</a>]</sup>; Moderne adds tooling to run its recipes against thousands of repositories at once <sup class="cite">[<a href="#src-65" title="Moderne Docs: Lossless semantic trees (recipe authoring concepts)">65</a>]</sup>.</p>
+<p><strong>Features</strong></p>
+<ul>
+<li>Recipes search and transform code represented as LSTs <sup class="cite">[<a href="#src-25" title="ICSME 2023 tool demo: Deterministic Automatic Refactoring at Scale (OpenRewrite)">25</a>]</sup>.</li>
+<li><strong>Moddy:</strong> a multi-repo AI agent, in restricted beta, that runs across thousands of repositories <sup class="cite">[<a href="#src-73" title="Moderne Docs: Getting started with Moddy">73</a>]</sup>.</li>
+<li><strong>Prethink (launched 10 Feb 2026 <sup class="cite">[<a href="#src-74" title="Business Wire: Moderne introduces Prethink (10 Feb 2026)">74</a>]</sup>):</strong> pre-resolved context for agents on service endpoints, database connections, external calls, messaging patterns and test coverage <sup class="cite">[<a href="#src-75" title="Moderne Docs: Moderne Prethink (agent tools)">75</a>]</sup>. It can also emit an optional knowledge graph and FINOS CALM architecture diagrams <sup class="cite">[<a href="#src-76" title="Moderne Docs: Prethink recipes">76</a>]</sup>.</li>
+<li><strong>Changelog (May 2026):</strong> shows what is ready, blocked or waiting across a changeset, through MCP and GraphQL <sup class="cite">[<a href="#src-3" title="Business Wire: Moderne Changelog (19 May 2026)">3</a>]</sup>.</li>
+<li><strong>Trigrep:</strong> symbol-aware code search for agents <sup class="cite">[<a href="#src-3" title="Business Wire: Moderne Changelog (19 May 2026)">3</a>]</sup>.</li>
+</ul>
+<p><strong>Technology</strong></p>
+<ul>
+<li>Run locally, the LST must fit in memory <sup class="cite">[<a href="#src-17" title="OpenRewrite Docs: Lossless Semantic Trees">17</a>]</sup>. Moderne serializes LSTs as a build byproduct and edits them in bulk later <sup class="cite">[<a href="#src-65" title="Moderne Docs: Lossless semantic trees (recipe authoring concepts)">65</a>]</sup>.</li>
+<li>Python support was added in Feb 2026 <sup class="cite">[<a href="#src-77" title="Business Wire: Moderne expands Agent Tools platform with Python (19 Feb 2026)">77</a>]</sup>.</li>
+</ul>
+<p><strong>Usage patterns</strong></p>
+<ul>
+<li>Delivered as the LST engine, recipe catalog, CLI, IDE plugins and Moddy, over MCP to coding agents <sup class="cite">[<a href="#src-6" title="AWS Marketplace: Moderne listing">6</a>]</sup>.</li>
+<li>Positioning: the agent plans while Moderne's deterministic tools execute <sup class="cite">[<a href="#src-6" title="AWS Marketplace: Moderne listing">6</a>]</sup>.</li>
+<li>Moddy Desktop runs an MCP server at <code>localhost:4848/mcp</code> <sup class="cite">[<a href="#src-78" title="Moderne Docs: Moddy Desktop MCP tools reference">78</a>]</sup>.</li>
+</ul>
+<p><strong>Traction</strong></p>
+<ul>
+<li>$30M Series B (Feb 2025) with Morgan Stanley, Amex Ventures and TIAA Ventures participating <sup class="cite">[<a href="#src-79" title="App Developer Magazine: Moderne closes $30M Series B">79</a>]</sup>.</li>
+<li>OpenRewrite is integrated into Amazon Q and Broadcom App Advisor <sup class="cite">[<a href="#src-79" title="App Developer Magazine: Moderne closes $30M Series B">79</a>]</sup>.</li>
+</ul>
+<p><strong>Watch-outs</strong></p>
+<ul>
+<li>Moddy is still restricted beta <sup class="cite">[<a href="#src-73" title="Moderne Docs: Getting started with Moddy">73</a>]</sup>.</li>
+<li><strong class="assess">Assessment:</strong> strongest on JVM ecosystems; check recipe coverage for each language and framework you plan to migrate.</li>
+</ul>
+<h3 id="44-github-codeql-industry">4.4 GitHub CodeQL (industry)</h3>
+<p><strong>What it is:</strong> GitHub's semantic code analysis engine, which queries a codebase as though it were data <sup class="cite">[<a href="#src-29" title="GitHub blog: Fixing security vulnerabilities with AI">29</a>]</sup>.</p>
+<p><strong>Features</strong></p>
+<ul>
+<li><strong>Copilot Autofix</strong> suggests fixes for CodeQL alerts. It is on by default for repos using CodeQL and needs no Copilot subscription <sup class="cite">[<a href="#src-80" title="GitHub Docs: Responsible use of Copilot Autofix for code scanning">80</a>]</sup>.</li>
+<li>Autofix runs on pull requests and on the default branch <sup class="cite">[<a href="#src-81" title="GitHub Docs: Security and quality AI features">81</a>]</sup>.</li>
+<li><strong>Copilot code review</strong> now blends LLM detection and tool calling with CodeQL and ESLint <sup class="cite">[<a href="#src-82" title="GitHub changelog: New public preview features in Copilot code review (28 Oct 2025)">82</a>]</sup>. CodeQL is on by default; ESLint and PMD are off <sup class="cite">[<a href="#src-30" title="GitHub Docs: About GitHub Copilot code review">30</a>]</sup>.</li>
+<li>Data-flow libraries can be extended with sources and sinks for extra frameworks <sup class="cite">[<a href="#src-83" title="CodeQL Docs: Supported languages and frameworks">83</a>]</sup>.</li>
+</ul>
+<p><strong>Technology and languages</strong></p>
+<ul>
+<li>Supports C/C++, C#, Go, Java/Kotlin, JavaScript/TypeScript and more; it does not support PHP or Scala <sup class="cite">[<a href="#src-84" title="GitHub Docs: About code scanning with CodeQL (GHES 3.18)">84</a>]</sup>.</li>
+<li>Standard queries are open source in github/codeql <sup class="cite">[<a href="#src-32" title="GitHub: github/codeql">32</a>]</sup>.</li>
+</ul>
+<p><strong>Usage patterns</strong></p>
+<ul>
+<li>Default setup picks languages, query suite and trigger events automatically <sup class="cite">[<a href="#src-84" title="GitHub Docs: About code scanning with CodeQL (GHES 3.18)">84</a>]</sup>.</li>
+<li>Code scanning runs on public repos, and on org repos with GitHub Code Security enabled <sup class="cite">[<a href="#src-85" title="GitHub Docs: Code scanning with CodeQL (availability)">85</a>]</sup>.</li>
+</ul>
+<p><strong>Watch-outs</strong></p>
+<ul>
+<li>Without GitHub Advanced Security, the CodeQL CLI may only be used on open-source codebases <sup class="cite">[<a href="#src-31" title="GitHub Security Lab: GitHub CodeQL Terms and Conditions">31</a>]</sup>.</li>
+<li><strong class="assess">Assessment:</strong> CodeQL is a deep analysis database, not a general MCP-queryable code graph; it fits review and security, less so agent navigation on GitLab-hosted code.</li>
+</ul>
+<h3 id="45-codegraph-open-source">4.5 CodeGraph (open source)</h3>
+<p><strong>What it is:</strong> a pre-built graph of every symbol, call edge and dependency, so an agent gets the code it needs in one call <sup class="cite">[<a href="#src-7" title="GitHub: colbymchenry/codegraph">7</a>]</sup>.</p>
+<ul>
+<li><strong>Tech:</strong> Rust parsing kernel for 20 languages; local SQLite with FTS5; no data leaves the machine <sup class="cite">[<a href="#src-7" title="GitHub: colbymchenry/codegraph">7</a>]</sup>.</li>
+<li><strong>Interface:</strong> one default MCP tool, <code>codegraph_explore</code>, with narrower tools available but unlisted <sup class="cite">[<a href="#src-7" title="GitHub: colbymchenry/codegraph">7</a>]</sup>.</li>
+<li><strong>Freshness:</strong> watches the project and updates the graph on every file change <sup class="cite">[<a href="#src-7" title="GitHub: colbymchenry/codegraph">7</a>]</sup>.</li>
+<li><strong>Benchmark (vendor-reported):</strong> across 7 repos on Claude Opus 4.8, 88% fewer tool calls, 53% faster, 62% fewer tokens and 44% cheaper <sup class="cite">[<a href="#src-7" title="GitHub: colbymchenry/codegraph">7</a>]</sup>.</li>
+<li><strong>Honest caveat:</strong> multi-turn sessions keep about 80% more retrieval context resident in the window <sup class="cite">[<a href="#src-7" title="GitHub: colbymchenry/codegraph">7</a>]</sup>.</li>
+<li><strong>Roadmap:</strong> a hosted PR platform is announced as coming <sup class="cite">[<a href="#src-7" title="GitHub: colbymchenry/codegraph">7</a>]</sup>.</li>
+</ul>
+<h3 id="46-codebase-memory-mcp-open-source">4.6 codebase-memory-mcp (open source)</h3>
+<p><strong>What it is:</strong> a persistent local knowledge graph that connects code, documentation, configuration and infrastructure <sup class="cite">[<a href="#src-8" title="GitHub: DeusData/codebase-memory-mcp">8</a>]</sup>.</p>
+<ul>
+<li><strong>Tech:</strong> native C backend with 17 MCP tools, vendored grammars and hybrid LSP type resolution <sup class="cite">[<a href="#src-8" title="GitHub: DeusData/codebase-memory-mcp">8</a>]</sup>; the preprint stores the graph in SQLite and uses Louvain community detection <sup class="cite">[<a href="#src-86" title="arXiv 2603.27277: Codebase-Memory, Tree-Sitter-Based Knowledge Graphs for LLM Code Exploration via MCP">86</a>]</sup>.</li>
+<li><strong>Beyond code:</strong> traces Docker, Kubernetes, Helm, Terraform, Ansible and CI configuration <sup class="cite">[<a href="#src-8" title="GitHub: DeusData/codebase-memory-mcp">8</a>]</sup>.</li>
+<li><strong>Scale:</strong> the Linux kernel (28M lines) fully indexes in 3 minutes into 4.81M nodes and 7.72M edges on an Apple M3 Pro <sup class="cite">[<a href="#src-8" title="GitHub: DeusData/codebase-memory-mcp">8</a>]</sup>.</li>
+<li><strong>Results (authors' own):</strong> 10x lower token use and 2.1x fewer tool calls than file-by-file exploration across 31 repos <sup class="cite">[<a href="#src-8" title="GitHub: DeusData/codebase-memory-mcp">8</a>]</sup>.</li>
+<li><strong>Supply chain:</strong> publishes OpenSSF Scorecard and SLSA 3 badges <sup class="cite">[<a href="#src-8" title="GitHub: DeusData/codebase-memory-mcp">8</a>]</sup>.</li>
+</ul>
+<h3 id="47-gitnexus-open-source-non-commercial-license">4.7 GitNexus (open source, non-commercial license)</h3>
+<p><strong>What it is:</strong> a code graph of symbols, calls, dependencies and execution flows, used through MCP, a CLI or a web explorer <sup class="cite">[<a href="#src-45" title="GitHub: abhigyanpatwari/GitNexus">45</a>]</sup>.</p>
+<ul>
+<li><strong>Tools:</strong> <code>query</code>, <code>context</code>, <code>impact</code>, <code>trace</code>, <code>detect_changes</code> and <code>rename</code> <sup class="cite">[<a href="#src-45" title="GitHub: abhigyanpatwari/GitNexus">45</a>]</sup>.</li>
+<li><strong>Languages:</strong> 18 providers, including COBOL <sup class="cite">[<a href="#src-45" title="GitHub: abhigyanpatwari/GitNexus">45</a>]</sup>.</li>
+<li><strong>Tech:</strong> tree-sitter parsing and LadybugDB, an embedded graph database with vector support <sup class="cite">[<a href="#src-45" title="GitHub: abhigyanpatwari/GitNexus">45</a>]</sup>.</li>
+<li><strong>Multi-agent:</strong> one shared HTTP MCP server can serve several concurrent agents <sup class="cite">[<a href="#src-45" title="GitHub: abhigyanpatwari/GitNexus">45</a>]</sup>.</li>
+<li><strong>Watch-outs:</strong> PolyForm Noncommercial license; commercial use, PR blast-radius review and unified multi-repo graphs sit in the paid enterprise offering <sup class="cite">[<a href="#src-45" title="GitHub: abhigyanpatwari/GitNexus">45</a>]</sup>.</li>
+</ul>
+<h3 id="48-joern-open-source">4.8 Joern (open source)</h3>
+<p><strong>What it is:</strong> a platform that turns source, bytecode and binaries into code property graphs for vulnerability discovery and static analysis research <sup class="cite">[<a href="#src-53" title="GitHub: joernio/joern">53</a>]</sup>.</p>
+<ul>
+<li><strong>Tech:</strong> CPGs stored in a custom graph database and mined with a Scala DSL <sup class="cite">[<a href="#src-53" title="GitHub: joernio/joern">53</a>]</sup>; v4.0.0 moved from overflowdb to flatgraph <sup class="cite">[<a href="#src-53" title="GitHub: joernio/joern">53</a>]</sup>.</li>
+<li><strong>Origin:</strong> introduced for vulnerability discovery in C system code and the Linux kernel <sup class="cite">[<a href="#src-15" title="Joern Docs: Code Property Graph">15</a>]</sup>.</li>
+<li><strong>Stewardship:</strong> Harness acquired Qwiet AI (formerly ShiftLeft) in Sep 2025, and CPG creator Fabian Yamaguchi is now at Harness <sup class="cite">[<a href="#src-43" title="Harness blog: Harness acquires Qwiet AI (29 Sep 2025)">43</a>]</sup>.</li>
+<li><strong>Watch-out:</strong> Harness's own docs call the CPG learning curve steep <sup class="cite">[<a href="#src-87" title="Harness Docs: Code Property Graph">87</a>]</sup>.</li>
+</ul>
+<hr />
+<h2 id="5-side-by-side-comparison">5. Side-by-side comparison</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th></th>
+<th>Graph scope</th>
+<th>Precision</th>
+<th>Multi-repo</th>
+<th>Writes code</th>
+<th>Self-host</th>
+<th>License</th>
+<th>Sources</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sourcegraph</strong></td>
+<td>Code plus commit, diff, blame history</td>
+<td>Compiler-grade with SCIP, search-based otherwise</td>
+<td>Yes, six code hosts</td>
+<td>Batch Changes</td>
+<td>Yes, on request</td>
+<td>Commercial, $59/user/month list</td>
+<td><sup class="cite">[<a href="#src-5" title="Sourcegraph: AI coding context tools compared">5</a>, <a href="#src-22" title="Sourcegraph Docs: Enterprise plan">22</a>, <a href="#src-64" title="Sourcegraph Docs: Batch Changes">64</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>GitLab Orbit</strong></td>
+<td>Code plus MRs, pipelines, vulnerabilities</td>
+<td>AST-based code graph</td>
+<td>Top-level GitLab.com group</td>
+<td>No (read-only API)</td>
+<td>Coming after GA</td>
+<td>GitLab EE</td>
+<td><sup class="cite">[<a href="#src-2" title="GitLab blog: GitLab Orbit is generally available (29 Oct 2026)">2</a>, <a href="#src-12" title="Compare the Market: Comparing Context Retrieval Approaches for AI Code Review">12</a>, <a href="#src-13" title="GitLab Docs: GitLab Orbit indexed data (schema)">13</a>, <a href="#src-23" title="GitLab Orbit (Knowledge Graph) README, GitHub mirror">23</a>, <a href="#src-88" title="GitLab epic 19744: Orbit as a Service GA">88</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>Moderne</strong></td>
+<td>Type-attributed code model</td>
+<td>Compiler-accurate LST</td>
+<td>Thousands of repos</td>
+<td>Recipes, Moddy</td>
+<td>SaaS tenant</td>
+<td>OpenRewrite Apache-2.0</td>
+<td><sup class="cite">[<a href="#src-18" title="Moderne Docs: Lossless semantic trees (platform reference)">18</a>, <a href="#src-26" title="GlobeNewswire via Manila Times: Moderne joins Microsoft Pegasus program (15 Apr 2025)">26</a>, <a href="#src-27" title="GitHub: openrewrite/rewrite">27</a>, <a href="#src-65" title="Moderne Docs: Lossless semantic trees (recipe authoring concepts)">65</a>, <a href="#src-89" title="IT Brief UK: Moderne unveils Prethink (12 Feb 2026)">89</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>CodeQL</strong></td>
+<td>Code database with data flow</td>
+<td>Semantic analysis</td>
+<td>Per repository (Assessment)</td>
+<td>Autofix suggestions</td>
+<td>GitHub Enterprise Server</td>
+<td>Restricted CLI terms</td>
+<td><sup class="cite">[<a href="#src-29" title="GitHub blog: Fixing security vulnerabilities with AI">29</a>, <a href="#src-31" title="GitHub Security Lab: GitHub CodeQL Terms and Conditions">31</a>, <a href="#src-80" title="GitHub Docs: Responsible use of Copilot Autofix for code scanning">80</a>, <a href="#src-83" title="CodeQL Docs: Supported languages and frameworks">83</a>, <a href="#src-84" title="GitHub Docs: About code scanning with CodeQL (GHES 3.18)">84</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>CodeGraph</strong></td>
+<td>Symbols, calls, dependencies</td>
+<td>tree-sitter plus cross-file resolution</td>
+<td>Other indexed projects by path</td>
+<td>No</td>
+<td>Local only</td>
+<td>MIT</td>
+<td><sup class="cite">[<a href="#src-7" title="GitHub: colbymchenry/codegraph">7</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>codebase-memory-mcp</strong></td>
+<td>Code, docs, config, infra</td>
+<td>tree-sitter plus hybrid LSP</td>
+<td>Calls across services</td>
+<td>No</td>
+<td>Local only</td>
+<td>MIT</td>
+<td><sup class="cite">[<a href="#src-8" title="GitHub: DeusData/codebase-memory-mcp">8</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>GitNexus</strong></td>
+<td>Symbols, calls, flows</td>
+<td>Varies by language</td>
+<td>Enterprise edition</td>
+<td>Semantic rename</td>
+<td>Local; paid self-hosted</td>
+<td>PolyForm NC</td>
+<td><sup class="cite">[<a href="#src-45" title="GitHub: abhigyanpatwari/GitNexus">45</a>]</sup></td>
+</tr>
+<tr>
+<td><strong>Joern</strong></td>
+<td>AST, control flow, data dependence</td>
+<td>Semantic CPG</td>
+<td>Per project (Assessment)</td>
+<td>No</td>
+<td>Local</td>
+<td>Apache-2.0</td>
+<td><sup class="cite">[<a href="#src-16" title="Qwiet AI: The semantic code property graph">16</a>, <a href="#src-53" title="GitHub: joernio/joern">53</a>]</sup></td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2 id="6-use-cases">6. Use cases</h2>
+<h3 id="61-generative-agents-ai-coding-agents">6.1 Generative agents (AI coding agents)</h3>
+<p><strong>The gap:</strong> coding agents rebuild context from scratch on every task with grep, glob and file reads <sup class="cite">[<a href="#src-5" title="Sourcegraph: AI coding context tools compared">5</a>]</sup>.</p>
+<ol>
+<li><strong>Answer codebase questions with fewer calls.</strong> CodeGraph cut tool calls by 88% in its own benchmark <sup class="cite">[<a href="#src-7" title="GitHub: colbymchenry/codegraph">7</a>]</sup>; codebase-memory-mcp reports 10x lower token use <sup class="cite">[<a href="#src-8" title="GitHub: DeusData/codebase-memory-mcp">8</a>]</sup>. Fits: CodeGraph, codebase-memory-mcp, Sourcegraph MCP.</li>
+<li><strong>Localize and repair issues.</strong> RepoGraph improved all four SWE-bench systems it was plugged into (ICLR 2025) <sup class="cite">[<a href="#src-90" title="arXiv 2410.14684: RepoGraph, Repository-level Code Graph (ICLR 2025)">90</a>]</sup>. KGCompass reached 58.3% on SWE-bench Lite at about $0.2 per repair <sup class="cite">[<a href="#src-10" title="arXiv 2503.21710v2: KGCompass, Knowledge Graph Enhanced Repository-Level Software Repair">10</a>]</sup>.</li>
+<li><strong>Find hidden dependencies before editing.</strong> CodeCompass reached 99.4% on hidden-dependency tasks versus 76.2% for a vanilla agent <sup class="cite">[<a href="#src-91" title="OpenTrain abstract page: CodeCompass (arXiv 2602.20048)">91</a>]</sup>.</li>
+<li><strong>Refuse to invent missing code.</strong> A Transcend hackathon team's agent checks Orbit and asks for the real location when it cannot find a service <sup class="cite">[<a href="#src-24" title="GitLab blog: Transcend hackathon, what developers built with Orbit (20 Jul 2026)">24</a>]</sup>.</li>
+<li><strong>Edit in dependency order.</strong> The runner-up hackathon project maps every affected file and edits them in dependency order <sup class="cite">[<a href="#src-24" title="GitLab blog: Transcend hackathon, what developers built with Orbit (20 Jul 2026)">24</a>]</sup>.</li>
+<li><strong>Ground answers in architecture facts.</strong> Moderne Prethink gives agents verified service endpoints and dependencies instead of making them infer architecture <sup class="cite">[<a href="#src-75" title="Moderne Docs: Moderne Prethink (agent tools)">75</a>]</sup>.</li>
+</ol>
+<p><strong>Watch-out:</strong> the graph only helps if it is called. When CodeCompass's tool was used, coverage hit 99.5%; when skipped, 80.2% <sup class="cite">[<a href="#src-11" title="arXiv 2602.20048: CodeCompass, the Navigation Paradox (HTML v1)">11</a>]</sup>. <strong class="assess">Assessment:</strong> deliver context through hooks or skills, not prompts alone.</p>
+<h3 id="62-toil-reduction-campaigns">6.2 Toil reduction campaigns</h3>
+<p><strong>Definition:</strong> Software Engineering at Google defines a large-scale change as logically related changes that cannot be submitted as one atomic unit <sup class="cite">[<a href="#src-92" title="Sourcegraph blog: Large-scale code changes, how to do them safely">92</a>]</sup>.</p>
+<ol>
+<li><strong>Build the impact set before changing anything.</strong> Google's migration tooling follows Kythe references up to five hops from a field, then an LLM fills the accuracy gaps <sup class="cite">[<a href="#src-57" title="arXiv 2504.09691: Google&#x27;s use of LLMs for internal code migrations (FSE 2025 preprint)">57</a>]</sup>. Across 39 migrations the LLM generated 74.45% of code changes, and developers estimated a 50% time saving <sup class="cite">[<a href="#src-57" title="arXiv 2504.09691: Google&#x27;s use of LLMs for internal code migrations (FSE 2025 preprint)">57</a>]</sup>.</li>
+<li><strong>Run deterministic framework and dependency upgrades.</strong> OpenRewrite recipes transform LSTs, and Moderne runs them across thousands of repos <sup class="cite">[<a href="#src-65" title="Moderne Docs: Lossless semantic trees (recipe authoring concepts)">65</a>]</sup>.</li>
+<li><strong>Open, track and merge fleet PRs.</strong> Batch Changes tracks every changeset until merged <sup class="cite">[<a href="#src-64" title="Sourcegraph Docs: Batch Changes">64</a>]</sup>. At Spotify, Fleetshift handles target selection, scheduling and tracking while the Honk agent edits code, and Fleet Management has merged more than 2.5 million automated PRs <sup class="cite">[<a href="#src-93" title="InfoQ: Spotify more than doubled monthly code changes as AI accelerated development (Oct 2026)">93</a>]</sup>.</li>
+<li><strong>Remove dead code and stale flags.</strong> Uber's Piranha has removed around two thousand stale feature flags and their code <sup class="cite">[<a href="#src-94" title="Uber Engineering: Introducing Piranha">94</a>]</sup>. Meta uses Glean to find unused C++ includes and automate cleanup <sup class="cite">[<a href="#src-59" title="Meta Engineering: Indexing code at scale with Glean (19 Dec 2024)">59</a>]</sup>.</li>
+<li><strong>See what is blocked.</strong> Moderne Changelog exposes ready, blocked and waiting work to agents through MCP <sup class="cite">[<a href="#src-3" title="Business Wire: Moderne Changelog (19 May 2026)">3</a>]</sup>; Meta tracks API migration progress with Glean <sup class="cite">[<a href="#src-59" title="Meta Engineering: Indexing code at scale with Glean (19 Dec 2024)">59</a>]</sup>.</li>
+<li><strong>Feed LLM migrations rich context.</strong> Airbnb's prompts included sibling tests, imports and component source <sup class="cite">[<a href="#src-95" title="Airbnb Tech: Accelerating large-scale test migration with LLMs">95</a>]</sup>. It migrated nearly 3.5K test files in 6 weeks <sup class="cite">[<a href="#src-95" title="Airbnb Tech: Accelerating large-scale test migration with LLMs">95</a>]</sup> against a 1.5-year manual estimate <sup class="cite">[<a href="#src-96" title="The Pragmatic Engineer: We need to talk about migrations with AI">96</a>]</sup>.</li>
+</ol>
+<p><strong>Scale context:</strong> around half of Spotify's pull requests have been automated since mid-2024 <sup class="cite">[<a href="#src-97" title="Spotify Engineering: 1,500+ PRs later, background coding agent (Honk, Part 1)">97</a>]</sup>.</p>
+<h3 id="63-automated-code-review-tooling">6.3 Automated code review tooling</h3>
+<ol>
+<li><strong>Show the blast radius beyond the diff.</strong> Greptile queries its graph for a changed function's dependencies and usage <sup class="cite">[<a href="#src-63" title="Greptile Docs: Graph-based codebase context">63</a>]</sup>. code-review-graph reports reachable callers, dependents and tests with a risk score <sup class="cite">[<a href="#src-46" title="GitHub: tirth8205/code-review-graph">46</a>]</sup>.</li>
+<li><strong>Pull cross-file definitions into the review.</strong> CodeRabbit maps definitions and references and finds files that often change together <sup class="cite">[<a href="#src-38" title="CodeRabbit Docs: Code Graph Analysis">38</a>]</sup>.</li>
+<li><strong>Ground GitLab MR review in the SDLC graph.</strong> Compare the Market's Orbit-grounded reviewer matched about 70% of expected inline comments versus about 58% for RAG, which did worse than no added context <sup class="cite">[<a href="#src-2" title="GitLab blog: GitLab Orbit is generally available (29 Oct 2026)">2</a>]</sup>.</li>
+<li><strong>Mix deterministic findings into AI review.</strong> Copilot code review combines LLM analysis with CodeQL and ESLint <sup class="cite">[<a href="#src-82" title="GitHub changelog: New public preview features in Copilot code review (28 Oct 2025)">82</a>]</sup>.</li>
+<li><strong>Select tests a change can reach.</strong> A hackathon team used Orbit's whole-codebase call graph to find the tests a change can reach <sup class="cite">[<a href="#src-24" title="GitLab blog: Transcend hackathon, what developers built with Orbit (20 Jul 2026)">24</a>]</sup>. Meta uses Glean for test selection <sup class="cite">[<a href="#src-59" title="Meta Engineering: Indexing code at scale with Glean (19 Dec 2024)">59</a>]</sup>.</li>
+<li><strong>Cut noise with reachability.</strong> Harness uses Qwiet's reachability analysis to cut noise and prioritize real risk <sup class="cite">[<a href="#src-43" title="Harness blog: Harness acquires Qwiet AI (29 Sep 2025)">43</a>]</sup>.</li>
+<li><strong>Index diffs for review tooling.</strong> Meta indexes diffs into "diff sketches" that drive lint rules and notifications <sup class="cite">[<a href="#src-59" title="Meta Engineering: Indexing code at scale with Glean (19 Dec 2024)">59</a>]</sup>.</li>
+</ol>
+<p><strong>Watch-out:</strong> Compare the Market scored alignment with a golden set using an LLM judge on 79 MRs, which the authors call directional <sup class="cite">[<a href="#src-12" title="Compare the Market: Comparing Context Retrieval Approaches for AI Code Review">12</a>]</sup>.</p>
+<h3 id="64-knowledge-graphs">6.4 Knowledge graphs</h3>
+<ol>
+<li><strong>SDLC context graph.</strong> Orbit links merge requests, pipelines and vulnerabilities to projects and code <sup class="cite">[<a href="#src-13" title="GitLab Docs: GitLab Orbit indexed data (schema)">13</a>]</sup>; engineers use it to trace changes and investigate incidents <sup class="cite">[<a href="#src-98" title="GitLab blog: Introducing GitLab Orbit (10 Jun 2026)">98</a>]</sup>.</li>
+<li><strong>Incident and reliability forensics.</strong> A financial services company traced a build-system outage to a CI job failing half the time <sup class="cite">[<a href="#src-2" title="GitLab blog: GitLab Orbit is generally available (29 Oct 2026)">2</a>]</sup>.</li>
+<li><strong>Code, docs and infrastructure in one graph.</strong> codebase-memory-mcp links docs, architecture decisions and Terraform or Kubernetes config to code <sup class="cite">[<a href="#src-8" title="GitHub: DeusData/codebase-memory-mcp">8</a>]</sup>.</li>
+<li><strong>Architecture knowledge as data.</strong> Prethink emits FINOS CALM diagrams and an optional knowledge graph <sup class="cite">[<a href="#src-76" title="Moderne Docs: Prethink recipes">76</a>]</sup>.</li>
+<li><strong>Decisions and team knowledge.</strong> Potpie indexes decisions, source history, team knowledge and workflows <sup class="cite">[<a href="#src-48" title="GitHub: potpie-ai/potpie">48</a>]</sup>.</li>
+<li><strong>Facts that change over time.</strong> Graphiti gives each fact a validity window and traces it back to source episodes <sup class="cite">[<a href="#src-20" title="GitHub: getzep/graphiti">20</a>]</sup>.</li>
+<li><strong>Org-wide code fact store.</strong> Meta's Glean serves code navigation, search, docs and RAG for AI coding assistants <sup class="cite">[<a href="#src-59" title="Meta Engineering: Indexing code at scale with Glean (19 Dec 2024)">59</a>]</sup>.</li>
+<li><strong>Mixed corpora.</strong> Graphify merges code, PDFs and images, and tags each edge as extracted, inferred or ambiguous <sup class="cite">[<a href="#src-44" title="GitHub: Graphify-Labs/graphify">44</a>]</sup>.</li>
+</ol>
+<hr />
+<h2 id="7-evidence-quality">7. Evidence quality</h2>
+<ul>
+<li><strong>Mostly vendor numbers.</strong> Orbit, CodeGraph, Augment and codebase-memory-mcp all publish their own benchmarks <sup class="cite">[<a href="#src-2" title="GitLab blog: GitLab Orbit is generally available (29 Oct 2026)">2</a>, <a href="#src-7" title="GitHub: colbymchenry/codegraph">7</a>, <a href="#src-8" title="GitHub: DeusData/codebase-memory-mcp">8</a>, <a href="#src-40" title="Augment Code changelog: Context Engine MCP for any AI coding agent (6 Feb 2026)">40</a>]</sup>.</li>
+<li><strong>One public customer A/B test.</strong> Compare the Market compared baseline, Orbit, RAG and Orbit plus RAG on 79 real MRs <sup class="cite">[<a href="#src-12" title="Compare the Market: Comparing Context Retrieval Approaches for AI Code Review">12</a>]</sup>.</li>
+<li><strong>Small corpora show little gain.</strong> Graphify's reduction was about 1x on a 6-file corpus versus 71.5x on 52 files <sup class="cite">[<a href="#src-44" title="GitHub: Graphify-Labs/graphify">44</a>]</sup>.</li>
+<li><strong class="assess">Assessment:</strong> star counts track attention. Graphify passed 149k stars within about seven and a half months of its April 2026 creation <sup class="cite">[<a href="#src-44" title="GitHub: Graphify-Labs/graphify">44</a>]</sup>, so treat stars as a weak proxy for production use.</li>
+</ul>
+<hr />
+<h2 id="8-decision-guide-assessment">8. Decision guide (Assessment)</h2>
+<p><strong>Evaluation criteria</strong></p>
+<ul>
+<li><strong>Precision:</strong> compiler-grade (SCIP, LST, CodeQL) versus tree-sitter heuristics.</li>
+<li><strong>Scope:</strong> code only, or code plus MRs, pipelines and deployments.</li>
+<li><strong>Freshness:</strong> per-commit or per-file-save updates versus scheduled re-indexing.</li>
+<li><strong>Access control:</strong> permission-aware results across repos.</li>
+<li><strong>Agent ergonomics:</strong> tool count and description size, since clients truncate long descriptions <sup class="cite">[<a href="#src-72" title="GitLab issue 553: query_graph tool description truncated by MCP clients">72</a>]</sup>.</li>
+<li><strong>Deployment and license:</strong> self-hosting timing and commercial terms.</li>
+<li><strong>Cost per query:</strong> graph calls add latency and spend <sup class="cite">[<a href="#src-12" title="Compare the Market: Comparing Context Retrieval Approaches for AI Code Review">12</a>]</sup>.</li>
+</ul>
+<p><strong>Recommended path</strong></p>
+<ol>
+<li><strong>Fix the eval harness first.</strong> Reuse Compare the Market's four-arm design: no context, graph, RAG and both, on real MRs <sup class="cite">[<a href="#src-12" title="Compare the Market: Comparing Context Retrieval Approaches for AI Code Review">12</a>]</sup>.</li>
+<li><strong>Pick the corpus layer.</strong> If code lives on GitLab, trial Orbit Remote; if it spans hosts, trial Sourcegraph. Keep codebase-memory-mcp or CodeGraph as the local, MIT-licensed baseline.</li>
+<li><strong>Pick the campaign layer.</strong> Pilot Moderne on one JVM migration and measure merged PRs and blocked changes.</li>
+<li><strong>Check licenses early.</strong> GitNexus is noncommercial <sup class="cite">[<a href="#src-45" title="GitHub: abhigyanpatwari/GitNexus">45</a>]</sup>, CodeQL CLI terms restrict private code <sup class="cite">[<a href="#src-31" title="GitHub Security Lab: GitHub CodeQL Terms and Conditions">31</a>]</sup>, and Orbit uses the GitLab EE license <sup class="cite">[<a href="#src-23" title="GitLab Orbit (Knowledge Graph) README, GitHub mirror">23</a>]</sup>.</li>
+<li><strong>Confirm self-host dates.</strong> Orbit Self-Managed and Dedicated follow GA <sup class="cite">[<a href="#src-2" title="GitLab blog: GitLab Orbit is generally available (29 Oct 2026)">2</a>]</sup>; Sourcegraph Self Hosted is on request <sup class="cite">[<a href="#src-22" title="Sourcegraph Docs: Enterprise plan">22</a>]</sup>.</li>
+</ol>
+<p><strong>Next actions</strong></p>
+<ul>
+<li class="todo"><span class="box" aria-hidden="true"></span>Ask GitLab for the Orbit Self-Managed date and RBAC model.</li>
+<li class="todo"><span class="box" aria-hidden="true"></span>Run the four-arm MR review eval on 50 to 100 internal MRs.</li>
+<li class="todo"><span class="box" aria-hidden="true"></span>Shortlist one campaign (for example a Java or Spring upgrade) for a Moderne pilot.</li>
+<li class="todo"><span class="box" aria-hidden="true"></span>Index two or three large repos locally with codebase-memory-mcp and CodeGraph as a free baseline.</li>
+</ul>
+<hr />
+<h2 id="sources">Sources</h2>
+<ol class="sources"><li id="src-1"><a href="https://sourcegraph.com/blog/a-new-era-for-sourcegraph-the-intelligence-layer-for-ai-coding-agents-and-developers" target="_blank" rel="noopener">Sourcegraph blog: A new era for Sourcegraph, Sourcegraph 7.0 (25 Feb 2026)</a><span class="url">https://sourcegraph.com/blog/a-new-era-for-sourcegraph-the-intelligence-layer-for-ai-coding-agents-and-developers</span></li>
+<li id="src-2"><a href="https://about.gitlab.com/blog/gitlab-orbit-ga/" target="_blank" rel="noopener">GitLab blog: GitLab Orbit is generally available (29 Oct 2026)</a><span class="url">https://about.gitlab.com/blog/gitlab-orbit-ga/</span></li>
+<li id="src-3"><a href="https://www.businesswire.com/news/home/20260519919718/en/" target="_blank" rel="noopener">Business Wire: Moderne Changelog (19 May 2026)</a><span class="url">https://www.businesswire.com/news/home/20260519919718/en/</span></li>
+<li id="src-4"><a href="https://about.gitlab.com/gitlab-orbit/" target="_blank" rel="noopener">GitLab: GitLab Orbit product page</a><span class="url">https://about.gitlab.com/gitlab-orbit/</span></li>
+<li id="src-5"><a href="https://sourcegraph.com/resources/context-compare" target="_blank" rel="noopener">Sourcegraph: AI coding context tools compared</a><span class="url">https://sourcegraph.com/resources/context-compare</span></li>
+<li id="src-6"><a href="https://aws.amazon.com/marketplace/pp/prodview-qa5qb3cy3ofbc" target="_blank" rel="noopener">AWS Marketplace: Moderne listing</a><span class="url">https://aws.amazon.com/marketplace/pp/prodview-qa5qb3cy3ofbc</span></li>
+<li id="src-7"><a href="https://github.com/colbymchenry/codegraph" target="_blank" rel="noopener">GitHub: colbymchenry/codegraph</a><span class="url">https://github.com/colbymchenry/codegraph</span></li>
+<li id="src-8"><a href="https://github.com/DeusData/codebase-memory-mcp" target="_blank" rel="noopener">GitHub: DeusData/codebase-memory-mcp</a><span class="url">https://github.com/DeusData/codebase-memory-mcp</span></li>
+<li id="src-9"><a href="https://sourcegraph.com/blog/the-future-of-scip" target="_blank" rel="noopener">Sourcegraph blog: The future of SCIP (25 Mar 2026)</a><span class="url">https://sourcegraph.com/blog/the-future-of-scip</span></li>
+<li id="src-10"><a href="https://arxiv.org/pdf/2503.21710v2" target="_blank" rel="noopener">arXiv 2503.21710v2: KGCompass, Knowledge Graph Enhanced Repository-Level Software Repair</a><span class="url">https://arxiv.org/pdf/2503.21710v2</span></li>
+<li id="src-11"><a href="https://arxiv.org/html/2602.20048v1" target="_blank" rel="noopener">arXiv 2602.20048: CodeCompass, the Navigation Paradox (HTML v1)</a><span class="url">https://arxiv.org/html/2602.20048v1</span></li>
+<li id="src-12"><a href="https://comparethemarketcareers.com/blog/comparing-context-retrieval-approaches-for-ai-code-review/" target="_blank" rel="noopener">Compare the Market: Comparing Context Retrieval Approaches for AI Code Review</a><span class="url">https://comparethemarketcareers.com/blog/comparing-context-retrieval-approaches-for-ai-code-review/</span></li>
+<li id="src-13"><a href="https://docs.gitlab.com/orbit/schema/" target="_blank" rel="noopener">GitLab Docs: GitLab Orbit indexed data (schema)</a><span class="url">https://docs.gitlab.com/orbit/schema/</span></li>
+<li id="src-14"><a href="https://github.com/scip-code/scip" target="_blank" rel="noopener">GitHub: scip-code/scip</a><span class="url">https://github.com/scip-code/scip</span></li>
+<li id="src-15"><a href="https://docs.joern.io/code-property-graph/" target="_blank" rel="noopener">Joern Docs: Code Property Graph</a><span class="url">https://docs.joern.io/code-property-graph/</span></li>
+<li id="src-16"><a href="https://qwiet.ai/?p=9049" target="_blank" rel="noopener">Qwiet AI: The semantic code property graph</a><span class="url">https://qwiet.ai/?p=9049</span></li>
+<li id="src-17"><a href="https://docs.openrewrite.org/concepts-and-explanations/lossless-semantic-trees.md" target="_blank" rel="noopener">OpenRewrite Docs: Lossless Semantic Trees</a><span class="url">https://docs.openrewrite.org/concepts-and-explanations/lossless-semantic-trees.md</span></li>
+<li id="src-18"><a href="https://docs.moderne.io/administrator-documentation/moderne-platform/references/lossless-semantic-trees" target="_blank" rel="noopener">Moderne Docs: Lossless semantic trees (platform reference)</a><span class="url">https://docs.moderne.io/administrator-documentation/moderne-platform/references/lossless-semantic-trees</span></li>
+<li id="src-19"><a href="https://about.gitlab.com/press/releases/2026-06-10-gitlab-announces-new-capabilities-to-give-enterprises-speed-control-at-agentic-scale/" target="_blank" rel="noopener">GitLab press release: new capabilities at Transcend (10 Jun 2026)</a><span class="url">https://about.gitlab.com/press/releases/2026-06-10-gitlab-announces-new-capabilities-to-give-enterprises-speed-control-at-agentic-scale/</span></li>
+<li id="src-20"><a href="https://github.com/getzep/graphiti" target="_blank" rel="noopener">GitHub: getzep/graphiti</a><span class="url">https://github.com/getzep/graphiti</span></li>
+<li id="src-21"><a href="https://7.5.sourcegraph.com/api/mcp.md" target="_blank" rel="noopener">Sourcegraph Docs: Sourcegraph MCP Server (7.5)</a><span class="url">https://7.5.sourcegraph.com/api/mcp.md</span></li>
+<li id="src-22"><a href="https://sourcegraph.com/docs/pricing/enterprise" target="_blank" rel="noopener">Sourcegraph Docs: Enterprise plan</a><span class="url">https://sourcegraph.com/docs/pricing/enterprise</span></li>
+<li id="src-23"><a href="https://github.com/gitlabhq/orbit-knowledge-graph" target="_blank" rel="noopener">GitLab Orbit (Knowledge Graph) README, GitHub mirror</a><span class="url">https://github.com/gitlabhq/orbit-knowledge-graph</span></li>
+<li id="src-24"><a href="https://about.gitlab.com/blog/gitlab-transcend-hackathon-orbit/" target="_blank" rel="noopener">GitLab blog: Transcend hackathon, what developers built with Orbit (20 Jul 2026)</a><span class="url">https://about.gitlab.com/blog/gitlab-transcend-hackathon-orbit/</span></li>
+<li id="src-25"><a href="https://conf.researchr.org/details/icsme-2023/icsme-2023-tool-demo-track/7/Deterministic-Automatic-Refactoring-at-Scale" target="_blank" rel="noopener">ICSME 2023 tool demo: Deterministic Automatic Refactoring at Scale (OpenRewrite)</a><span class="url">https://conf.researchr.org/details/icsme-2023/icsme-2023-tool-demo-track/7/Deterministic-Automatic-Refactoring-at-Scale</span></li>
+<li id="src-26"><a href="https://manilatimes.net/2025/04/15/tmt-newswire/globenewswire/moderne-joins-microsoft-pegasus-program-to-accelerate-large-scale-code-modernization-for-enterprises/2092757" target="_blank" rel="noopener">GlobeNewswire via Manila Times: Moderne joins Microsoft Pegasus program (15 Apr 2025)</a><span class="url">https://manilatimes.net/2025/04/15/tmt-newswire/globenewswire/moderne-joins-microsoft-pegasus-program-to-accelerate-large-scale-code-modernization-for-enterprises/2092757</span></li>
+<li id="src-27"><a href="https://github.com/openrewrite/rewrite" target="_blank" rel="noopener">GitHub: openrewrite/rewrite</a><span class="url">https://github.com/openrewrite/rewrite</span></li>
+<li id="src-28"><a href="https://www.intelcapital.com/?p=11696" target="_blank" rel="noopener">Intel Capital: Moderne Series B announcement</a><span class="url">https://www.intelcapital.com/?p=11696</span></li>
+<li id="src-29"><a href="https://github.blog/2024/02/14/fixing-security-vulnerabilities-with-ai/" target="_blank" rel="noopener">GitHub blog: Fixing security vulnerabilities with AI</a><span class="url">https://github.blog/2024/02/14/fixing-security-vulnerabilities-with-ai/</span></li>
+<li id="src-30"><a href="https://docs.github.com/en/copilot/concepts/agents/code-review" target="_blank" rel="noopener">GitHub Docs: About GitHub Copilot code review</a><span class="url">https://docs.github.com/en/copilot/concepts/agents/code-review</span></li>
+<li id="src-31"><a href="https://securitylab.github.com/tools/codeql/license" target="_blank" rel="noopener">GitHub Security Lab: GitHub CodeQL Terms and Conditions</a><span class="url">https://securitylab.github.com/tools/codeql/license</span></li>
+<li id="src-32"><a href="https://github.com/github/codeql" target="_blank" rel="noopener">GitHub: github/codeql</a><span class="url">https://github.com/github/codeql</span></li>
+<li id="src-33"><a href="https://www.greptile.com/docs/code-review/key-features" target="_blank" rel="noopener">Greptile Docs: Key features</a><span class="url">https://www.greptile.com/docs/code-review/key-features</span></li>
+<li id="src-34"><a href="https://www.greptile.com/docs/introduction.md" target="_blank" rel="noopener">Greptile Docs: Introduction (platforms)</a><span class="url">https://www.greptile.com/docs/introduction.md</span></li>
+<li id="src-35"><a href="https://www.greptile.com/code-context" target="_blank" rel="noopener">Greptile: Code context</a><span class="url">https://www.greptile.com/code-context</span></li>
+<li id="src-36"><a href="https://www.greptile.com/docs/api-reference/zapier" target="_blank" rel="noopener">Greptile Docs: product overview (enterprise readiness)</a><span class="url">https://www.greptile.com/docs/api-reference/zapier</span></li>
+<li id="src-37"><a href="https://www.greptile.com" target="_blank" rel="noopener">Greptile homepage</a><span class="url">https://www.greptile.com</span></li>
+<li id="src-38"><a href="https://docs.coderabbit.ai/integrations/code-graph-analysis" target="_blank" rel="noopener">CodeRabbit Docs: Code Graph Analysis</a><span class="url">https://docs.coderabbit.ai/integrations/code-graph-analysis</span></li>
+<li id="src-39"><a href="https://docs.augmentcode.com/context-services/overview" target="_blank" rel="noopener">Augment Docs: Context Services overview</a><span class="url">https://docs.augmentcode.com/context-services/overview</span></li>
+<li id="src-40"><a href="https://www.augmentcode.com/changelog/context-engine-mcp-in-ga" target="_blank" rel="noopener">Augment Code changelog: Context Engine MCP for any AI coding agent (6 Feb 2026)</a><span class="url">https://www.augmentcode.com/changelog/context-engine-mcp-in-ga</span></li>
+<li id="src-41"><a href="https://www.sonarsource.com/products/gitar/" target="_blank" rel="noopener">Sonar: Gitar product page</a><span class="url">https://www.sonarsource.com/products/gitar/</span></li>
+<li id="src-42"><a href="https://www.sonarsource.com/developers/blueprints/get-started-with-gitar/" target="_blank" rel="noopener">Sonar: Get started with Gitar</a><span class="url">https://www.sonarsource.com/developers/blueprints/get-started-with-gitar/</span></li>
+<li id="src-43"><a href="https://harness.io/blog/harness-acquires-qwiet-ai" target="_blank" rel="noopener">Harness blog: Harness acquires Qwiet AI (29 Sep 2025)</a><span class="url">https://harness.io/blog/harness-acquires-qwiet-ai</span></li>
+<li id="src-44"><a href="https://github.com/Graphify-Labs/graphify" target="_blank" rel="noopener">GitHub: Graphify-Labs/graphify</a><span class="url">https://github.com/Graphify-Labs/graphify</span></li>
+<li id="src-45"><a href="https://github.com/abhigyanpatwari/GitNexus" target="_blank" rel="noopener">GitHub: abhigyanpatwari/GitNexus</a><span class="url">https://github.com/abhigyanpatwari/GitNexus</span></li>
+<li id="src-46"><a href="https://github.com/tirth8205/code-review-graph" target="_blank" rel="noopener">GitHub: tirth8205/code-review-graph</a><span class="url">https://github.com/tirth8205/code-review-graph</span></li>
+<li id="src-47"><a href="https://github.com/oraios/serena" target="_blank" rel="noopener">GitHub: oraios/serena</a><span class="url">https://github.com/oraios/serena</span></li>
+<li id="src-48"><a href="https://github.com/potpie-ai/potpie" target="_blank" rel="noopener">GitHub: potpie-ai/potpie</a><span class="url">https://github.com/potpie-ai/potpie</span></li>
+<li id="src-49"><a href="https://github.com/vitali87/code-graph-rag" target="_blank" rel="noopener">GitHub: vitali87/code-graph-rag</a><span class="url">https://github.com/vitali87/code-graph-rag</span></li>
+<li id="src-50"><a href="https://github.com/CodeGraphContext/CodeGraphContext" target="_blank" rel="noopener">GitHub: CodeGraphContext/CodeGraphContext</a><span class="url">https://github.com/CodeGraphContext/CodeGraphContext</span></li>
+<li id="src-51"><a href="https://github.com/sourcebot-dev/sourcebot" target="_blank" rel="noopener">GitHub: sourcebot-dev/sourcebot</a><span class="url">https://github.com/sourcebot-dev/sourcebot</span></li>
+<li id="src-52"><a href="https://moderne.io/blog/overview-of-openrewrite-and-moderne" target="_blank" rel="noopener">Moderne blog: Overview of OpenRewrite and Moderne</a><span class="url">https://moderne.io/blog/overview-of-openrewrite-and-moderne</span></li>
+<li id="src-53"><a href="https://github.com/joernio/joern" target="_blank" rel="noopener">GitHub: joernio/joern</a><span class="url">https://github.com/joernio/joern</span></li>
+<li id="src-54"><a href="https://github.com/FalkorDB/Auryn" target="_blank" rel="noopener">GitHub: FalkorDB/Auryn (formerly FalkorDB/code-graph)</a><span class="url">https://github.com/FalkorDB/Auryn</span></li>
+<li id="src-55"><a href="https://github.com/tree-sitter/tree-sitter" target="_blank" rel="noopener">GitHub: tree-sitter/tree-sitter</a><span class="url">https://github.com/tree-sitter/tree-sitter</span></li>
+<li id="src-56"><a href="https://kythe.io/" target="_blank" rel="noopener">Kythe project site</a><span class="url">https://kythe.io/</span></li>
+<li id="src-57"><a href="https://arxiv.org/html/2504.09691v1" target="_blank" rel="noopener">arXiv 2504.09691: Google&#x27;s use of LLMs for internal code migrations (FSE 2025 preprint)</a><span class="url">https://arxiv.org/html/2504.09691v1</span></li>
+<li id="src-58"><a href="https://github.com/kythe/kythe" target="_blank" rel="noopener">GitHub: kythe/kythe</a><span class="url">https://github.com/kythe/kythe</span></li>
+<li id="src-59"><a href="https://engineering.fb.com/2024/12/19/developer-tools/glean-open-source-code-indexing/" target="_blank" rel="noopener">Meta Engineering: Indexing code at scale with Glean (19 Dec 2024)</a><span class="url">https://engineering.fb.com/2024/12/19/developer-tools/glean-open-source-code-indexing/</span></li>
+<li id="src-60"><a href="https://github.com/facebookincubator/Glean" target="_blank" rel="noopener">GitHub: facebookincubator/Glean</a><span class="url">https://github.com/facebookincubator/Glean</span></li>
+<li id="src-61"><a href="https://github.com/github/stack-graphs" target="_blank" rel="noopener">GitHub: github/stack-graphs (archived)</a><span class="url">https://github.com/github/stack-graphs</span></li>
+<li id="src-62"><a href="https://sourcegraph.com/docs/code-navigation/precise-code-navigation" target="_blank" rel="noopener">Sourcegraph Docs: Precise Code Navigation</a><span class="url">https://sourcegraph.com/docs/code-navigation/precise-code-navigation</span></li>
+<li id="src-63"><a href="https://www.greptile.com/docs/how-greptile-works/graph-based-codebase-context" target="_blank" rel="noopener">Greptile Docs: Graph-based codebase context</a><span class="url">https://www.greptile.com/docs/how-greptile-works/graph-based-codebase-context</span></li>
+<li id="src-64"><a href="https://sourcegraph.com/docs/batch_changes" target="_blank" rel="noopener">Sourcegraph Docs: Batch Changes</a><span class="url">https://sourcegraph.com/docs/batch_changes</span></li>
+<li id="src-65"><a href="https://docs.moderne.io/user-documentation/recipes/authoring-recipes/concepts/lossless-semantic-trees" target="_blank" rel="noopener">Moderne Docs: Lossless semantic trees (recipe authoring concepts)</a><span class="url">https://docs.moderne.io/user-documentation/recipes/authoring-recipes/concepts/lossless-semantic-trees</span></li>
+<li id="src-66"><a href="https://sourcegraph.com/docs/code_navigation/explanations/precise_code_navigation" target="_blank" rel="noopener">Sourcegraph Docs: Precise code navigation explanation (search-based fallback)</a><span class="url">https://sourcegraph.com/docs/code_navigation/explanations/precise_code_navigation</span></li>
+<li id="src-67"><a href="https://sourcegraph.com/docs/self-hosted/deploy" target="_blank" rel="noopener">Sourcegraph Docs: Self-hosted deployment overview</a><span class="url">https://sourcegraph.com/docs/self-hosted/deploy</span></li>
+<li id="src-68"><a href="https://handbook.gitlab.com/handbook/engineering/architecture/design-documents/orbit/" target="_blank" rel="noopener">GitLab Handbook: GitLab Orbit design document</a><span class="url">https://handbook.gitlab.com/handbook/engineering/architecture/design-documents/orbit/</span></li>
+<li id="src-69"><a href="https://docs.gitlab.com/orbit/indexed-data/" target="_blank" rel="noopener">GitLab Docs: Orbit indexed data, properties resolved at query time</a><span class="url">https://docs.gitlab.com/orbit/indexed-data/</span></li>
+<li id="src-70"><a href="https://docs.gitlab.com/orbit/remote/access/api/" target="_blank" rel="noopener">GitLab Docs: Orbit REST API endpoints</a><span class="url">https://docs.gitlab.com/orbit/remote/access/api/</span></li>
+<li id="src-71"><a href="https://about.gitlab.com/blog/gitlab-orbit-and-google-antigravity" target="_blank" rel="noopener">GitLab blog: GitLab Orbit and Google Antigravity (25 Jun 2026)</a><span class="url">https://about.gitlab.com/blog/gitlab-orbit-and-google-antigravity</span></li>
+<li id="src-72"><a href="https://gitlab.com/gitlab-org/orbit/knowledge-graph/-/work_items/553" target="_blank" rel="noopener">GitLab issue 553: query_graph tool description truncated by MCP clients</a><span class="url">https://gitlab.com/gitlab-org/orbit/knowledge-graph/-/work_items/553</span></li>
+<li id="src-73"><a href="https://docs.moderne.io/user-documentation/moddy/moddy-platform" target="_blank" rel="noopener">Moderne Docs: Getting started with Moddy</a><span class="url">https://docs.moderne.io/user-documentation/moddy/moddy-platform</span></li>
+<li id="src-74"><a href="https://www.businesswire.com/news/home/20260210110758/en/Moderne-Introduces-Prethink-to-Give-AI-Agents-the-Structured-Knowledge-Theyve-Been-Missing" target="_blank" rel="noopener">Business Wire: Moderne introduces Prethink (10 Feb 2026)</a><span class="url">https://www.businesswire.com/news/home/20260210110758/en/Moderne-Introduces-Prethink-to-Give-AI-Agents-the-Structured-Knowledge-Theyve-Been-Missing</span></li>
+<li id="src-75"><a href="https://docs.moderne.io/user-documentation/agent-tools/prethink" target="_blank" rel="noopener">Moderne Docs: Moderne Prethink (agent tools)</a><span class="url">https://docs.moderne.io/user-documentation/agent-tools/prethink</span></li>
+<li id="src-76"><a href="https://docs.moderne.io/user-documentation/recipes/prethink" target="_blank" rel="noopener">Moderne Docs: Prethink recipes</a><span class="url">https://docs.moderne.io/user-documentation/recipes/prethink</span></li>
+<li id="src-77"><a href="https://www.businesswire.com/news/home/20260219393723/en/Moderne-Expands-Agent-Tools-Platform-with-Python" target="_blank" rel="noopener">Business Wire: Moderne expands Agent Tools platform with Python (19 Feb 2026)</a><span class="url">https://www.businesswire.com/news/home/20260219393723/en/Moderne-Expands-Agent-Tools-Platform-with-Python</span></li>
+<li id="src-78"><a href="https://docs.moderne.io/user-documentation/moddy/mcp-tools-reference" target="_blank" rel="noopener">Moderne Docs: Moddy Desktop MCP tools reference</a><span class="url">https://docs.moderne.io/user-documentation/moddy/mcp-tools-reference</span></li>
+<li id="src-79"><a href="https://appdevelopermagazine.com/automated-code-refactoring-platform-moderne/amp/" target="_blank" rel="noopener">App Developer Magazine: Moderne closes $30M Series B</a><span class="url">https://appdevelopermagazine.com/automated-code-refactoring-platform-moderne/amp/</span></li>
+<li id="src-80"><a href="https://docs.github.com/en/enterprise-cloud@latest/code-security/responsible-use/responsible-use-autofix-code-scanning" target="_blank" rel="noopener">GitHub Docs: Responsible use of Copilot Autofix for code scanning</a><span class="url">https://docs.github.com/en/enterprise-cloud@latest/code-security/responsible-use/responsible-use-autofix-code-scanning</span></li>
+<li id="src-81"><a href="https://docs.github.com/en/enterprise-cloud%40latest/code-security/responsible-use/security-and-quality-ai-features" target="_blank" rel="noopener">GitHub Docs: Security and quality AI features</a><span class="url">https://docs.github.com/en/enterprise-cloud%40latest/code-security/responsible-use/security-and-quality-ai-features</span></li>
+<li id="src-82"><a href="https://github.blog/changelog/2025-10-28-new-public-preview-features-in-copilot-code-review-ai-reviews-that-see-the-full-picture/" target="_blank" rel="noopener">GitHub changelog: New public preview features in Copilot code review (28 Oct 2025)</a><span class="url">https://github.blog/changelog/2025-10-28-new-public-preview-features-in-copilot-code-review-ai-reviews-that-see-the-full-picture/</span></li>
+<li id="src-83"><a href="https://codeql.github.com/docs/codeql-overview/supported-languages-and-frameworks/" target="_blank" rel="noopener">CodeQL Docs: Supported languages and frameworks</a><span class="url">https://codeql.github.com/docs/codeql-overview/supported-languages-and-frameworks/</span></li>
+<li id="src-84"><a href="https://docs.github.com/en/enterprise-server@3.18/code-security/concepts/code-scanning/codeql/about-code-scanning-with-codeql" target="_blank" rel="noopener">GitHub Docs: About code scanning with CodeQL (GHES 3.18)</a><span class="url">https://docs.github.com/en/enterprise-server@3.18/code-security/concepts/code-scanning/codeql/about-code-scanning-with-codeql</span></li>
+<li id="src-85"><a href="https://docs.github.com/en/enterprise-server@3.17/code-security/concepts/code-scanning/codeql/codeql-code-scanning" target="_blank" rel="noopener">GitHub Docs: Code scanning with CodeQL (availability)</a><span class="url">https://docs.github.com/en/enterprise-server@3.17/code-security/concepts/code-scanning/codeql/codeql-code-scanning</span></li>
+<li id="src-86"><a href="https://arxiv.org/html/2603.27277" target="_blank" rel="noopener">arXiv 2603.27277: Codebase-Memory, Tree-Sitter-Based Knowledge Graphs for LLM Code Exploration via MCP</a><span class="url">https://arxiv.org/html/2603.27277</span></li>
+<li id="src-87"><a href="https://developer.harness.io/ai-sca/core-concepts/code-property-graph" target="_blank" rel="noopener">Harness Docs: Code Property Graph</a><span class="url">https://developer.harness.io/ai-sca/core-concepts/code-property-graph</span></li>
+<li id="src-88"><a href="https://gitlab.com/groups/gitlab-org/-/epics/19744" target="_blank" rel="noopener">GitLab epic 19744: Orbit as a Service GA</a><span class="url">https://gitlab.com/groups/gitlab-org/-/epics/19744</span></li>
+<li id="src-89"><a href="https://itbrief.co.uk/story/moderne-unveils-prethink-to-boost-ai-code-governance" target="_blank" rel="noopener">IT Brief UK: Moderne unveils Prethink (12 Feb 2026)</a><span class="url">https://itbrief.co.uk/story/moderne-unveils-prethink-to-boost-ai-code-governance</span></li>
+<li id="src-90"><a href="https://arxiv.org/abs/2410.14684" target="_blank" rel="noopener">arXiv 2410.14684: RepoGraph, Repository-level Code Graph (ICLR 2025)</a><span class="url">https://arxiv.org/abs/2410.14684</span></li>
+<li id="src-91"><a href="https://www.opentrain.ai/papers/codecompass-navigating-the-navigation-paradox-in-agentic-code-intelligence--arxiv-2602.20048/" target="_blank" rel="noopener">OpenTrain abstract page: CodeCompass (arXiv 2602.20048)</a><span class="url">https://www.opentrain.ai/papers/codecompass-navigating-the-navigation-paradox-in-agentic-code-intelligence--arxiv-2602.20048/</span></li>
+<li id="src-92"><a href="https://sourcegraph.com/blog/large-scale-code-changes" target="_blank" rel="noopener">Sourcegraph blog: Large-scale code changes, how to do them safely</a><span class="url">https://sourcegraph.com/blog/large-scale-code-changes</span></li>
+<li id="src-93"><a href="https://infoq.com/news/2026/10/spotify-ai-quality-controls" target="_blank" rel="noopener">InfoQ: Spotify more than doubled monthly code changes as AI accelerated development (Oct 2026)</a><span class="url">https://infoq.com/news/2026/10/spotify-ai-quality-controls</span></li>
+<li id="src-94"><a href="https://www.uber.com/cz/en/blog/piranha/" target="_blank" rel="noopener">Uber Engineering: Introducing Piranha</a><span class="url">https://www.uber.com/cz/en/blog/piranha/</span></li>
+<li id="src-95"><a href="https://airbnb.tech/?p=366" target="_blank" rel="noopener">Airbnb Tech: Accelerating large-scale test migration with LLMs</a><span class="url">https://airbnb.tech/?p=366</span></li>
+<li id="src-96"><a href="https://newsletter.pragmaticengineer.com/p/the-pulse-we-need-to-talk-about-migrations-b3d?r=1q9je3" target="_blank" rel="noopener">The Pragmatic Engineer: We need to talk about migrations with AI</a><span class="url">https://newsletter.pragmaticengineer.com/p/the-pulse-we-need-to-talk-about-migrations-b3d?r=1q9je3</span></li>
+<li id="src-97"><a href="https://engineering.atspotify.com/2025/11/spotifys-background-coding-agent-part-1" target="_blank" rel="noopener">Spotify Engineering: 1,500+ PRs later, background coding agent (Honk, Part 1)</a><span class="url">https://engineering.atspotify.com/2025/11/spotifys-background-coding-agent-part-1</span></li>
+<li id="src-98"><a href="https://about.gitlab.com/blog/introducing-gitlab-orbit/" target="_blank" rel="noopener">GitLab blog: Introducing GitLab Orbit (10 Jun 2026)</a><span class="url">https://about.gitlab.com/blog/introducing-gitlab-orbit/</span></li></ol>
+<p class="meta">Generated from code-graph-vendors.md. Citations link to the numbered source list; source links open in a new tab.</p>
+</main>
+</div>
+</body>
+</html>
